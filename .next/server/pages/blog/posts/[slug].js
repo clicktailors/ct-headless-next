@@ -589,7 +589,7 @@ module.exports = require("zlib");
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next@14.2.13_react-dom@18.3.1_react@18.3.1","vendor-chunks/@swc+helpers@0.5.5","vendor-chunks/@heroicons+react@2.1.5_react@18.3.1","vendor-chunks/date-fns@2.30.0","vendor-chunks/@babel+runtime@7.25.6"], () => (__webpack_exec__("./node_modules/.pnpm/next@14.2.13_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES&page=%2Fblog%2Fposts%2F%5Bslug%5D&preferredRegion=&absolutePagePath=.%2Fpages%2Fblog%2Fposts%2F%5Bslug%5D.tsx&absoluteAppPath=private-next-pages%2F_app&absoluteDocumentPath=private-next-pages%2F_document&middlewareConfigBase64=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next@14.2.13_react-dom@18.3.1_react@18.3.1","vendor-chunks/@swc+helpers@0.5.5","vendor-chunks/date-fns@2.30.0","vendor-chunks/@heroicons+react@2.1.5_react@18.3.1","vendor-chunks/@babel+runtime@7.25.6"], () => (__webpack_exec__("./node_modules/.pnpm/next@14.2.13_react-dom@18.3.1_react@18.3.1/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?kind=PAGES&page=%2Fblog%2Fposts%2F%5Bslug%5D&preferredRegion=&absolutePagePath=.%2Fpages%2Fblog%2Fposts%2F%5Bslug%5D.tsx&absoluteAppPath=private-next-pages%2F_app&absoluteDocumentPath=private-next-pages%2F_document&middlewareConfigBase64=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();
