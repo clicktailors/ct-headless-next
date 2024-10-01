@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Intro from "../../../components/sections/core/Intro";
 import Layout from "../../../components/layout";
-import Container from "../../../components/ui/container";
+import Container from "../../../components/ui/Container";
 import { SITE_NAME } from "../../../lib/constants";
-import StripeForm from "../../../components/ui/StripeForm";
-import Timeline from "../../../components/ui/Timeline";
+import StripeForm from "../../../components/ui/Form/StripeForm";
+import Timeline from "../../../components/ui/Form/components/Timeline";
 
 const TestPay: React.FC = () => {
 	const pageTitle = "Test Pay";

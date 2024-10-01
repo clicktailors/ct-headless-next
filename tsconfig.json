@@ -24,7 +24,9 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["react", "node"]
   },
   "include": [
     "next-env.d.ts",

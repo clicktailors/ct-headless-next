@@ -1,48 +1,8 @@
 import React, { useState } from "react";
-import Form from "../../components/ui/Form/Form";
+import Form from "../../components/ui/Form/components/Form";
 import { useFormSubmit } from "../../utils/hooks/useFormSubmit";
 
-const ContactForm = () => {
-	const fields = {
-		"Send us a message.": [
-			{
-				type: "text",
-				name: "firstName",
-				placeholder: "John",
-				label: "First Name",
-				required: true,
-			},
-			{
-				type: "text",
-				name: "lastName",
-				placeholder: "Doe",
-				label: "Last Name",
-				required: true,
-			},
-			{
-				type: "tel",
-				name: "phone",
-				placeholder: "(123) 456-7890",
-				label: "Phone Number",
-				required: false,
-			},
-			{
-				type: "email",
-				name: "email",
-				placeholder: "john.doe@example.com",
-				label: "Email Address",
-				required: true,
-			},
-			{
-				type: "textarea",
-				name: "message",
-				placeholder: "Hello, I'm interested in applying for a new home!",
-				label: "Your message",
-				required: true,
-			},
-		],
-	};
-
+const ContactForm = ({ fields }: { fields: any }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const { handleSubmit, submitError } = useFormSubmit("contact");

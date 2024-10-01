@@ -1,14 +1,18 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
-import Container from "../../components/ui/container";
+import Container from "../../components/ui/Container";
 import MoreStories from "../../components/blog/MoreStories";
 import HeroPost from "../../components/blog/HeroPost";
 import Intro from "../../components/sections/core/Intro";
 import Layout from "../../components/layout";
-import { getAllPostsForHome } from "../../lib/wp-api";
+import { getAllPostsForHome } from "../api/wp-api";
 import { SITE_NAME } from "../../lib/constants";
 
-export default function Index({ allPosts: { edges } }: { allPosts: { edges: any } }) {
+export default function Index({
+	allPosts: { edges },
+}: {
+	allPosts: { edges: any };
+}) {
 	const heroPost = edges[0]?.node;
 	const morePosts = edges.slice(1);
 	const pageTitle = "Blog";

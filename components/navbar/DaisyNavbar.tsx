@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { APPLY_LINK } from "../../lib/constants";
+import { CTA_LINK, CTA_TEXT } from "../../lib/constants";
 import { usePathname } from "next/navigation";
 import React from "react";
 import NavigationItems from "./NavigationItems";
@@ -7,6 +7,8 @@ import ToggleButton from "./ToggleButton";
 import NavTitle from "./NavTitle";
 import Copyright from "../sections/misc/Copyright";
 import Socials from "../sections/core/Socials";
+import { styles } from "../../lib/styles";
+import ThemeSwitcher from "../ui/ThemeSwitcher";
 
 export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -66,20 +68,26 @@ export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 				<ToggleButton variant="hamburger" toggleId="my-drawer-3" />
 				<NavTitle />
 			</div>
-			<div>
+			<div className="flex gap-4">
 				<HorizontalNavItems />
+				<ThemeSwitcher />
 				<Buttons />
 			</div>
+			{/* <div className="flex"></div> */}
 		</div>
 	);
 
 	const Buttons = () => (
-		<Link
-			className="btn btn-sm btn-outline btn-secondary"
-			href={APPLY_LINK}
-		>
-			Apply Now
-		</Link>
+		<>
+			{CTA_LINK && (
+				<Link
+					className={`btn btn-sm ${styles.buttonOutline}`}
+					href={CTA_LINK}
+				>
+					{CTA_TEXT}
+				</Link>
+			)}
+		</>
 	);
 
 	return (

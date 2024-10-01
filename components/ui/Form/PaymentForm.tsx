@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import Form from "./Form/Form";
-import Error from "./Error";
-import { useFormSubmit } from "../../utils/hooks/useFormSubmit";
+import Form from "./components/Form";
+import Error from "../Error";
+import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
 
-const PaymentForm = ({ onPaymentSuccess }: { onPaymentSuccess: (result: any) => void }) => {
+const PaymentForm = ({
+	onPaymentSuccess,
+}: {
+	onPaymentSuccess: (result: any) => void;
+}) => {
 	// const stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 

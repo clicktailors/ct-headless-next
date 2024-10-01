@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ApplicationLayout from "../ApplicationLayout";
 import ApplicationForm from "../ApplicationForm";
 import { BUYER_APPLICATION_FEE } from "../../../lib/stripeAmounts";
-import StripeForm from "../../../components/ui/StripeForm";
+import StripeForm from "../../../components/ui/Form/StripeForm";
 
 const BuyerApplication = () => {
 	const pageTitle = "Buyer Application";

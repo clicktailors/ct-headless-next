@@ -1,16 +1,23 @@
 import Link from "next/link";
-import { FACEBOOK, YOUTUBE, TWITTER } from "../../../lib/constants";
+import { FACEBOOK, TWITTER, MEDIUM, INSTAGRAM } from "../../../lib/constants";
 import { styles } from "../../../lib/styles";
-import { TwitterIcon, YouTubeIcon, FacebookIcon } from "../../images/tsx/icons";
+import {
+	XIcon,
+	FacebookIcon,
+	MediumIcon,
+	InstagramIcon,
+} from "../../images/tsx/icons";
 
 const Socials = () => {
 	const socialClasses = styles.icon;
-
-	const socials = [
-		{ href: TWITTER, icon: <TwitterIcon /> },
-		{ href: YOUTUBE, icon: <YouTubeIcon /> },
-		{ href: FACEBOOK, icon: <FacebookIcon /> },
+	const socialLinks = [
+		{ href: INSTAGRAM, icon: <InstagramIcon />, name: "INSTAGRAM" },
+		{ href: TWITTER, icon: <XIcon />, name: "TWITTER" },
+		{ href: MEDIUM, icon: <MediumIcon />, name: "MEDIUM" },
+		{ href: FACEBOOK, icon: <FacebookIcon />, name: "FACEBOOK" },
 	];
+
+	const socials = socialLinks.filter((social) => social.href);
 
 	return (
 		<nav>

@@ -10,6 +10,10 @@ export default function Credits() {
 			name: "ClickTailors",
 			link: "https://www.clicktailors.com",
 		},
+		{
+			name: "FreePik",
+			link: "https://www.freepik.com",
+		},
 	];
 
 	const links = credits.map((credit) => (

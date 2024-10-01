@@ -1,16 +1,14 @@
-export default function Blurb({
-	blurb,
-}: {
-	blurb: {
-		sectionTitle: string;
-		sectionHeading: string;
-		sectionSummary: string;
-	};
-}) {
+interface BlurbContent {
+	sectionTitle: string;
+	sectionHeading: string;
+	sectionSummary: string;
+}
+
+export default function Blurb({ blurb }: { blurb: BlurbContent }) {
 	const { sectionTitle, sectionHeading, sectionSummary } = blurb;
 	return (
 		<div className="mx-auto max-w-2xl lg:text-center">
-			<h2 className="text-secondary font-semibold leading-7">
+			<h2 className="text-primary font-semibold leading-7">
 				{sectionTitle}
 			</h2>
 			<p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">

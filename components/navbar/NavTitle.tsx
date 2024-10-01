@@ -1,12 +1,5 @@
-import { CornerstoneLogo } from './CornerstoneLogo';
-import Link from 'next/link';
-import { SITE_NAME } from '../../lib/constants';
+import SiteTitle from "../ui/SiteTitle";
 
-const NavTitle = () => (
-    <div className="flex items-center mx-4 font-semibold text-xl">
-        <CornerstoneLogo />
-        <Link href="/">{SITE_NAME}.</Link>
-    </div>
-);
+const NavTitle = () => <SiteTitle size="text-2xl" logoSize="size-6" />;
 
 export default NavTitle;

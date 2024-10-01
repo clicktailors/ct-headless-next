@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import ErrorPage from "next/error";
+import CustomErrorPage from "../../../components/ui/CustomErrorPage";
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
-import Container from "../../../components/ui/container";
+import Container from "../../../components/ui/Container";
 import PostBody from "../../../components/blog/PostBody";
 import MoreStories from "../../../components/blog/MoreStories";
 import Header from "../../../components/sections/core/Header";
@@ -11,7 +11,7 @@ import SectionSeparator from "../../../components/ui/SectionSeparator";
 import Layout from "../../../components/layout";
 import PostTitle from "../../../components/blog/PostTitle";
 import Tags from "../../../components/blog/Tags";
-import { getAllPostsWithSlug, getPostAndMorePosts } from "../../../lib/wp-api";
+import { getAllPostsWithSlug, getPostAndMorePosts } from "../../api/wp-api";
 import { SITE_NAME } from "../../../lib/constants";
 
 export default function Post({ post, posts }: { post: any; posts: any }) {
@@ -19,7 +19,7 @@ export default function Post({ post, posts }: { post: any; posts: any }) {
 	const morePosts = posts?.edges;
 
 	if (!router.isFallback && !post?.slug) {
-		return <ErrorPage statusCode={404} />;
+		return <CustomErrorPage statusCode={404} />;
 	}
 
 	return (

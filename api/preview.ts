@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPreviewPost } from "../lib/wp-api";
+import { getPreviewPost } from "../pages/api/wp-api";
 
 export default async function preview(
 	req: NextApiRequest,

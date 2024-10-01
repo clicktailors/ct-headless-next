@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../../../components/ui/Form/Form";
+import Form from "./Form";
 
 const FormStep: React.FC<{
 	currentStepData: { fields: any[] };

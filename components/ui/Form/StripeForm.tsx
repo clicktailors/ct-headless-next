@@ -6,7 +6,7 @@ import {
 	Appearance,
 } from "@stripe/stripe-js";
 import { useTheme } from "next-themes";
-import { colors } from "../../lib/colors";
+import { colors } from "../../../lib/colors";
 import CheckoutForm from "./CheckoutForm";
 
 const stripePromise = loadStripe(

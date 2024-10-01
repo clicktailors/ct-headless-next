@@ -12,7 +12,7 @@ import image11 from "../raw/sample-listing-images/11.jpg";
 import image12 from "../raw/sample-listing-images/12.jpg";
 import image13 from "../raw/sample-listing-images/13.jpg";
 
-import Carousel from "../../ui/Carousel";
+import Carousel from "../../ui/Images/Carousel";
 
 export default function Listings() {
 	const images = [
@@ -32,8 +32,10 @@ export default function Listings() {
 	];
 	return (
 		<div className="justify-center flex flex-col gap-3 my-24">
-			<h2 className="my-8 text-3xl font-bold tracking-tight sm:text-4xl text-center">Some of our Homes</h2>
-			<Carousel images={images.map(img => img.src)} />
+			<h2 className="my-8 text-3xl font-bold tracking-tight sm:text-4xl text-center">
+				Some of our Homes
+			</h2>
+			<Carousel images={images.map((img) => img.src)} />
 		</div>
 	);
 }

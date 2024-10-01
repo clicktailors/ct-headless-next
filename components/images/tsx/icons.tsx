@@ -1,28 +1,61 @@
-export const TwitterIcon = () => {
+import { Icon } from "@iconify-icon/react";
+import { CursorArrowRaysIcon } from "@heroicons/react/24/solid";
+
+export const SiteLogo = ({
+	className,
+	size,
+}: {
+	className: string;
+	size: string;
+}) => {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
+		<div className={`flex items-center ${className}`}>
+			<CursorArrowRaysIcon className="size-8 text-primary mr-2" />
+		</div>
+	);
+};
+
+export const XIcon = () => {
+	return (
+		<Icon
+			icon="fa6-brands:x-twitter"
 			width="24"
 			height="24"
-			viewBox="0 0 24 24"
 			className="fill-current"
-		>
-			<path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-		</svg>
+		/>
+	);
+};
+
+export const InstagramIcon = () => {
+	return (
+		<Icon
+			icon="fa6-brands:instagram"
+			width="24"
+			height="24"
+			className="fill-current"
+		/>
 	);
 };
 
 export const YouTubeIcon = () => {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
+		<Icon
+			icon="fa6-brands:youtube"
 			width="24"
 			height="24"
-			viewBox="0 0 24 24"
 			className="fill-current"
-		>
-			<path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-		</svg>
+		/>
+	);
+};
+
+export const MediumIcon = () => {
+	return (
+		<Icon
+			icon="fa6-brands:medium"
+			width="24"
+			height="24"
+			className="fill-current"
+		/>
 	);
 };
 
@@ -82,24 +115,24 @@ export const SystemIcon = () => (
 );
 
 export const emailSVG = () => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        className="w-4 h-4 opacity-70"
-    >
-        <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-        <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-    </svg>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 16 16"
+		fill="currentColor"
+		className="w-4 h-4 opacity-70"
+	>
+		<path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+		<path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+	</svg>
 );
 
 export const usernameSVG = () => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        className="w-4 h-4 opacity-70"
-    >
-        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-    </svg>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 16 16"
+		fill="currentColor"
+		className="w-4 h-4 opacity-70"
+	>
+		<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+	</svg>
 );
