@@ -3,7 +3,6 @@ import { validateForm, FormErrors } from "../../../../utils/formValidation";
 import Category from "./Category";
 
 const formClasses = "p-6 form-control w-full max-w-lg mx-auto p-2 mb-20";
-const submitButtonClasses = "btn btn-primary w-full mt-6";
 
 export interface FieldType {
 	label: string;
@@ -22,6 +21,10 @@ interface FormProps {
 	isSubmitting: boolean;
 	children?: React.ReactNode;
 	initialData?: Record<string, any>;
+	successMessage?: string;
+	errorMessage?: string;
+	submitSuccess?: boolean;
+	submitError?: string | null;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -30,6 +33,10 @@ const Form: React.FC<FormProps> = ({
 	submitButtonText = "Submit",
 	isSubmitting,
 	initialData,
+	successMessage,
+	errorMessage,
+	submitSuccess,
+	submitError,
 }) => {
 	const [formData, setFormData] = useState<{ [key: string]: string }>(
 		initialData || {}
@@ -46,6 +53,20 @@ const Form: React.FC<FormProps> = ({
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		onSubmit(formData);
+	};
+
+	const getButtonText = () => {
+		if (isSubmitting) return "Submitting...";
+		if (submitSuccess) return successMessage || "Success!";
+		if (submitError) return "Try Again";
+		return submitButtonText;
+	};
+
+	const getButtonClassName = () => {
+		const baseClasses = "btn w-full mt-6";
+		if (submitSuccess) return `${baseClasses} btn-success`;
+		if (submitError) return `${baseClasses} btn-error`;
+		return `${baseClasses} btn-primary`;
 	};
 
 	return (
@@ -81,10 +102,10 @@ const Form: React.FC<FormProps> = ({
 			)}
 			<button
 				type="submit"
-				className={submitButtonClasses}
+				className={getButtonClassName()}
 				disabled={isSubmitting}
 			>
-				{isSubmitting ? "Submitting..." : submitButtonText}
+				{getButtonText()}
 			</button>
 		</form>
 	);

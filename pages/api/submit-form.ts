@@ -3,7 +3,7 @@ import { createOrUpdateContact } from "../../services/hubspotService";
 import { sendContactEmail } from "../../services/emailService";
 import { processPayment } from "../../services/paymentService";
 import { submitToTenantScreening } from "../../services/tenantScreeningService";
-import { sendApplicationNotification } from "../../services/emailService";
+import { sendApplicationNotification, sendNewsletterEmail } from "../../services/emailService";
 
 export default async function handler(
 	req: NextApiRequest,
@@ -12,7 +12,7 @@ export default async function handler(
 	if (req.method === "POST") {
 		try {
 			const { formType, ...formData } = req.body;
-			console.log("Received formType:", formType); // Add this line
+			console.log("Received formType:", formType);
 			console.log("formData", formData);
 			let response: any = {};
 
@@ -28,6 +28,12 @@ export default async function handler(
 				case "contact":
 					const emailResponse = await sendContactEmail(formData);
 					response.email = emailResponse;
+					break;
+				case "newsletter":
+					// const newsletterResponse = await sendNewsletterEmail(formData);
+					// response.newsletter = newsletterResponse;
+					// break;
+					console.log("newsletter subscribed")
 					break;
 				case "buyer":
 					console.log("Buyer form data:", formData);

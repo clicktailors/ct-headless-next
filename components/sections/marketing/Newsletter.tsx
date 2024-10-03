@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import Form from "../../ui/Form/components/Form";
 import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
+import Lottie from "../../images/animations/lottie";
 
-const fields = {
-	"Subscribe to Our Newsletter!": [
+export default function Newsletter() {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isSubscribed, setIsSubscribed] = useState(false); // State to track subscription status
+	const [titleMessage, setTitleMessage] = useState({
+		title: "Subscribe to Our Newsletter!",
+		body: "Sign up to our newsletter to get the latest news and updates.",
+	});
+
+	const [isFading, setIsFading] = useState(false);
+
+	const fields = [
 		{
 			type: "email",
 			name: "email",
@@ -11,22 +21,26 @@ const fields = {
 			placeholder: "john.doe@example.com",
 			required: true,
 		},
-	],
-};
+	];
 
-export default function Newsletter() {
-	const [isSubmitting, setIsSubmitting] = useState(false);
-
-	const { handleSubmit, submitError } = useFormSubmit("newsletter");
+	const { handleSubmit, submitError, setSubmitError } =
+		useFormSubmit("newsletter");
 
 	const onSubmit = async (formData: any) => {
 		setIsSubmitting(true);
 		try {
 			await handleSubmit(formData);
-			alert("Subscribed successfully");
-			// Reset form or redirect as needed
+			setIsFading(true);
+			setIsSubscribed(true);
+			setTimeout(() => {
+				setTitleMessage({
+					title: "Thank You For Joining Our Newsletter!",
+					body: "You will receive an email when we publish new content.",
+				});
+				setIsFading(false);
+			}, 500); // Adjust this timing to match your CSS transition duration
 		} catch (error) {
-			// Error is already logged and set in the hook
+			setSubmitError("Error subscribing. Please try again.");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -34,15 +48,32 @@ export default function Newsletter() {
 
 	return (
 		<>
-			{submitError && (
-				<div className="text-red-500 mb-4">{submitError}</div>
-			)}
-			<Form
-				fields={fields}
-				onSubmit={onSubmit}
-				submitButtonText={isSubmitting ? "Subscribing..." : "Subscribe"}
-				isSubmitting={isSubmitting}
-			/>
+			<div className="p-4 rounded-md flex flex-col items-center justify-center gap-8">
+				<div
+					className={`flex flex-col text-center justify-center lg:w-1/2 ${
+						isFading ? "opacity-0" : "opacity-100"
+					}`}
+				>
+					<h2 className={`text-2xl font-bold mb-4`}>
+						{titleMessage.title}
+					</h2>
+					<p className="text-sm text-gray-500">{titleMessage.body}</p>
+				</div>
+				<div className="lg:w-1/2 flex items-center">
+					<Form
+						fields={fields}
+						onSubmit={onSubmit}
+						submitButtonText={
+							isSubmitting ? "Subscribing..." : "Subscribe"
+						}
+						isSubmitting={isSubmitting}
+						successMessage="Subscribed successfully!"
+						errorMessage="Error subscribing. Please try again."
+						submitSuccess={isSubscribed}
+						submitError={submitError}
+					/>
+				</div>
+			</div>
 		</>
 	);
 }
