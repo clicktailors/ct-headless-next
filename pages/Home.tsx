@@ -10,8 +10,8 @@ import Hero from "../components/sections/marketing/Hero";
 import Newsletter from "../components/sections/marketing/Newsletter";
 
 export default function Home({
-	gridContent,
-	splitContent,
+	gridContent = {},
+	splitContent = {},
 	preview = false,
 }: {
 	gridContent: any;
@@ -24,8 +24,8 @@ export default function Home({
 				<title>{`${SITE_NAME}`}</title>
 			</Head>
 			<Hero />
-			<BlurbTwoByTwoGrid content={gridContent} />
-			<MarketingSplit content={splitContent} />
+			{gridContent && <BlurbTwoByTwoGrid content={gridContent} />}
+			{splitContent && <MarketingSplit content={splitContent} />}
 			<Newsletter />
 		</Layout>
 	);

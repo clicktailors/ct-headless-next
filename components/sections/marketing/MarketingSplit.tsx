@@ -58,19 +58,28 @@ interface MarketingSplitContent {
 }
 
 export default function MarketingSplit({
-	content,
+	content = {
+		sectionTitle: "",
+		sectionHeading: "",
+		sectionSummary: "",
+		imageURL: "",
+		features: [],
+	},
 }: {
 	content: MarketingSplitContent;
 }) {
 	const {
-		sectionTitle,
-		sectionHeading,
-		sectionSummary,
-		imageURL,
-		features,
+		sectionTitle = "",
+		sectionHeading = "",
+		sectionSummary = "",
+		imageURL = "",
+		features = [],
 		button,
 		buttonLink,
-	} = content;
+	} = content || {};
+
+	if (!sectionTitle) return null; // Don't render if there's no content
+
 	return (
 		<div
 			id={convertToId(sectionTitle)}

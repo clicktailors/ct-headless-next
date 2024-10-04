@@ -73,5 +73,10 @@ const splitContent = {
 };
 
 export default function Index() {
-	return <Home gridContent={gridContent} splitContent={splitContent} />;
+	return (
+		<Home
+			gridContent={gridContent || {}}
+			splitContent={splitContent || {}}
+		/>
+	);
 }

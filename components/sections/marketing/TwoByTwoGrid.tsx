@@ -2,14 +2,15 @@ import React from "react";
 import * as icons from "@heroicons/react/24/outline";
 
 interface TwoByTwoGridContent {
-	map(arg0: (feature: any) => React.JSX.Element): React.ReactNode;
-	features: Array<{ name: string; icon: string; description: string }>;
+	name: string;
+	icon: string;
+	description: string;
 }
 
 export default function TwoByTwoGrid({
 	features,
 }: {
-	features: TwoByTwoGridContent;
+	features: TwoByTwoGridContent[];
 }) {
 	return (
 		<div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

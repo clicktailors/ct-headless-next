@@ -4,22 +4,29 @@ import TwoByTwoGrid from "./TwoByTwoGrid";
 import { convertToId } from "../../../utils/formatters";
 
 interface BlurbTwoByTwoGridContent {
-	blurb: any;
-	features: any;
+	blurb?: {
+		sectionTitle?: string;
+		sectionHeading?: string;
+		sectionSummary?: string;
+	};
+	features: Array<{ name: string; icon: string; description: string }>;
 }
 
 export default function BlurbTwoByTwoGrid({
-	content,
+	content = {
+		blurb: {},
+		features: [],
+	},
 }: {
 	content: BlurbTwoByTwoGridContent;
 }) {
-	const { blurb, features } = content;
+	const { blurb = {}, features = [] } = content;
+	const sectionTitle = blurb.sectionTitle || "Default Section Title";
+
 	return (
-		<div id={convertToId(blurb.sectionTitle)} className="py-12 sm:py-12">
-			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<Blurb blurb={blurb} />
-				<TwoByTwoGrid features={features} />
-			</div>
+		<div id={convertToId(sectionTitle)} className="py-12 sm:py-12">
+			<Blurb blurb={blurb} />
+			<TwoByTwoGrid features={features} />
 		</div>
 	);
 }
