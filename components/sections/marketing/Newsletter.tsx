@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "../../ui/Form/components/Form";
 import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
 import Lottie from "../../images/animations/lottie";
-import Container from "../../ui/Container";
+import Section from "../../ui/Section";
 
 export default function Newsletter() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,8 +51,8 @@ export default function Newsletter() {
 	};
 
 	return (
-		<div className="w-full p-4 pt-24 rounded-md flex flex-col items-center justify-center gap-8">
-			<Container>
+		<div className="w-full py-12 rounded-md flex flex-col items-center justify-center gap-8">
+			<Section>
 				<div className="w-full flex flex-col items-center justify-center gap-8 mb-12">
 					<Lottie
 						button={false}
@@ -85,7 +85,7 @@ export default function Newsletter() {
 						submitError={submitError}
 					/>
 				</div>
-			</Container>
+			</Section>
 		</div>
 	);
 }

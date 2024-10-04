@@ -14,6 +14,7 @@ import PostTitle from "../../../components/blog/PostTitle";
 import Tags from "../../../components/blog/Tags";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../api/wp-api";
 import { SITE_NAME } from "../../../lib/constants";
+import Newsletter from "../../../components/sections/marketing/Newsletter";
 
 export default function Post({ post, posts }: { post: any; posts: any }) {
 	const router = useRouter();
@@ -59,6 +60,7 @@ export default function Post({ post, posts }: { post: any; posts: any }) {
 						)}
 					</>
 				)}
+				<Newsletter />
 			</Section>
 		</Layout>
 	);
