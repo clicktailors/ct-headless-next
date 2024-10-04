@@ -2,6 +2,7 @@ import Avatar from "../ui/Images/Avatar";
 import Date from "../sections/misc/date";
 import CoverImage from "./CoverImage";
 import Link from "next/link";
+import Section from "../ui/Section";
 
 interface HeroPostProps {
 	title: string;
@@ -34,7 +35,7 @@ export default function HeroPost({
 	slug,
 }: HeroPostProps) {
 	return (
-		<section className="max-w-screen-md mx-auto">
+		<Section className="max-w-screen-md mx-auto">
 			<div className="mb-8 md:mb-16">
 				{coverImage && (
 					<CoverImage
@@ -65,6 +66,6 @@ export default function HeroPost({
 					<Avatar author={author} />
 				</div>
 			</div>
-		</section>
+		</Section>
 	);
 }

@@ -2,6 +2,7 @@ import React from "react";
 import Blurb from "./Blurb";
 import TwoByTwoGrid from "./TwoByTwoGrid";
 import { convertToId } from "../../../utils/formatters";
+import Section from "../../ui/Section";
 
 interface BlurbTwoByTwoGridContent {
 	blurb?: {
@@ -24,9 +25,11 @@ export default function BlurbTwoByTwoGrid({
 	const sectionTitle = blurb.sectionTitle || "Default Section Title";
 
 	return (
-		<div id={convertToId(sectionTitle)} className="py-12 sm:py-12">
-			<Blurb blurb={blurb} />
-			<TwoByTwoGrid features={features} />
-		</div>
+		<Section>
+			<div id={convertToId(sectionTitle)} className="py-12 sm:py-12">
+				<Blurb blurb={blurb} />
+				<TwoByTwoGrid features={features} />
+			</div>
+		</Section>
 	);
 }
