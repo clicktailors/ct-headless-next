@@ -51,19 +51,21 @@ export default function Newsletter() {
 	};
 
 	return (
-		<div className="bg-white w-full p-4 pt-24 rounded-md flex flex-col items-center justify-center gap-8">
+		<div className="w-full p-4 pt-24 rounded-md flex flex-col items-center justify-center gap-8">
 			<Container>
-				<div
-					className={`w-full flex flex-col text-center justify-center ${
-						isFading ? "opacity-0" : "opacity-100"
-					}`}
-				>
+				<div className="w-full flex flex-col items-center justify-center gap-8 mb-12">
 					<Lottie
 						button={false}
 						src={newsletterAnimation}
 						loop={true}
 						autoplay={true}
 					/>
+				</div>
+				<div
+					className={`w-full flex flex-col text-center justify-center ${
+						isFading ? "opacity-0" : "opacity-100"
+					}`}
+				>
 					<h2 className={`text-2xl font-bold mb-4`}>
 						{titleMessage.title}
 					</h2>
