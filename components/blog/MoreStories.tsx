@@ -1,6 +1,7 @@
 import PostPreview from "./PostPreview";
 import Container from "../ui/Container";
 import Section from "../ui/Section";
+
 export default function MoreStories({ posts }: { posts: any[] }) {
 	return (
 		<Section>
