@@ -14,6 +14,9 @@ importers:
       '@hubspot/api-client':
         specifier: ^11.1.0
         version: 11.2.0
+      '@lottiefiles/dotlottie-react':
+        specifier: ^0.9.0
+        version: 0.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nextui-org/react':
         specifier: ^2.3.6
         version: 2.4.8(@types/react@18.3.8)(framer-motion@11.5.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)
@@ -186,6 +189,15 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@lottiefiles/dotlottie-react@0.9.0':
+    resolution: {integrity: sha512-6vR3XA7YWWvv76TkNPKC6Hc4CU0WXJlVydYmEezgi6RZS+Au3IUsCxZBr/3Zt2JPvtS3mttvP4X7tfeTA+414g==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+
+  '@lottiefiles/dotlottie-web@0.34.0':
+    resolution: {integrity: sha512-lKayn0IaqFKcnLGxJKKaDlxwKqKBpHzZ7COMEZ0HYhd3cbI9GFJb9YDUgtdpzTH5uL9Eqnr19myWYmEXHPm9pQ==}
 
   '@next/env@14.2.13':
     resolution: {integrity: sha512-s3lh6K8cbW1h5Nga7NNeXrbe0+2jIIYK9YaA9T7IufDWnZpozdFUp6Hf0d5rNWUKu4fEuSX2rCKlGjCrtylfDw==}
@@ -2401,6 +2413,14 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@lottiefiles/dotlottie-react@0.9.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@lottiefiles/dotlottie-web': 0.34.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@lottiefiles/dotlottie-web@0.34.0': {}
 
   '@next/env@14.2.13': {}
 
