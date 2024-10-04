@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
-import Container from "../../components/ui/Container";
+import Section from "../../components/ui/Section";
 import MoreStories from "../../components/blog/MoreStories";
 import HeroPost from "../../components/blog/HeroPost";
 import Intro from "../../components/sections/core/Intro";
@@ -31,7 +31,7 @@ export default function Index({
 			<Head>
 				<title>{`${pageTitle} | ${SITE_NAME}`}</title>
 			</Head>
-			<Container>
+			<Section>
 				{/* Page Title Header */}
 				<Intro pageTitle={pageTitle} />
 
@@ -40,7 +40,7 @@ export default function Index({
 
 				{/* More Stories */}
 				{morePosts.length > 0 && <MoreStories posts={morePosts} />}
-			</Container>
+			</Section>
 		</Layout>
 	);
 }

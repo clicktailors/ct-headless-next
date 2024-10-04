@@ -5,11 +5,11 @@ import DrawerNavbar from "./navbar/DaisyNavbar";
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
-				<Meta />
-				<div className="max-w-screen-xl mx-auto min-h-screen flex flex-col justify-between">
-					<DrawerNavbar pageContent={<main>{children}</main>} />
-				</div>
-				<Footer />
+			<Meta />
+			<div className="min-h-screen flex flex-col justify-between">
+				<DrawerNavbar pageContent={<main>{children}</main>} />
+			</div>
+			<Footer />
 		</>
 	);
 }

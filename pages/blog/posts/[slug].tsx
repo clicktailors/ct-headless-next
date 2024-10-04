@@ -3,6 +3,7 @@ import CustomErrorPage from "../../../components/ui/CustomErrorPage";
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Container from "../../../components/ui/Container";
+import Section from "../../../components/ui/Section";
 import PostBody from "../../../components/blog/PostBody";
 import MoreStories from "../../../components/blog/MoreStories";
 import Header from "../../../components/sections/core/Header";
@@ -24,7 +25,7 @@ export default function Post({ post, posts }: { post: any; posts: any }) {
 
 	return (
 		<Layout>
-			<Container>
+			<Section>
 				{/* <Header /> */}
 				{router.isFallback ? (
 					<PostTitle>Loading…</PostTitle>
@@ -58,7 +59,7 @@ export default function Post({ post, posts }: { post: any; posts: any }) {
 						)}
 					</>
 				)}
-			</Container>
+			</Section>
 		</Layout>
 	);
 }

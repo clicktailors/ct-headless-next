@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "../../ui/Form/components/Form";
 import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
 import Lottie from "../../images/animations/lottie";
+import Container from "../../ui/Container";
 
 export default function Newsletter() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -10,6 +11,9 @@ export default function Newsletter() {
 		title: "Subscribe to Our Newsletter!",
 		body: "Sign up to our newsletter to get the latest news and updates.",
 	});
+
+	const newsletterAnimation =
+		"https://lottie.host/ebc0a280-efc9-43a4-9be1-be0cdef674d1/VrnZT7yV9p.lottie";
 
 	const [isFading, setIsFading] = useState(false);
 
@@ -47,19 +51,25 @@ export default function Newsletter() {
 	};
 
 	return (
-		<>
-			<div className="p-4 rounded-md flex flex-col items-center justify-center gap-8">
+		<div className="bg-white w-full p-4 pt-24 rounded-md flex flex-col items-center justify-center gap-8">
+			<Container>
 				<div
-					className={`flex flex-col text-center justify-center lg:w-1/2 ${
+					className={`w-full flex flex-col text-center justify-center ${
 						isFading ? "opacity-0" : "opacity-100"
 					}`}
 				>
+					<Lottie
+						button={false}
+						src={newsletterAnimation}
+						loop={true}
+						autoplay={true}
+					/>
 					<h2 className={`text-2xl font-bold mb-4`}>
 						{titleMessage.title}
 					</h2>
 					<p className="text-sm text-gray-500">{titleMessage.body}</p>
 				</div>
-				<div className="lg:w-1/2 flex items-center">
+				<div className="w-full flex items-center">
 					<Form
 						fields={fields}
 						onSubmit={onSubmit}
@@ -73,7 +83,7 @@ export default function Newsletter() {
 						submitError={submitError}
 					/>
 				</div>
-			</div>
-		</>
+			</Container>
+		</div>
 	);
 }

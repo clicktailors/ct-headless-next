@@ -9,7 +9,8 @@ import Copyright from "../sections/misc/Copyright";
 import Socials from "../sections/core/Socials";
 import { styles } from "../../lib/styles";
 import ThemeSwitcher from "../ui/ThemeSwitcher";
-
+import Breadcrumbs from "./BreadCrumbs";
+import Container from "../ui/Container";
 export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 	const path = usePathname();
@@ -73,7 +74,6 @@ export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 				<ThemeSwitcher />
 				<Buttons />
 			</div>
-			{/* <div className="flex"></div> */}
 		</div>
 	);
 
@@ -94,7 +94,10 @@ export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 		<div className="drawer">
 			<ToggleInput />
 			<div className="drawer-content flex flex-col">
-				<HorizontalNav />
+				<Container>
+					<HorizontalNav />
+					<Breadcrumbs />
+				</Container>
 				{pageContent}
 			</div>
 			<Drawer />

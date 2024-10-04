@@ -1,5 +1,15 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
-export default function Container({ children }: { children: ReactNode }) {
-	return <div className="container mx-auto px-5">{children}</div>;
+export default function Container({
+	children,
+	className = "",
+}: {
+	children: ReactNode;
+	className?: string;
+}) {
+	return (
+		<div className={`container max-w-7xl mx-auto ${className}`}>
+			{children}
+		</div>
+	);
 }

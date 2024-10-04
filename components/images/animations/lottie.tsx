@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Lottie({
+	button = false,
 	src,
 	loop = false,
 	autoplay = false,
 }: {
+	button?: boolean;
 	src: string;
 	loop: boolean;
 	autoplay: boolean;
@@ -54,15 +56,17 @@ export default function Lottie({
 			<div className="flex justify-center items-center">
 				<DotLottieReact {...lottie} />
 			</div>
-			<button
-				className="btn btn-primary"
-				onClick={() => {
-					playAnimation ? pause() : play();
-					setPlayAnimation(!playAnimation);
-				}}
-			>
-				{playAnimation ? "Pause Animation" : "Play Animation"}
-			</button>
+			{button && (
+				<button
+					className="btn btn-primary"
+					onClick={() => {
+						playAnimation ? pause() : play();
+						setPlayAnimation(!playAnimation);
+					}}
+				>
+					{playAnimation ? "Pause Animation" : "Play Animation"}
+				</button>
+			)}
 		</div>
 	);
 }
