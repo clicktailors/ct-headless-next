@@ -1,18 +1,24 @@
 import React, { ReactNode } from "react";
 
 interface SectionProps {
+	id?: string;
 	children: ReactNode;
+	// fullWidth?: boolean;
 	className?: string;
-	fullWidth?: boolean;
 }
 
 export default function Section({
+	id,
 	children,
+	// fullWidth = false,
 	className = "",
-	fullWidth = false,
 }: SectionProps) {
 	return (
-		<section className={`w-full ${fullWidth ? "" : "px-6"} ${className}`}>
+		<section
+			id={id}
+			// className={`w-full ${fullWidth ? "" : "px-6"} ${className}`}
+			className={`w-full ${className}`}
+		>
 			{children}
 		</section>
 	);

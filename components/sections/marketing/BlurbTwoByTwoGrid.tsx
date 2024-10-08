@@ -3,6 +3,7 @@ import Blurb from "./Blurb";
 import TwoByTwoGrid from "./TwoByTwoGrid";
 import { convertToId } from "../../../utils/formatters";
 import Section from "../../ui/Section";
+import Container from "../../ui/Container";
 
 interface BlurbTwoByTwoGridContent {
 	blurb?: {
@@ -26,10 +27,12 @@ export default function BlurbTwoByTwoGrid({
 
 	return (
 		<Section>
-			<div id={convertToId(sectionTitle)} className="py-12 sm:py-12">
-				<Blurb blurb={blurb} />
-				<TwoByTwoGrid features={features} />
-			</div>
+			<Container>
+				<div id={convertToId(sectionTitle)} className="py-12 sm:py-12">
+					<Blurb blurb={blurb} />
+					<TwoByTwoGrid features={features} />
+				</div>
+			</Container>
 		</Section>
 	);
 }

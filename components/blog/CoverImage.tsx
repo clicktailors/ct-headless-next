@@ -19,7 +19,7 @@ export default function CoverImage({ title, coverImage, slug }: Props) {
 			height={1000}
 			alt={`Cover Image for ${title}`}
 			src={coverImage?.node.sourceUrl}
-			className={cn("rounded-xl", {
+			className={cn("rounded-xl max-w-sm m-auto w-full", {
 				"duration-200": slug,
 			})}
 			priority

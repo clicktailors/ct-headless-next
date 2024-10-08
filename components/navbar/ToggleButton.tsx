@@ -33,7 +33,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ variant, toggleId }) => {
 				aria-label={
 					variant === "close" ? "close sidebar" : "open sidebar"
 				}
-				className="btn btn-square btn-ghost"
+				className="btn btn-square border btn-ghost"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

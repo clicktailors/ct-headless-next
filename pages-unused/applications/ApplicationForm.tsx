@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Timeline from "../../components/ui/Form/components/Timeline";
 import { useFormSubmit } from "../../utils/hooks/useFormSubmit";
 import { validateForm } from "../../utils/formValidation";
-import ErrorMessage from "../../components/sections/core/ErrorMessage";
+import ErrorMessage from "../../components/ui/ErrorMessage";
 import FormStep from "../../components/ui/Form/components/FormStep";
 import axios from "axios";
 

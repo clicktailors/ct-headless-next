@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { FACEBOOK, TWITTER, MEDIUM, INSTAGRAM } from "../../../lib/constants";
-import { styles } from "../../../lib/styles";
+import { FACEBOOK, TWITTER, MEDIUM, INSTAGRAM } from "../../lib/constants";
+import { styles } from "../../lib/styles";
 import {
 	XIcon,
 	FacebookIcon,
 	MediumIcon,
 	InstagramIcon,
-} from "../../images/tsx/icons";
+} from "../images/tsx/icons";
 
 const Socials = () => {
 	const socialClasses = styles.icon;

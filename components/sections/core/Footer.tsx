@@ -3,7 +3,7 @@ import { CTA_LINK, CTA_TEXT } from "../../../lib/constants";
 import Link from "next/link";
 import NavigationItems from "../../navbar/NavigationItems";
 import { usePathname } from "next/navigation";
-import Socials from "./Socials";
+import Socials from "../../ui/Socials";
 import Copyright from "../misc/Copyright";
 import SiteTitle from "../../ui/SiteTitle";
 

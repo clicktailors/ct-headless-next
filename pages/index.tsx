@@ -2,74 +2,74 @@ import Home from "./Home";
 
 const gridContent = {
 	blurb: {
-		sectionTitle: "Our Mission",
-		sectionHeading: "Building your path to home",
+		sectionTitle: "Our Expertise",
+		sectionHeading: "Crafting Digital Excellence",
 		sectionSummary:
-			"Cornerstone Residency Solutions is a community-focused organization based in Paducah, Kentucky, dedicated to assisting individuals and families in establishing residency.",
+			"ClickTailors is a premier web design agency dedicated to creating stunning, functional websites that elevate your brand and drive business growth.",
 	},
 	features: [
 		{
-			name: "Local resources",
+			name: "Custom Design",
 			description:
-				"Our team collaborates closely with local experts to provide tailored solutions that make residency a reality for our clients.",
-			icon: "MapIcon",
+				"Our team of creative designers crafts unique, visually appealing websites tailored to your brand identity and target audience.",
+			icon: "PaintBrushIcon",
 		},
 		{
-			name: "Experienced and reliable",
+			name: "Responsive Development",
 			description:
-				"With years of local investment experience, we handle the hard part for you by utilizing local resources and fostering meaningful relationships with specialists to streamline the residency process.",
-			icon: "BuildingLibraryIcon",
+				"We build websites that look and function flawlessly across all devices, ensuring an optimal user experience for your visitors.",
+			icon: "DevicePhoneMobileIcon",
 		},
 		{
-			name: "Personalized support",
+			name: "SEO Optimization",
 			description:
-				"At Cornerstone Residency Solutions, we understand the importance of community connections and personalized support.",
-			icon: "PuzzlePieceIcon",
+				"Our websites are built with search engine optimization in mind, helping your business rank higher in search results and attract more organic traffic.",
+			icon: "MagnifyingGlassIcon",
 		},
 		{
-			name: "Trusted partnership",
+			name: "Ongoing Support",
 			description:
-				"Whether you're seeking to establish residency or navigate the intricacies of relocation, trust Cornerstone Residency Solutions to be your trusted partner every step of the way.",
-			icon: "UserGroupIcon",
+				"We provide continuous support and maintenance to keep your website up-to-date, secure, and performing at its best long after launch.",
+			icon: "WrenchScrewdriverIcon",
 		},
 	],
 };
 
 const splitContent = {
-	sectionTitle: "How It Works",
-	sectionHeading: "How Our Rent-to-Own Program Works",
+	sectionTitle: "Our Design Process",
+	sectionHeading: "How We Create Your Perfect Website",
 	sectionSummary:
-		"At Cornerstone Residency Solutions, we make the journey to home ownership simple and accessible with our rent-to-own program. Here’s how it works:",
-	imageURL:
-		"https://images.unsplash.com/photo-1585914641050-fa9883c4e21c?q=80&w=3043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		"At ClickTailors, we follow a streamlined process to deliver stunning, functional websites that perfectly represent your brand. Here's how we work:",
+	// imageURL:
+	// 	"https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 	features: [
 		{
-			name: "Fill Out Your Preferences",
+			name: "Discovery and Planning",
 			description:
-				"Tell us what kind of house you’re looking for. Whether it’s a cozy starter home or a spacious family house, we’ll help you find the perfect match.",
+				"We start by understanding your business goals, target audience, and design preferences to create a comprehensive project plan.",
 			icon: "MapIcon",
 		},
 		{
-			name: "Determine Your Option Deposit",
+			name: "Design Concept",
 			description:
-				"Let us know what you can afford for an option deposit. This deposit secures your right to purchase the home in the future.",
-			icon: "BuildingLibraryIcon",
+				"Our creative team develops unique design concepts that align with your brand identity and user experience requirements.",
+			icon: "PaintBrushIcon",
 		},
 		{
-			name: "Set Your Lease Duration",
+			name: "Development and Integration",
 			description:
-				"Decide how long you need to lease the property before securing financing. Our flexible terms are designed to fit your unique situation.",
-			icon: "PuzzlePieceIcon",
+				"We bring your design to life with clean, efficient code and seamlessly integrate necessary features and functionalities.",
+			icon: "CodeBracketIcon",
 		},
 		{
-			name: "Background Check and Credit Building",
+			name: "Testing and Launch",
 			description:
-				"Complete a background check and take advantage of our strategies to help you build your credit, ensuring you're ready to buy when the time comes.",
-			icon: "UserGroupIcon",
+				"We rigorously test your website across devices and browsers before launching it to ensure a flawless user experience.",
+			icon: "RocketLaunchIcon",
 		},
 	],
-	// button: "Apply Now",
-	// buttonLink: "/applications",
+	// button: "Start Your Project",
+	// buttonLink: "/contact",
 };
 
 export default function Index() {

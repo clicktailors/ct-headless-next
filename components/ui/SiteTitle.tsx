@@ -14,9 +14,9 @@ const SiteTitle: React.FC<SiteTitleProps> = ({
 	size = "text-4xl",
 	logoSize = "size-6",
 }) => (
-	<div className="flex items-center mx-4 font-semibold text-xl">
+	<div className="flex items-center mx-2 font-semibold text-xl">
 		<div className="flex items-center">
-			<SiteLogo className="mr-2" size={logoSize} />
+			<SiteLogo className="mx-1" size={logoSize} />
 			<Link href="/">
 				<h3 className={`${size} ${styles.siteTitle}`}>
 					<span className={styles.siteTitleGradient}>

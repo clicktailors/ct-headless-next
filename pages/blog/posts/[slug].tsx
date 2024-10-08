@@ -26,42 +26,38 @@ export default function Post({ post, posts }: { post: any; posts: any }) {
 
 	return (
 		<Layout>
-			<Section>
-				{/* <Header /> */}
-				{router.isFallback ? (
-					<PostTitle>Loading…</PostTitle>
-				) : (
-					<>
-						<article>
-							<Head>
-								<title>{`${post.title} | ${SITE_NAME}`}</title>
-								<meta
-									property="og:image"
-									content={post.featuredImage?.node.sourceUrl}
-								/>
-							</Head>
-							<PostHeader
-								title={post.title}
-								coverImage={post.featuredImage}
-								date={post.date}
-								author={post.author}
-								categories={post.categories}
+			{/* <Header /> */}
+			{router.isFallback ? (
+				<PostTitle>Loading…</PostTitle>
+			) : (
+				<>
+					<article>
+						<Head>
+							<title>{`${post.title} | ${SITE_NAME}`}</title>
+							<meta
+								property="og:image"
+								content={post.featuredImage?.node.sourceUrl}
 							/>
-							<PostBody content={post.content} />
-							<footer>
-								{post.tags.edges.length > 0 && (
-									<Tags tags={post.tags} />
-								)}
-							</footer>
-						</article>
-						{morePosts.length > 0 && <SectionSeparator />}
-						{morePosts.length > 0 && (
-							<MoreStories posts={morePosts} />
-						)}
-					</>
-				)}
-				<Newsletter />
-			</Section>
+						</Head>
+						<PostHeader
+							title={post.title}
+							coverImage={post.featuredImage}
+							date={post.date}
+							author={post.author}
+							categories={post.categories}
+						/>
+						<PostBody content={post.content} />
+						<footer>
+							{post.tags.edges.length > 0 && (
+								<Tags tags={post.tags} />
+							)}
+						</footer>
+					</article>
+					{morePosts.length > 0 && <SectionSeparator />}
+					{morePosts.length > 0 && <MoreStories posts={morePosts} />}
+				</>
+			)}
+			<Newsletter />
 		</Layout>
 	);
 }

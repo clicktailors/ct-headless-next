@@ -1,5 +1,5 @@
 import Avatar from "../ui/Images/Avatar";
-import Date from "../sections/misc/date";
+import Date from "../sections/misc/Date";
 import CoverImage from "./CoverImage";
 import Link from "next/link";
 
@@ -40,7 +40,7 @@ export default function PostPreview({
 					dangerouslySetInnerHTML={{ __html: title }}
 				></Link>
 			</h3>
-			<div className="text-lg mb-4">
+			<div className="text-sm text-gray-500 mb-4">
 				<Date dateString={date} />
 			</div>
 			<div className="text-lg leading-relaxed mb-4">

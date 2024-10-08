@@ -6,6 +6,7 @@ import Container from "../../components/ui/Container";
 import { SITE_NAME } from "../../lib/constants";
 import ContactForm from "./ContactForm";
 
+const pageTitle = "Get in Touch";
 const fields = {
 	"Send us a message.": [
 		{
@@ -47,8 +48,6 @@ const fields = {
 };
 
 const Contact = () => {
-	const pageTitle = "Get in Touch";
-
 	return (
 		<Layout>
 			<Head>

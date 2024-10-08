@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { validateForm, FormErrors } from "../../../../utils/formValidation";
 import Category from "./Category";
 
-const formClasses = "p-6 form-control w-full max-w-lg mx-auto p-2 mb-20";
+const formClasses = "form-control w-full max-w-lg mx-auto mb-20";
 
 export interface FieldType {
 	label: string;

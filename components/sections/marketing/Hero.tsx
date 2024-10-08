@@ -11,6 +11,7 @@ import HeroImage from "../../../public/images/marketing-hero/hero.png";
 
 import { CalendarIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
 import Section from "../../ui/Section";
+import Container from "../../ui/Container";
 
 export default function Hero() {
 	const content = {
@@ -26,57 +27,61 @@ export default function Hero() {
 		image: HeroImage,
 	};
 
-	const { hero } = styles;
+	const { hero, buttonSecondary } = styles;
 
 	return (
 		<Section>
-			<div className="hero min-h-[60vh] mt-12 md:max-w-2xl lg:max-w-4xl mx-auto">
-				{/* Glowing gradient background with radial fade */}
-				<motion.div
-					className={`${styles.blur} ${styles.blurColor}`}
-				></motion.div>
+			<Container>
+				<div className="hero min-h-[60vh] mt-12">
+					{/* Glowing gradient background with radial fade */}
+					<motion.div
+						className={`${styles.blur} ${styles.blurColor}`}
+					></motion.div>
 
-				<div className={hero.main}>
-					{/* Hero text */}
-					<div className={hero.textArea}>
-						<h1 className={hero.header}>{content.header}</h1>
-						<p className={hero.subheader}>{content.subheader}</p>
-						<div className="flex flex-row gap-4 lg:flex-row">
-							<button className={hero.button}>
-								<Link
-									href={content.buttonLink}
-									onClick={handleSmoothScroll}
-									className="flex items-center gap-2"
-								>
-									{content.buttonIcon}
-									{content.button}
-								</Link>
-							</button>
-							<button className={hero.buttonSecondary}>
-								<Link
-									href={content.buttonSecondaryLink}
-									onClick={handleSmoothScroll}
-									className="flex items-center gap-2"
-								>
-									{content.buttonSecondaryIcon}
-									{content.buttonSecondary}
-								</Link>
-							</button>
+					<div className={hero.main}>
+						{/* Hero text */}
+						<div className={hero.textArea}>
+							<h1 className={hero.header}>{content.header}</h1>
+							<p className={hero.subheader}>
+								{content.subheader}
+							</p>
+							<div className="flex flex-row gap-4 lg:flex-row">
+								<button className={hero.button}>
+									<Link
+										href={content.buttonLink}
+										onClick={handleSmoothScroll}
+										className="flex items-center gap-2"
+									>
+										{content.buttonIcon}
+										{content.button}
+									</Link>
+								</button>
+								<button className={hero.buttonOutline}>
+									<Link
+										href={content.buttonSecondaryLink}
+										onClick={handleSmoothScroll}
+										className="flex items-center gap-2"
+									>
+										{content.buttonSecondaryIcon}
+										{content.buttonSecondary}
+									</Link>
+								</button>
+							</div>
+						</div>
+
+						{/* Hero image */}
+						<div className="w-full lg:w-1/2 relative h-96 lg:h-96">
+							<Image
+								src={content.image}
+								alt="Hero"
+								layout="fill"
+								objectFit="contain"
+								className={hero.image}
+							/>
 						</div>
 					</div>
-
-					{/* Hero image */}
-					<div className="w-full lg:w-1/2 relative h-96 lg:h-96">
-						<Image
-							src={content.image}
-							alt="Hero"
-							layout="fill"
-							objectFit="contain"
-							className={hero.image}
-						/>
-					</div>
 				</div>
-			</div>
+			</Container>
 		</Section>
 	);
 }

@@ -3,6 +3,7 @@ import Form from "../../ui/Form/components/Form";
 import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
 import Lottie from "../../images/animations/lottie";
 import Section from "../../ui/Section";
+import Container from "../../ui/Container";
 
 export default function Newsletter() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,41 +52,45 @@ export default function Newsletter() {
 	};
 
 	return (
-		<div className="w-full py-12 rounded-md flex flex-col items-center justify-center gap-8">
-			<Section>
-				<div className="w-full flex flex-col items-center justify-center gap-8 mb-12">
-					<Lottie
-						button={false}
-						src={newsletterAnimation}
-						loop={true}
-						autoplay={true}
-					/>
+		<Section>
+			<Container>
+				<div className="flex flex-col items-center justify-center gap-8 max-w-sm mx-auto">
+					<div className="w-full flex flex-col items-center justify-center gap-8 mb-12">
+						<Lottie
+							button={false}
+							src={newsletterAnimation}
+							loop={true}
+							autoplay={true}
+						/>
+					</div>
+					<div
+						className={`w-full flex flex-col text-center justify-center ${
+							isFading ? "opacity-0" : "opacity-100"
+						}`}
+					>
+						<h2 className={`text-2xl font-bold mb-4`}>
+							{titleMessage.title}
+						</h2>
+						<p className="text-sm text-gray-500">
+							{titleMessage.body}
+						</p>
+					</div>
+					<div className="w-full flex items-center">
+						<Form
+							fields={fields}
+							onSubmit={onSubmit}
+							submitButtonText={
+								isSubmitting ? "Subscribing..." : "Subscribe"
+							}
+							isSubmitting={isSubmitting}
+							successMessage="Subscribed successfully!"
+							errorMessage="Error subscribing. Please try again."
+							submitSuccess={isSubscribed}
+							submitError={submitError}
+						/>
+					</div>
 				</div>
-				<div
-					className={`w-full flex flex-col text-center justify-center ${
-						isFading ? "opacity-0" : "opacity-100"
-					}`}
-				>
-					<h2 className={`text-2xl font-bold mb-4`}>
-						{titleMessage.title}
-					</h2>
-					<p className="text-sm text-gray-500">{titleMessage.body}</p>
-				</div>
-				<div className="w-full flex items-center">
-					<Form
-						fields={fields}
-						onSubmit={onSubmit}
-						submitButtonText={
-							isSubmitting ? "Subscribing..." : "Subscribe"
-						}
-						isSubmitting={isSubmitting}
-						successMessage="Subscribed successfully!"
-						errorMessage="Error subscribing. Please try again."
-						submitSuccess={isSubscribed}
-						submitError={submitError}
-					/>
-				</div>
-			</Section>
-		</div>
+			</Container>
+		</Section>
 	);
 }

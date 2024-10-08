@@ -52,7 +52,7 @@ export default function Breadcrumbs() {
 		.filter((segment) => segment !== "" && segment !== "posts");
 
 	return (
-		<div className="breadcrumbs text-sm md:ml-8 ml-6">
+		<div className="breadcrumbs text-sm px-4">
 			<ul>
 				<li>
 					<a href="/">

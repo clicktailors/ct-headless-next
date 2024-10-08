@@ -6,7 +6,7 @@ import NavigationItems from "./NavigationItems";
 import ToggleButton from "./ToggleButton";
 import NavTitle from "./NavTitle";
 import Copyright from "../sections/misc/Copyright";
-import Socials from "../sections/core/Socials";
+import Socials from "../ui/Socials";
 import { styles } from "../../lib/styles";
 import ThemeSwitcher from "../ui/ThemeSwitcher";
 import Breadcrumbs from "./BreadCrumbs";
@@ -64,7 +64,7 @@ export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 	);
 
 	const HorizontalNav = () => (
-		<div className="navbar justify-between pr-4">
+		<div className="navbar justify-between p-0 m-0 w-full">
 			<div>
 				<ToggleButton variant="hamburger" toggleId="my-drawer-3" />
 				<NavTitle />
@@ -94,7 +94,10 @@ export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 		<div className="drawer">
 			<ToggleInput />
 			<div className="drawer-content flex flex-col">
-				<Container>
+				<Container
+					smallNav={true}
+					className="px-2 md:px-4 lg:max-w-4xl xl:max-w-5xl"
+				>
 					<HorizontalNav />
 					<Breadcrumbs />
 				</Container>
