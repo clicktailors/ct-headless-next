@@ -56,7 +56,9 @@ export default function Hero() {
 										{content.button}
 									</Link>
 								</button>
-								<button className={hero.buttonOutline}>
+								<button
+									className={`btn btn-outline btn-primary`}
+								>
 									<Link
 										href={content.buttonSecondaryLink}
 										onClick={handleSmoothScroll}

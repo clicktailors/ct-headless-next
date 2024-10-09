@@ -42,6 +42,15 @@ const splitContent = {
 		"At ClickTailors, we follow a streamlined process to deliver stunning, functional websites that perfectly represent your brand. Here's how we work:",
 	imageURL:
 		"https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+	// lottie: {
+	// 	src: "/images/dot-lottie-files/Animation-1728438809855.lottie",
+	// 	loop: true,
+	// 	autoplay: true,
+	// 	style: {
+	// 		width: "100%",
+	// 		height: "100%",
+	// 	},
+	// },
 	features: [
 		{
 			name: "Discovery and Planning",

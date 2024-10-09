@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Lottie({
 	button = false,
 	src,
-	loop = false,
-	autoplay = false,
+	loop = true,
+	autoplay = true,
 }: {
 	button?: boolean;
 	src: string;
 	loop: boolean;
 	autoplay: boolean;
+	className?: string;
 }) {
 	const [playAnimation, setPlayAnimation] = useState(false); // State to control animation
 	const [animationComplete, setAnimationComplete] = useState(false); // State to control animation
@@ -20,6 +21,7 @@ export default function Lottie({
 	const dotLottieRefCallback = (dotLottie: any) => {
 		setDotLottie(dotLottie);
 	};
+
 	const lottie = {
 		src: src,
 		loop: loop,
@@ -51,11 +53,17 @@ export default function Lottie({
 		}
 	}
 
+	useEffect(() => {
+		if (dotLottie) {
+			dotLottie.addEventListener("complete", () => {
+				setAnimationComplete(true);
+			});
+		}
+	}, [dotLottie]);
+
 	return (
-		<div>
-			<div className="flex justify-center items-center">
-				<DotLottieReact {...lottie} />
-			</div>
+		<div className="w-full flex justify-center items-center flex-col">
+			<DotLottieReact {...lottie} />
 			{button && (
 				<button
 					className="btn btn-primary"
