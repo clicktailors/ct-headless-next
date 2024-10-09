@@ -105,29 +105,30 @@ export default function MarketingSplit({
 	if (!sectionTitle) return null; // Don't render if there's no content
 
 	const ImageSection = () => {
+		if (!imageURL && !lottie) {
+			return <div className="lg:order-last"></div>; // Return an empty div if no image or lottie
+		}
 		return (
-			(imageURL || lottie) && (
-				<div className="lg:order-last">
-					{imageURL && (
-						<img
-							src={imageURL}
-							alt="Product screenshot"
-							className="w-full max-w-none rounded-xl shadow-xl sm:w-[57rem] md:-ml-4 lg:-ml-0"
-							width={2432}
-							height={1442}
+			<div className="lg:order-last">
+				{imageURL && (
+					<img
+						src={imageURL}
+						alt="Product screenshot"
+						className="w-full max-w-none rounded-xl shadow-xl sm:w-[57rem] md:-ml-4 lg:-ml-0"
+						width={2432}
+						height={1442}
+					/>
+				)}
+				{lottie && (
+					<div className="w-full max-w-none rounded-xl ring-1 sm:w-[57rem] md:-ml-4 lg:-ml-0">
+						<Lottie
+							src={lottie.src}
+							loop={lottie.loop}
+							autoplay={lottie.autoplay}
 						/>
-					)}
-					{lottie && (
-						<div className="w-full max-w-none rounded-xl ring-1 sm:w-[57rem] md:-ml-4 lg:-ml-0">
-							<Lottie
-								src={lottie.src}
-								loop={lottie.loop}
-								autoplay={lottie.autoplay}
-							/>
-						</div>
-					)}
-				</div>
-			)
+					</div>
+				)}
+			</div>
 		);
 	};
 
