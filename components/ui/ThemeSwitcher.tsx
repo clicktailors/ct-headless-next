@@ -7,22 +7,24 @@ const ThemeSwitcher = () => {
 	const [mounted, setMounted] = useState(false);
 	const { theme, setTheme } = useTheme();
 
-	// useEffect only runs on the client, so now we can safely show the UI
 	useEffect(() => {
 		setMounted(true);
-	}, []);
+		if (!theme) {
+			setTheme("system");
+		}
+	}, [theme, setTheme]);
 
 	if (!mounted) {
 		return null;
 	}
 
 	const toggleTheme = () => {
-		if (theme === "dark") {
+		if (theme === "system") {
 			setTheme("light");
 		} else if (theme === "light") {
-			setTheme("system");
-		} else {
 			setTheme("dark");
+		} else {
+			setTheme("system");
 		}
 	};
 
@@ -32,12 +34,12 @@ const ThemeSwitcher = () => {
 			className={`p-2 rounded-full ${styles.icon}`}
 			aria-label="Toggle theme"
 		>
-			{theme === "dark" ? (
-				<MoonIcon />
+			{theme === "system" ? (
+				<SystemIcon />
 			) : theme === "light" ? (
 				<SunIcon />
 			) : (
-				<SystemIcon />
+				<MoonIcon />
 			)}
 		</button>
 	);
