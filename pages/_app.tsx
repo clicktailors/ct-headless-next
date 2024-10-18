@@ -7,7 +7,7 @@ import { ThemeProvider as PrimerThemeProvider } from "@primer/react-brand";
 function MyApp({ Component, pageProps }: AppProps) {
 	const providerProps = {
 		attribute: "data-theme",
-		defaultTheme: "light",
+		defaultTheme: "system",
 		themes: ["light", "dark"],
 		colorMode: "dark",
 	};
