@@ -14,10 +14,6 @@ const ThemeSwitcher = () => {
 		}
 	}, [theme, setTheme]);
 
-	if (!mounted) {
-		return null;
-	}
-
 	const toggleTheme = () => {
 		if (theme === "system") {
 			setTheme("light");
@@ -27,6 +23,18 @@ const ThemeSwitcher = () => {
 			setTheme("system");
 		}
 	};
+
+	// Render a placeholder button with the same dimensions
+	if (!mounted) {
+		return (
+			<button
+				className={`p-2 rounded-full ${styles.icon} opacity-0`}
+				aria-hidden="true"
+			>
+				<SystemIcon />
+			</button>
+		);
+	}
 
 	return (
 		<button
