@@ -32,7 +32,7 @@ export default function Index({
 				<title>{`${pageTitle} | ${SITE_NAME}`}</title>
 			</Head>
 			{/* Page Title Header */}
-			<Intro pageTitle={pageTitle} />
+			{/* <Intro pageTitle={pageTitle} /> */}
 			{/* Hero Post */}
 			{heroPost && <HeroPost {...heroPostProps} />}
 			{/* More Stories */}
