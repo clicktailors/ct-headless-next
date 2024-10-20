@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				colorMode={providerProps.colorMode as "light" | "dark" | "auto"}
 			>
 				<Component {...pageProps} />
-				<GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID ?? ""} />
+				<GoogleAnalytics gaId="G-M1L6SCV1TL" />
 			</PrimerThemeProvider>
 		</NextThemesProvider>
 	);
