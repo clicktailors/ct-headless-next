@@ -13,13 +13,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 		colorMode: "dark",
 	};
 
+	const GOOGLE_ANALYTICS_ID = process.env
+		.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string;
+
 	return (
 		<NextThemesProvider {...providerProps}>
 			<PrimerThemeProvider
 				colorMode={providerProps.colorMode as "light" | "dark" | "auto"}
 			>
 				<Component {...pageProps} />
-				<GoogleAnalytics gaId="G-M1L6SCV1TL" />
+				<GoogleAnalytics gaId={GOOGLE_ANALYTICS_ID} />
 			</PrimerThemeProvider>
 		</NextThemesProvider>
 	);
