@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Script from "next/script";
-import { CMS_NAME } from "../../../lib/constants";
+import { CMS_NAME, SITE_DESCRIPTION } from "../../../lib/constants";
 
 export default function Meta() {
 	return (
@@ -36,12 +36,13 @@ export default function Meta() {
 			/>
 			<meta name="theme-color" content="#000" />
 			<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-			<meta
-				name="description"
-				content={`A statically generated blog example using Next.js and ${CMS_NAME}.`}
-			/>
+			<meta name="description" content={SITE_DESCRIPTION} />
 			{/* <meta property="og:image" content={HOME_OG_IMAGE_URL} /> */}
-			<Script src="https://js.stripe.com/v3/"></Script>
+			{/* <Script
+				id="stripe-js"
+				src="https://js.stripe.com/v3/"
+				strategy="lazyOnload"
+			/> */}
 		</Head>
 	);
 }
