@@ -19,15 +19,15 @@ module.exports = {
 				port,
 				pathname: `${pathname}/**`,
 			},
+			// {
+			// 	protocol: "https",
+			// 	hostname: "clicktailors.com",
+			// 	port: "",
+			// 	pathname: "/wp-content/uploads/**",
+			// },
 			{
 				protocol: "https",
-				hostname: "cornerstone-residency.com",
-				port: "",
-				pathname: "/wp-content/uploads/**",
-			},
-			{
-				protocol: "https",
-				hostname: "wp.cornerstone-residency.com",
+				hostname: "wp.clicktailors.com",
 				port: "",
 				pathname: "/wp-content/uploads/**",
 			},

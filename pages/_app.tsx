@@ -3,7 +3,7 @@ import "@primer/react-brand/lib/css/main.css";
 import "../styles/index.css";
 import { ThemeProvider as NextThemesProvider } from "../utils/ThemeProvider";
 import { ThemeProvider as PrimerThemeProvider } from "@primer/react-brand";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 function MyApp({ Component, pageProps }: AppProps) {
 	const providerProps = {
 		attribute: "data-theme",
@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				colorMode={providerProps.colorMode as "light" | "dark" | "auto"}
 			>
 				<Component {...pageProps} />
+				<GoogleAnalytics gaId="G-M1L6SCV1TL" />
 			</PrimerThemeProvider>
 		</NextThemesProvider>
 	);

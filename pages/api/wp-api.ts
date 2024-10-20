@@ -209,5 +209,6 @@ export async function getPostAndMorePosts(slug: string, preview: boolean, previe
   // If there are still 3 posts, remove the last one
   if (data.posts.edges.length > 2) data.posts.edges.pop();
 
+  console.log(data)
   return data;
 }
