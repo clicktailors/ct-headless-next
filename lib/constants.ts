@@ -17,6 +17,7 @@ export const COMPANY_NAME = "Redwood Creative, LLC"
 
 export const SITE_DESCRIPTION = "ClickTailors is a premier web design agency dedicated to creating stunning, functional websites that elevate your brand and drive business growth."
 
+export const FROM_EMAIL = "contact@clicktailors.com"
 export const INSTAGRAM = "https://www.instagram.com/cornerstone_residency/"
 export const FACEBOOK = "https://www.facebook.com/profile.php?id=61559115745305"
 export const MEDIUM = "https://medium.com/@cornerstoneresidency"

@@ -1,7 +1,8 @@
 import sgMail from "@sendgrid/mail";
+import { FROM_EMAIL } from "../lib/constants";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
-const FROM_EMAIL = "contact@clicktailors.com";
+console.log("SENDGRID_API_KEY", process.env.SENDGRID_API_KEY);
 
 export async function sendContactEmail(formData: {
 	name: string;
@@ -15,8 +16,8 @@ export async function sendContactEmail(formData: {
 		: "";
 
 	const msg = {
-		to: process.env.EMAIL_USER,
-		from: FROM_EMAIL,
+		to: FROM_EMAIL || "",
+		from: FROM_EMAIL || "",
 		subject: `Contact Form Submission from ${name}`,
 		text: `${message}`,
 		html: `
