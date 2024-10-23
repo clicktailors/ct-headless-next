@@ -5,12 +5,13 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 console.log("SENDGRID_API_KEY", process.env.SENDGRID_API_KEY);
 
 export async function sendContactEmail(formData: {
-	name: string;
+  firstName: string;
+  lastName: string;
 	email: string;
 	phoneNumber?: string;
 	message: string;
 }) {
-	const { name, email, message } = formData;
+	const { firstName, lastName, email, message } = formData;
 	const phoneNumber = formData.phoneNumber
 		? `Phone Number: ${formData.phoneNumber}`
 		: "";
@@ -18,10 +19,10 @@ export async function sendContactEmail(formData: {
 	const msg = {
 		to: FROM_EMAIL || "",
 		from: FROM_EMAIL || "",
-		subject: `Contact Form Submission from ${name}`,
+		subject: `Contact Form Submission from ${firstName} ${lastName}`,
 		text: `${message}`,
 		html: `
-      <h3>${name} <${email}> sent you a message:</h3>
+      <h3>${firstName} ${lastName} <${email}> sent you a message:</h3>
       <p><strong>${message}</strong></p>
       ${phoneNumber}
     `,
