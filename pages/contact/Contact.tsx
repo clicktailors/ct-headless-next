@@ -10,14 +10,14 @@ const pageTitle = "Get in Touch";
 const fields = {
 	"Send us a message.": [
 		{
-			type: "text",
+			type: "firstName",
 			name: "firstName",
 			placeholder: "John",
 			label: "First Name",
 			required: true,
 		},
 		{
-			type: "text",
+			type: "lastName",
 			name: "lastName",
 			placeholder: "Doe",
 			label: "Last Name",

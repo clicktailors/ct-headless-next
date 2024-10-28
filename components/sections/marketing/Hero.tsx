@@ -22,7 +22,7 @@ export default function Hero() {
 		buttonLink: "/contact",
 		buttonIcon: <CalendarIcon className="size-4" />,
 		buttonSecondary: "Learn More",
-		buttonSecondaryLink: "/about",
+		buttonSecondaryLink: "/blog",
 		buttonSecondaryIcon: <InformationCircleIcon className="size-4" />,
 		image: HeroImage,
 	};
@@ -49,7 +49,7 @@ export default function Hero() {
 								<button className={hero.button}>
 									<Link
 										href={content.buttonLink}
-										onClick={handleSmoothScroll}
+										// onClick={handleSmoothScroll}
 										className="flex items-center gap-2"
 									>
 										{content.buttonIcon}
@@ -61,7 +61,7 @@ export default function Hero() {
 								>
 									<Link
 										href={content.buttonSecondaryLink}
-										onClick={handleSmoothScroll}
+										// onClick={handleSmoothScroll}
 										className="flex items-center gap-2"
 									>
 										{content.buttonSecondaryIcon}

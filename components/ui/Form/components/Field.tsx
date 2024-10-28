@@ -44,6 +44,7 @@ const Field: React.FC<FieldProps> = ({
 	};
 
 	const renderField = () => {
+		console.log(type);
 		if (type === "textarea") {
 			return (
 				<textarea
@@ -56,6 +57,30 @@ const Field: React.FC<FieldProps> = ({
 							target: { name, value: e.target.value },
 						} as React.ChangeEvent<HTMLInputElement>);
 					}}
+				/>
+			);
+		} else if (type === "firstName") {
+			return (
+				<input
+					type="text"
+					autoComplete="given-name"
+					name={name}
+					className={`${sharedClasses} ${inputClasses}`}
+					placeholder={placeholder}
+					value={value}
+					onChange={handleChange}
+				/>
+			);
+		} else if (type === "lastName") {
+			return (
+				<input
+					type="text"
+					autoComplete="family-name"
+					name={name}
+					className={`${sharedClasses} ${inputClasses}`}
+					placeholder={placeholder}
+					value={value}
+					onChange={handleChange}
 				/>
 			);
 		} else if (type === "tel") {

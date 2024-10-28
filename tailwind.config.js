@@ -21,7 +21,12 @@ module.exports = {
 				tight: 1.2,
 			},
 			fontSize: {
-				// sm: "0.8rem",
+				h1: ["2.5rem", { lineHeight: "1.2" }],
+				h2: ["2rem", { lineHeight: "1.25" }],
+				h3: ["1.75rem", { lineHeight: "1.3" }],
+				h4: ["1.5rem", { lineHeight: "1.35" }],
+				h5: ["1.25rem", { lineHeight: "1.4" }],
+				h6: ["1rem", { lineHeight: "1.5" }],
 				"5xl": "2.5rem",
 				"6xl": "2.75rem",
 				"7xl": "4.5rem",
