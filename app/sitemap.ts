@@ -1,8 +1,19 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "../lib/constants";
+import { getAllPostsWithSlug } from "../pages/api/wp-api";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-	return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+	// Fetch all blog posts
+	const posts = await getAllPostsWithSlug();
+	const blogPosts = posts?.edges?.map(({ node }: { node: { slug: string } }) => ({
+		url: `${SITE_URL}/blog/posts/${node.slug}`,
+		lastModified: new Date(),
+		changeFrequency: "monthly",
+		priority: 0.7,
+	})) || [];
+
+	// Base routes
+	const routes = [
 		{
 			url: SITE_URL,
 			lastModified: new Date(),
@@ -22,4 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			priority: 0.5,
 		},
 	];
+
+	return [...routes, ...blogPosts];
 }
