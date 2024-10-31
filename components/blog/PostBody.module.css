@@ -10,7 +10,21 @@
 }
 
 .content a {
-	@apply underline;
+	@apply underline hover:no-underline;
+}
+
+/* WordPress specific button styles */
+content.wp-block-button__link,
+.content .wp-element-button,
+.content button a,
+.content .btn a,
+.content a.btn,
+.content a.button,
+.content .wp-block-button a,
+.content .wp-block-file__button,
+.content a.wp-block-button__link {
+	@apply no-underline hover:no-underline !important;
+	text-decoration-line: none !important;
 }
 
 .content ul,
