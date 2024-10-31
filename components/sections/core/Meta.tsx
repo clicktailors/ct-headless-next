@@ -1,8 +1,12 @@
 import Head from "next/head";
 import Script from "next/script";
 import { CMS_NAME, SITE_DESCRIPTION } from "../../../lib/constants";
+import { useRouter } from "next/router";
 
 export default function Meta() {
+	const router = useRouter();
+	const canonicalUrl = `https://clicktailors.com${router.asPath}`;
+
 	return (
 		<Head>
 			<link
@@ -43,6 +47,7 @@ export default function Meta() {
 				src="https://js.stripe.com/v3/"
 				strategy="lazyOnload"
 			/> */}
+			<link rel="canonical" href={canonicalUrl} />
 		</Head>
 	);
 }
