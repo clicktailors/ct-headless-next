@@ -27,7 +27,7 @@ export default function Hero() {
 		image: HeroImage,
 	};
 
-	const { hero, buttonSecondary } = styles;
+	const { hero } = styles;
 
 	return (
 		<Section>

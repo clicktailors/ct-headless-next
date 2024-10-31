@@ -1,30 +1,44 @@
-"use client";
+// "use client";
 
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect, useState } from "react";
 import * as pixel from "../../lib/fpixel";
 
-const FacebookPixel = () => {
-	const [loaded, setLoaded] = useState(false);
-	const pathname = usePathname();
+export const usePixelTracking = () => {
+	const router = useRouter();
+	const [isInitialized, setIsInitialized] = useState(false);
 
 	useEffect(() => {
-		if (!loaded) return;
+		if (!isInitialized) return;
 
+		// Initial pageview
 		pixel.pageview();
-	}, [pathname, loaded]);
+
+		const handleRouteChange = () => {
+			pixel.pageview();
+		};
+
+		router.events.on("routeChangeComplete", handleRouteChange);
+		return () => {
+			router.events.off("routeChangeComplete", handleRouteChange);
+		};
+	}, [router.events, isInitialized]);
+
+	return setIsInitialized;
+};
+
+const FacebookPixel = () => {
+	const setIsInitialized = usePixelTracking();
 
 	return (
-		<div>
-			<Script
-				id="fb-pixel"
-				src="/scripts/pixel.js"
-				strategy="afterInteractive"
-				onLoad={() => setLoaded(true)}
-				data-pixel-id={pixel.FB_PIXEL_ID}
-			/>
-		</div>
+		<Script
+			id="fb-pixel"
+			src="/scripts/pixel.js"
+			strategy="afterInteractive"
+			data-pixel-id={pixel.FB_PIXEL_ID}
+			onLoad={() => setIsInitialized(true)}
+		/>
 	);
 };
 

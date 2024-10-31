@@ -26,4 +26,5 @@ initializeFacebookPixel(
 	"https://connect.facebook.net/en_US/fbevents.js"
 );
 
-window.fbq("init", PIXEL_ID);
+fbq("init", PIXEL_ID);
+fbq("track", "PageView");
