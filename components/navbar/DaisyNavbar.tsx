@@ -26,7 +26,7 @@ export default function DrawerNavbar({ pageContent }: { pageContent: any }) {
 				aria-label="close sidebar"
 				className="drawer-overlay"
 			></label>
-			<div className="menu p-4 w-80 min-h-full bg-base-200 flex flex-col justify-between">
+			<div className="menu p-4 w-80 min-h-full bg-base-100 flex flex-col justify-between">
 				<div>
 					<div className="flex justify-between">
 						<NavTitle />
