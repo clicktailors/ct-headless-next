@@ -13,7 +13,7 @@ import { Inter, Bricolage_Grotesque } from "next/font/google";
 export const EXAMPLE_PATH = "cms-wordpress";
 export const CMS_NAME = "WordPress";
 export const SITE_NAME = "ClickTailors"
-export const SITE_URL = "clicktailors.com"
+export const SITE_URL = "https://clicktailors.com"
 export const COMPANY_NAME = "Redwood Creative, LLC"
 
 export const SITE_DESCRIPTION = "ClickTailors is a premier web design agency dedicated to creating stunning, functional websites that elevate your brand and drive business growth."

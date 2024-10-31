@@ -14,7 +14,7 @@ const Copyright = () => (
 		<p className="text-xs">Copyright © 2024</p>
 		<p className="text-xs">
 			{`Designed by `}
-			<Link className="text-xs text-primary" href="clicktailors.com">
+			<Link className="text-xs text-primary" href="https://clicktailors.com">
 				ClickTailors
 			</Link>
 		</p>

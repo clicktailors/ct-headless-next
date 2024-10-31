@@ -8,7 +8,7 @@ export default function Credits() {
 		},
 		{
 			name: "ClickTailors",
-			link: "clicktailors.com",
+			link: "https://clicktailors.com",
 		},
 		{
 			name: "FreePik",
