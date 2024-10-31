@@ -21,7 +21,7 @@ const Links: React.FC = () => {
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="bg-accent-1 border-accent-2 footer footer-center p-16 bg-black/10 text-base-content rounded">
+		<footer className="border-accent-2 footer footer-center p-16 bg-black/10 text-base-content rounded">
 			<SiteTitle size="text-4xl" logoSize="size-8" />
 			<Links />
 			<Socials />
