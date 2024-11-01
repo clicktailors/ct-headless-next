@@ -1,15 +1,15 @@
 export const colors = {
 	light: {
-		primary: "#006789",
-		secondary: "#42c2b1",
-		background: "#EAFDF8",
+		primary: "#46A5B4",
+		secondary: "#3CC0B4",
+		background: "#F6F0E8",
 		text: "#30313d",
 		borderColor: "#e5e7eb",
 		content: "#ffffff",
 		placeholder: "#ffffff50",
 		gradientText: "#FFAE03",
 		gradientStart: "#006789",
-		gradientEnd: "#42c2b1",
+		gradientEnd: "#3CC0B4",
 	},
 	dark: {
 		primary: "#0096c7",

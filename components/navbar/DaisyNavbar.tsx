@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { CTA_LINK, CTA_TEXT } from "../../lib/constants";
 import { usePathname } from "next/navigation";

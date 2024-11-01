@@ -1,11 +1,13 @@
+"use client";
+
 import Head from "next/head";
 import Script from "next/script";
 import { CMS_NAME, SITE_DESCRIPTION } from "../../../lib/constants";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 export default function Meta() {
-	const router = useRouter();
-	const canonicalUrl = `https://clicktailors.com${router.asPath}`;
+	const pathname = usePathname();
+	const canonicalUrl = `https://clicktailors.com${pathname}`;
 
 	return (
 		<Head>
@@ -41,12 +43,6 @@ export default function Meta() {
 			<meta name="theme-color" content="#000" />
 			<link rel="alternate" type="application/rss+xml" href="/feed.xml" />
 			<meta name="description" content={SITE_DESCRIPTION} />
-			{/* <meta property="og:image" content={HOME_OG_IMAGE_URL} /> */}
-			{/* <Script
-				id="stripe-js"
-				src="https://js.stripe.com/v3/"
-				strategy="lazyOnload"
-			/> */}
 			<link rel="canonical" href={canonicalUrl} />
 		</Head>
 	);

@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import React, { useCallback } from "react";
 import routes from "../../lib/routes";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface NavItem {
 	route: {
@@ -34,9 +36,8 @@ const NavItem = React.memo(
 
 		const handleClick = (e: React.MouseEvent) => {
 			e.preventDefault();
-			router.push(path).then(() => {
-				if (closeMenu) closeMenu();
-			});
+			router.push(path);
+			if (closeMenu) closeMenu();
 		};
 
 		return (

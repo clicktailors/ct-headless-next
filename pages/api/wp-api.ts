@@ -46,60 +46,89 @@ export async function getPreviewPost(id: number, idType = "DATABASE_ID") {
 }
 
 export async function getAllPostsWithSlug() {
-  const data = await fetchAPI(`
-    {
-      posts(first: 10000) {
-        edges {
-          node {
-            slug
-          }
-        }
-      }
-    }
-  `);
-  return data?.posts;
+	const data = await fetchAPI(`
+		{
+			posts(first: 10000) {
+				edges {
+					node {
+						title
+						excerpt
+						slug
+						date
+						modified
+						featuredImage {
+							node {
+								sourceUrl
+							}
+						}
+						author {
+							node {
+								name
+								firstName
+								lastName
+								avatar {
+									url
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	`);
+	return data?.posts;
 }
 
-export async function getAllPostsForHome(preview: boolean) {
-  const data = await fetchAPI(
-    `
-    query AllPosts {
-      posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
-        edges {
-          node {
-            title
-            excerpt
-            slug
-            date
-            featuredImage {
-              node {
-                sourceUrl
-              }
-            }
-            author {
-              node {
-                name
-                firstName
-                lastName
-                avatar {
-                  url
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `,
-    {
-      variables: {
-        onlyEnabled: !preview,
-        preview,
-      },
-    },
-  );
+export async function getAllPostsForHome(preview: boolean, page = 1, perPage = 20) {
+	const data = await fetchAPI(
+		`
+		query AllPosts($first: Int!, $after: String) {
+			posts(
+				first: $first,
+				after: $after,
+				where: { orderby: { field: DATE, order: DESC } }
+			) {
+				pageInfo {
+					hasNextPage
+					endCursor
+				}
+				edges {
+					node {
+						title
+						excerpt
+						slug
+						date
+						featuredImage {
+							node {
+								sourceUrl
+							}
+						}
+						author {
+							node {
+								name
+								firstName
+								lastName
+								avatar {
+									url
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+			`,
+		{
+			variables: {
+				first: perPage,
+				after: page > 1 ? btoa(`arrayconnection:${(page - 1) * perPage - 1}`) : null,
+				onlyEnabled: !preview,
+				preview,
+			},
+		}
+	);
 
-  return data?.posts;
+	return data?.posts;
 }
 
 export async function getPostAndMorePosts(slug: string, preview: boolean, previewData: any) {

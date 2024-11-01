@@ -38,7 +38,7 @@ export default function HeroPost({
 	const Heading = () => {
 		return (
 			<div>
-				<h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
+				<h3 className="mb-4 text-4xl font-bold lg:text-6xl leading-tight">
 					<Link
 						href={`/blog/posts/${slug}`}
 						className="hover:underline"

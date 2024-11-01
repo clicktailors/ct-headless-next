@@ -10,6 +10,8 @@ import { convertToId } from "../../../utils/formatters";
 import Section from "../../ui/Section";
 import Container from "../../ui/Container";
 import Lottie from "../../images/animations/lottie";
+import Image from "next/image";
+
 // ~SAMPLE CONTENT
 // const sampleContent = {
 // 	sectionTitle: "",
@@ -111,16 +113,16 @@ export default function MarketingSplit({
 		return (
 			<div className="lg:order-last">
 				{imageURL && (
-					<img
+					<Image
 						src={imageURL}
 						alt="Product screenshot"
-						className="w-full max-w-none rounded-xl shadow-xl sm:w-[57rem] md:-ml-4 lg:-ml-0"
+						className="w-full rounded-xl shadow-xl sm:w-[57rem]"
 						width={2432}
 						height={1442}
 					/>
 				)}
 				{lottie && (
-					<div className="w-full max-w-none rounded-xl ring-1 sm:w-[57rem] md:-ml-4 lg:-ml-0">
+					<div className="w-full rounded-xl ring-1">
 						<Lottie
 							src={lottie.src}
 							loop={lottie.loop}

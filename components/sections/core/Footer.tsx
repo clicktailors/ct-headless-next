@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { CTA_LINK, CTA_TEXT } from "../../../lib/constants";
 import Link from "next/link";
 import NavigationItems from "../../navbar/NavigationItems";
@@ -8,7 +10,17 @@ import Copyright from "../misc/Copyright";
 import SiteTitle from "../../ui/SiteTitle";
 
 const Links: React.FC = () => {
+	const [mounted, setMounted] = useState(false);
 	const currentPath = usePathname();
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	if (!mounted) {
+		return null;
+	}
+
 	return (
 		<nav className="grid grid-flow-col gap-4">
 			<NavigationItems currentPath={currentPath ?? ""} footer={true} />

@@ -13,7 +13,7 @@ import Layout from "../../../components/layout";
 import PostTitle from "../../../components/blog/PostTitle";
 import Tags from "../../../components/blog/Tags";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../api/wp-api";
-import { SITE_NAME } from "../../../lib/constants";
+import { SITE_NAME, SITE_URL } from "../../../lib/constants";
 import Newsletter from "../../../components/sections/marketing/Newsletter";
 
 export default function Post({ post, posts }: { post: any; posts: any }) {
@@ -35,8 +35,37 @@ export default function Post({ post, posts }: { post: any; posts: any }) {
 						<Head>
 							<title>{`${post.title} | ${SITE_NAME}`}</title>
 							<meta
+								name="description"
+								content={post.excerpt
+									.replace(/<[^>]*>/g, "")
+									.substring(0, 160)}
+							/>
+							<meta
+								property="og:title"
+								content={`${post.title} | ${SITE_NAME}`}
+							/>
+							<meta
+								property="og:description"
+								content={post.excerpt
+									.replace(/<[^>]*>/g, "")
+									.substring(0, 160)}
+							/>
+							<meta
+								property="og:url"
+								content={`${SITE_URL}/blog/posts/${post.slug}`}
+							/>
+							<meta property="og:type" content="article" />
+							<meta
+								property="article:published_time"
+								content={post.date}
+							/>
+							<meta
 								property="og:image"
 								content={post.featuredImage?.node.sourceUrl}
+							/>
+							<link
+								rel="canonical"
+								href={`${SITE_URL}/blog/posts/${post.slug}`}
 							/>
 						</Head>
 						<PostHeader
