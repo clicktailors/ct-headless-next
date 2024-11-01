@@ -6,6 +6,7 @@ import DrawerNavbar from "../components/navbar/DaisyNavbar";
 import Footer from "../components/sections/core/Footer";
 import { SITE_NAME, SITE_DESCRIPTION } from "../lib/constants";
 import ClientProviders from "../components/providers/ClientProviders";
+import { Suspense } from "react";
 
 const bricolage = Bricolage_Grotesque({
 	weight: "variable",
@@ -25,12 +26,16 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={bricolage.className}>
-				<ClientProviders>
-					<div className="min-h-screen flex flex-col justify-between">
-						<DrawerNavbar pageContent={<main>{children}</main>} />
-					</div>
-					<Footer />
-				</ClientProviders>
+				<Suspense fallback={null}>
+					<ClientProviders>
+						<div className="min-h-screen flex flex-col justify-between">
+							<DrawerNavbar
+								pageContent={<main>{children}</main>}
+							/>
+						</div>
+						<Footer />
+					</ClientProviders>
+				</Suspense>
 			</body>
 		</html>
 	);
