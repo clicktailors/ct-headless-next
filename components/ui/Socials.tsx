@@ -8,7 +8,7 @@ import {
 	InstagramIcon,
 } from "../images/tsx/icons";
 
-const Socials = () => {
+const Socials = ({ inverted }: { inverted?: boolean }) => {
 	const socialClasses = styles.icon;
 	const socialLinks = [
 		{ href: INSTAGRAM, icon: <InstagramIcon />, name: "INSTAGRAM" },
@@ -28,6 +28,7 @@ const Socials = () => {
 						icon={social.icon}
 						className={socialClasses}
 						key={index}
+						inverted={inverted}
 					/>
 				))}
 			</div>
@@ -39,13 +40,18 @@ const SocialLink = ({
 	href,
 	icon,
 	className,
+	inverted,
 }: {
 	href: string;
 	icon: React.ReactNode;
 	className?: string;
+	inverted?: boolean;
 }) => {
 	return (
-		<Link className={`${className}`} href={href}>
+		<Link
+			className={`${className} ${inverted && "text-lightText"}`}
+			href={href}
+		>
 			{icon}
 		</Link>
 	);

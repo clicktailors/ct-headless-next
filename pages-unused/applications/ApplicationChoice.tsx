@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Layout from "../../components/layout";
+import Layout from "../../pages/layout";
 import Container from "../../components/ui/Container";
 import { SITE_NAME } from "../../lib/constants";
 

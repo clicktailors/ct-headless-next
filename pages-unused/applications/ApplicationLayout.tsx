@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import Layout from "../../components/layout";
+import Layout from "../../pages/layout";
 import Container from "../../components/ui/Container";
 import Intro from "../../components/sections/core/Intro";
 import { SITE_NAME } from "../../lib/constants";

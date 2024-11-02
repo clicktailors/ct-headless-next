@@ -9,7 +9,7 @@ import MoreStories from "../../../components/blog/MoreStories";
 import Header from "../../../components/sections/core/Header";
 import PostHeader from "../../../components/blog/PostHeader";
 import SectionSeparator from "../../../components/ui/SectionSeparator";
-import Layout from "../../../components/layout";
+import Layout from "../../layout";
 import PostTitle from "../../../components/blog/PostTitle";
 import Tags from "../../../components/blog/Tags";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../api/wp-api";

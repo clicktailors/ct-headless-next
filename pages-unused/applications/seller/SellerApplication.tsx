@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Intro from "../../../components/sections/core/Intro";
-import Layout from "../../../components/layout";
+import Layout from "../../../pages/layout";
 import Container from "../../../components/ui/Container";
 import { SITE_NAME } from "../../../lib/constants";
 import Form from "../../../components/ui/Form/components/Form";

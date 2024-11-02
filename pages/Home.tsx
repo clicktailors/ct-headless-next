@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
-import Layout from "../components/layout";
+import Layout from "./layout";
 import { getAllPostsForHome } from "./api/wp-api";
 import { SITE_NAME } from "../lib/constants";
 import * as Marketing from "../components/sections/marketing/_module";

@@ -1,6 +1,6 @@
-import Footer from "./sections/core/Footer";
-import Meta from "./sections/core/Meta";
-import DrawerNavbar from "./navbar/DaisyNavbar";
+import Footer from "../components/sections/core/Footer";
+import Meta from "../components/sections/core/Meta";
+import DrawerNavbar from "../components/navbar/DaisyNavbar";
 import Script from "next/script";
 import { Bricolage_Grotesque } from "next/font/google";
 

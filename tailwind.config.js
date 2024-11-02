@@ -2,6 +2,11 @@
 const { colors } = require("./lib/colors");
 const { headingFont, textFont } = require("./lib/constants");
 
+const getThemeColors = (isDark = false) => ({
+	darkBg: isDark ? colors.dark.darkBg : colors.light.darkBg,
+	lightText: isDark ? colors.dark.lightText : colors.light.lightText,
+});
+
 module.exports = {
 	content: [
 		"./pages/**/*.{js,ts,jsx,tsx}",
@@ -59,6 +64,10 @@ module.exports = {
 				medium: "0.5rem",
 				small: "0.25rem",
 			},
+			colors: {
+				darkBg: getThemeColors(true).darkBg,
+				lightText: getThemeColors(true).lightText,
+			},
 		},
 	},
 	daisyui: {
@@ -72,10 +81,14 @@ module.exports = {
 					background: colors.light.background,
 					"base-100": colors.light.background,
 					base: colors.light.text,
+					colors: {
+						lightText: colors.light.lightText,
+						darkBg: colors.light.darkBg,
+						"gradient-start": colors.light.gradientStart,
+						"gradient-end": colors.light.gradientEnd,
+					},
 					"border-color": colors.light.borderColor,
 					content: colors.light.content,
-					"gradient-start": colors.light.gradientStart,
-					"gradient-end": colors.light.gradientEnd,
 					"--tw-gradient-start": colors.light.gradientStart,
 					"--tw-gradient-end": colors.light.gradientEnd,
 				},
@@ -87,11 +100,14 @@ module.exports = {
 					background: colors.dark.background,
 					"base-100": colors.dark.background,
 					base: colors.dark.text,
-					colors: { "gradient-start": colors.light.gradientStart },
+					colors: {
+						"gradient-start": colors.dark.gradientStart,
+						"gradient-end": colors.dark.gradientEnd,
+						lightText: colors.dark.lightText,
+						darkBg: colors.dark.darkBg,
+					},
 					"border-color": colors.dark.borderColor,
 					content: colors.dark.content,
-					"gradient-start": colors.dark.gradientStart,
-					"gradient-end": colors.dark.gradientEnd,
 					"--tw-gradient-start": colors.dark.gradientStart,
 					"--tw-gradient-end": colors.dark.gradientEnd,
 				},

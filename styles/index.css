@@ -1,5 +1,20 @@
 @tailwind base;
 
+@layer base {
+	:root[data-theme="light"] {
+		--color-darkBg: #23272b;
+		--color-lightText: #ffffff;
+	}
+
+	:root[data-theme="dark"] {
+		--color-darkBg: #23272b;
+		--color-lightText: #ffffff;
+	}
+}
+
+@tailwind components;
+@tailwind utilities;
+
 /* Write your own custom base styles here */
 
 /* Start purging... */

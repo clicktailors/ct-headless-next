@@ -8,10 +8,13 @@ import { usePathname } from "next/navigation";
 import Socials from "../../ui/Socials";
 import Copyright from "../misc/Copyright";
 import SiteTitle from "../../ui/SiteTitle";
+import { useTheme } from "next-themes";
 
-const Links: React.FC = () => {
+const Links: React.FC<{ inverted: boolean }> = ({ inverted }) => {
 	const [mounted, setMounted] = useState(false);
 	const currentPath = usePathname();
+	// is theme dark?
+	const { theme } = useTheme();
 
 	useEffect(() => {
 		setMounted(true);
@@ -23,7 +26,11 @@ const Links: React.FC = () => {
 
 	return (
 		<nav className="grid grid-flow-col gap-4">
-			<NavigationItems currentPath={currentPath ?? ""} footer={true} />
+			<NavigationItems
+				currentPath={currentPath ?? ""}
+				footer={true}
+				inverted
+			/>
 			<Link href={CTA_LINK} className="link link-hover">
 				{CTA_TEXT}
 			</Link>
@@ -32,12 +39,15 @@ const Links: React.FC = () => {
 };
 
 const Footer: React.FC = () => {
+	const { theme } = useTheme();
 	return (
-		<footer className="border-accent-2 footer footer-center p-16 bg-black/5 text-base-content rounded">
-			<SiteTitle size="text-4xl" logoSize="size-8" />
-			<Links />
-			<Socials />
-			<div className="flex flex-col items-center text-gray-500">
+		<footer
+			className={`border-accent-2 footer footer-center p-16 bg-darkBg`}
+		>
+			<SiteTitle size="text-4xl" logoSize="size-8" inverted />
+			<Links inverted />
+			<Socials inverted />
+			<div className="flex flex-col items-center text-lightText">
 				<Copyright />
 			</div>
 		</footer>

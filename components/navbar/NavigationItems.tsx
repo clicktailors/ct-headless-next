@@ -14,6 +14,7 @@ interface NavItem {
 	currentPath: string;
 	footer: boolean;
 	closeMenu: () => void;
+	inverted: boolean;
 }
 
 interface NavigationItemsProps {
@@ -21,10 +22,11 @@ interface NavigationItemsProps {
 	footer?: boolean;
 	closeMenu?: () => void;
 	drawer?: boolean;
+	inverted?: boolean;
 }
 
 const NavItem = React.memo(
-	({ route, currentPath, footer, closeMenu, drawer }: NavItem) => {
+	({ route, currentPath, footer, closeMenu, drawer, inverted }: NavItem) => {
 		const { path, name } = route;
 		const router = useRouter();
 		const linkClass = `
@@ -32,6 +34,7 @@ const NavItem = React.memo(
 			${!footer && "btn btn-sm btn-ghost"}
 			${footer && "link link-hover"} 
 			${currentPath === path && "text-primary"}
+			${inverted && "text-lightText"}
 		`.trim();
 
 		const handleClick = (e: React.MouseEvent) => {
@@ -53,6 +56,7 @@ const NavigationItems: React.FC<NavigationItemsProps> = ({
 	footer = false,
 	drawer = false,
 	closeMenu,
+	inverted = false,
 }) => {
 	const handleMenuClose = useCallback(() => {
 		if (closeMenu) closeMenu();
@@ -68,6 +72,7 @@ const NavigationItems: React.FC<NavigationItemsProps> = ({
 					currentPath={currentPath}
 					footer={footer}
 					closeMenu={handleMenuClose}
+					inverted={inverted}
 				/>
 			))}
 		</>
