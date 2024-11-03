@@ -25,7 +25,7 @@ export default function Index({
 	const router = useRouter();
 	const heroPost = edges[0]?.node;
 	const morePosts = edges.slice(1);
-	const pageTitle = "Blog";
+	const pageTitle = "Featured Posts";
 
 	const heroPostProps = {
 		title: heroPost.title,
@@ -42,7 +42,7 @@ export default function Index({
 				<title>{`${pageTitle} | ${SITE_NAME}`}</title>
 			</Head>
 			{/* Page Title Header */}
-			{/* <Intro pageTitle={pageTitle} /> */}
+			<Intro pageTitle={pageTitle} />
 			{/* Hero Post */}
 			{heroPost && <HeroPost {...heroPostProps} />}
 			{/* More Stories */}

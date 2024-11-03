@@ -5,15 +5,21 @@ export default function Intro({
 	pageTitle,
 	icon,
 	description,
+	center = false,
 }: {
 	pageTitle: string;
 	icon?: React.ReactNode;
 	description?: string;
+	center?: boolean;
 }) {
 	return (
 		<Section id="intro">
 			<Container>
-				<h1 className="tracking-tighter text-6xl md:text-7xl font-bold leading-tight text-center my-12">
+				<h1
+					className={`tracking-tighter text-6xl md:text-7xl font-bold leading-tight my-12 ${
+						center && "text-center"
+					}`}
+				>
 					{icon && <span className="mr-4">{icon}</span>}
 					{pageTitle}
 				</h1>

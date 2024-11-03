@@ -54,7 +54,7 @@ const Contact = () => {
 				<title>{`${pageTitle} | ${SITE_NAME}`}</title>
 			</Head>
 			<Container>
-				<Intro pageTitle={pageTitle} />
+				<Intro pageTitle={pageTitle} center />
 				<ContactForm fields={fields} />
 			</Container>
 		</Layout>
