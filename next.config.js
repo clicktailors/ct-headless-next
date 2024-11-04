@@ -64,6 +64,10 @@ module.exports = {
 				destination:
 					"/api/apple-developer-merchantid-domain-association",
 			},
+			{
+				source: "/sitemap.xml",
+				destination: "/api/sitemap",
+			},
 		];
 	},
 };
