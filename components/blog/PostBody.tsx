@@ -24,7 +24,9 @@ export default function PostBody({ content }: { content: string }) {
 						"prose-img:rounded-xl prose-img:my-2",
 						"[&_.wp-block-button]:btn [&_.wp-block-button]:btn-primary",
 						"[&_.wp-block-button_a]:text-primary-content",
-						"[&_.wp-block-button__link]:text-primary-content"
+						"[&_.wp-block-button__link]:text-primary-content",
+						"[&_.wp-block-image]:rounded-xl",
+						"[&_.wp-block-video_video]:rounded-xl"
 					)}
 					dangerouslySetInnerHTML={{ __html: content }}
 				/>
