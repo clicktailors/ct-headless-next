@@ -36,19 +36,15 @@ export default function Index({
 		excerpt: heroPost.excerpt,
 	};
 
-	return (
-		<Layout>
-			<Head>
-				<title>{`${pageTitle} | ${SITE_NAME}`}</title>
-			</Head>
-			{/* Page Title Header */}
-			<Intro pageTitle={pageTitle} />
-			{/* Hero Post */}
-			{heroPost && <HeroPost {...heroPostProps} />}
-			{/* More Stories */}
-			{morePosts.length > 0 && <MoreStories posts={morePosts} />}
-			{/* Pagination */}
-			<div className="flex justify-between max-w-2xl mx-auto my-8">
+	const paginationProps = {
+		hasNextPage: pageInfo.hasNextPage,
+		currentPage: currentPage,
+	};
+
+	const Pagination = () => {
+		return (
+			// <div className="flex justify-between max-w-2xl mx-auto my-8">
+			<div className="join">
 				<button
 					onClick={() => router.push(`/blog?page=${currentPage - 1}`)}
 					disabled={currentPage <= 1}
@@ -65,6 +61,22 @@ export default function Index({
 					Next
 				</button>
 			</div>
+		);
+	};
+
+	return (
+		<Layout>
+			<Head>
+				<title>{`${pageTitle} | ${SITE_NAME}`}</title>
+			</Head>
+			{/* Page Title Header */}
+			<Intro pageTitle={pageTitle} />
+			{/* Hero Post */}
+			{heroPost && <HeroPost {...heroPostProps} />}
+			{/* More Stories */}
+			{morePosts.length > 0 && <MoreStories posts={morePosts} />}
+			{/* Pagination */}
+			<Pagination />
 			{/* Newsletter */}
 			<Newsletter />
 		</Layout>
