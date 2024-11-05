@@ -30,14 +30,9 @@ export const thirdPartyScripts: ThirdPartyScript[] = [
 		strategy: "afterInteractive",
 		src: `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`,
 	},
-    {
-        id: "google-tag-manager",
-        strategy: "afterInteractive",
-        src: `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTM_ID}`,
-    },
 	{
 		id: "pinterest-verification",
-		strategy: "afterInteractive",
+		strategy: "beforeInteractive",
 		src: `https://s.pinimg.com/ct/core.js`,
 		innerHTML: `<meta name="p:domain_verify" content="52ef2a40792e1120add9c27ecc08a51c"/>`,
 	},
