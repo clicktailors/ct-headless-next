@@ -11,29 +11,26 @@ export interface ThirdPartyScript {
 export const thirdPartyScripts: ThirdPartyScript[] = [
 	{
 		id: "facebook-pixel",
-		strategy: "afterInteractive",
+		strategy: "beforeInteractive",
+		src: "https://connect.facebook.net/en_US/fbevents.js",
 		innerHTML: `
-			!function(f,b,e,v,n,t,s)
-			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-			n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-			if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-			n.queue=[];t=b.createElement(e);t.async=!0;
-			t.src=v;s=b.getElementsByTagName(e)[0];
-			s.parentNode.insertBefore(t,s)}(window, document,'script',
-			'https://connect.facebook.net/en_US/fbevents.js');
-			fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}');
-			fbq('track', 'PageView');
+			window.fbq = window.fbq || function() {
+				(window.fbq.q = window.fbq.q || []).push(arguments)
+			};
+			window._fbq = window._fbq || window.fbq;
+			window.fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}');
+			window.fbq('track', 'PageView');
 		`,
 	},
 	{
 		id: "google-analytics",
 		strategy: "afterInteractive",
 		innerHTML: `
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-		`,
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+			`,
 	},
 	{
 		id: "google-analytics-script",

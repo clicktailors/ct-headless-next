@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import usePageTracking from "../../hooks/usePageTracking";
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function PageTracker() {
-	const [mounted, setMounted] = useState(false);
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
-		setMounted(true);
-	}, []);
+		if (typeof window !== "undefined" && window.fbq) {
+			window.fbq("track", "PageView");
+		}
+	}, [pathname, searchParams]);
 
-	if (!mounted) return null;
-
-	usePageTracking();
 	return null;
 }

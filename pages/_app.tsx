@@ -4,7 +4,6 @@ import "../styles/index.css";
 import { ThemeProvider as NextThemesProvider } from "../utils/ThemeProvider";
 import { ThemeProvider as PrimerThemeProvider } from "@primer/react-brand";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import FacebookPixel from "../components/integrations/FacebookPixel";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const providerProps = {
@@ -21,7 +20,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 			>
 				<Component {...pageProps} />
 				<GoogleAnalytics gaId="G-M1L6SCV1TL" />
-				<FacebookPixel />
 			</PrimerThemeProvider>
 		</NextThemesProvider>
 	);
