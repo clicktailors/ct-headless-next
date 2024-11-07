@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "./components/Form";
 import Error from "../Error";
-import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
+import { useFormSubmit } from "../../../hooks/useFormSubmit";
 
 const PaymentForm = ({
 	onPaymentSuccess,

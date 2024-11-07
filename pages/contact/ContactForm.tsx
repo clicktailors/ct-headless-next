@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Form from "../../components/ui/Form/components/Form";
-import { useFormSubmit } from "../../utils/hooks/useFormSubmit";
+import { useFormSubmit } from "../../hooks/useFormSubmit";
 
 const ContactForm = ({ fields }: { fields: any }) => {
 	const [isSubmitting, setIsSubmitting] = useState(false);

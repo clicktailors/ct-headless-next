@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { submitForm } from '../../services/submitForm';
+import { useState } from "react";
+import submitForm from "../services/submitForm";
 
 const LOGGING = process.env.LOGGING || false;
 

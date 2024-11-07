@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Form from "../../ui/Form/components/Form";
-import { useFormSubmit } from "../../../utils/hooks/useFormSubmit";
+import { useFormSubmit } from "../../../hooks/useFormSubmit";
 import Lottie from "../../images/animations/lottie";
 import Section from "../../ui/Section";
 import Container from "../../ui/Container";

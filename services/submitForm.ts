@@ -4,7 +4,7 @@ interface FormData {
 	[key: string]: string | number | boolean;
 }
 
-export async function submitForm(formType: string, formData: FormData) {
+export default async function submitForm(formType: string, formData: FormData) {
   console.log("formData", formData);
 	try {
 		const response = await axios.post("/api/submit-form", {
