@@ -1,5 +1,11 @@
 "use client";
 
+declare global {
+	interface Window {
+		fbq: any;
+	}    
+}    
+
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
