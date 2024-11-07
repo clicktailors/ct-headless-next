@@ -8,7 +8,7 @@ import { SITE_NAME, SITE_DESCRIPTION } from "../lib/constants";
 import ClientProviders from "../components/providers/ClientProviders";
 import { Suspense } from "react";
 import ThirdPartyScripts from "../components/core/ThirdPartyScripts";
-import usePageTracking from "../hooks/usePageTracking";
+import PageTracker from "../components/core/PageTracker";
 
 const bricolage = Bricolage_Grotesque({
 	weight: "variable",
@@ -25,14 +25,13 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	usePageTracking();
-
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={bricolage.className}>
 				<Suspense fallback={null}>
 					<ClientProviders>
 						<ThirdPartyScripts />
+						<PageTracker />
 						<div className="min-h-screen flex flex-col justify-between">
 							<DrawerNavbar
 								pageContent={<main>{children}</main>}
