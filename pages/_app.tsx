@@ -3,8 +3,6 @@ import "@primer/react-brand/lib/css/main.css";
 import "../styles/index.css";
 import { ThemeProvider as NextThemesProvider } from "../utils/ThemeProvider";
 import { ThemeProvider as PrimerThemeProvider } from "@primer/react-brand";
-import ThirdPartyScripts from "../components/core/ThirdPartyScripts";
-import PageTracker from "../components/core/PageTracker";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const providerProps = {
@@ -19,8 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<PrimerThemeProvider
 				colorMode={providerProps.colorMode as "light" | "dark" | "auto"}
 			>
-				<ThirdPartyScripts />
-				<PageTracker />
 				<Component {...pageProps} />
 			</PrimerThemeProvider>
 		</NextThemesProvider>

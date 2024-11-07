@@ -8,6 +8,11 @@ export interface ThirdPartyScript {
 	nonce?: string;
 }
 
+export interface ThirdPartyMetaTag {
+	id: string;
+	content: string;
+}
+
 export const thirdPartyScripts: ThirdPartyScript[] = [
 	{
 		id: "facebook-pixel",
@@ -47,5 +52,12 @@ export const thirdPartyScripts: ThirdPartyScript[] = [
 		id: "pinterest-tag",
 		strategy: "afterInteractive",
 		src: `https://s.pinimg.com/ct/core.js`,
+	},
+];
+
+export const thirdPartyMetaTags: ThirdPartyMetaTag[] = [
+	{
+		id: "pinterest-verification",
+		content: `<meta name="p:domain_verify" content="52ef2a40792e1120add9c27ecc08a51c"/>`,
 	},
 ];

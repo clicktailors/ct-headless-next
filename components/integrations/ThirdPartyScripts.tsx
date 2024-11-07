@@ -1,7 +1,7 @@
 "use client";
 
 import Script from "next/script";
-import { thirdPartyScripts } from "../../lib/third-party-scripts";
+import { thirdPartyScripts, thirdPartyMetaTags } from "../../lib/third-party";
 
 export default function ThirdPartyScripts() {
 	return (
