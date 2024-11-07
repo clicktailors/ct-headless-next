@@ -11,5 +11,3 @@ export default function FacebookNoscript() {
 		</noscript>
 	);
 }
-
-// <meta name="p:domain_verify" content="52ef2a40792e1120add9c27ecc08a51c"/>

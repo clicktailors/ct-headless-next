@@ -10,6 +10,8 @@ export interface ThirdPartyScript {
 
 export interface ThirdPartyMetaTag {
 	id: string;
+	name?: string;
+	property?: string;
 	content: string;
 }
 
@@ -42,22 +44,17 @@ export const thirdPartyScripts: ThirdPartyScript[] = [
 		strategy: "afterInteractive",
 		src: `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`,
 	},
-	{
-		id: "pinterest-verification",
-		strategy: "beforeInteractive",
-		src: `https://s.pinimg.com/ct/core.js`,
-		innerHTML: `<meta name="p:domain_verify" content="52ef2a40792e1120add9c27ecc08a51c"/>`,
-	},
-	{
-		id: "pinterest-tag",
-		strategy: "afterInteractive",
-		src: `https://s.pinimg.com/ct/core.js`,
-	},
 ];
 
 export const thirdPartyMetaTags: ThirdPartyMetaTag[] = [
 	{
 		id: "pinterest-verification",
-		content: `<meta name="p:domain_verify" content="52ef2a40792e1120add9c27ecc08a51c"/>`,
+		name: "p:domain_verify",
+		content: "52ef2a40792e1120add9c27ecc08a51c",
+	},
+	{
+		id: "facebook-domain-verification",
+		name: "facebook-domain-verification",
+		content: process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION || "",
 	},
 ];
