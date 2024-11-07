@@ -11,7 +11,7 @@ export interface ThirdPartyScript {
 export const thirdPartyScripts: ThirdPartyScript[] = [
 	{
 		id: "facebook-pixel",
-		strategy: "afterInteractive",
+		strategy: "beforeInteractive",
 		innerHTML: `
 			!function(f,b,e,v,n,t,s)
 			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -22,11 +22,20 @@ export const thirdPartyScripts: ThirdPartyScript[] = [
 			s.parentNode.insertBefore(t,s)}(window, document,'script',
 			'https://connect.facebook.net/en_US/fbevents.js');
 			fbq('init', '${process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID}');
-			fbq('track', 'PageView');
 		`,
 	},
 	{
 		id: "google-analytics",
+		strategy: "afterInteractive",
+		innerHTML: `
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+		`,
+	},
+	{
+		id: "google-analytics-script",
 		strategy: "afterInteractive",
 		src: `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`,
 	},

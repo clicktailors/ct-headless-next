@@ -2,8 +2,6 @@
 
 import { ThemeProvider as NextThemesProvider } from "../../utils/ThemeProvider";
 import { ThemeProvider as PrimerThemeProvider } from "@primer/react-brand";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import FacebookPixel from "../integrations/FacebookPixel";
 
 const providerProps = {
 	attribute: "data-theme",
@@ -23,8 +21,6 @@ export default function ClientProviders({
 				colorMode={providerProps.colorMode as "light" | "dark" | "auto"}
 			>
 				{children}
-				<GoogleAnalytics gaId="G-M1L6SCV1TL" />
-				<FacebookPixel />
 			</PrimerThemeProvider>
 		</NextThemesProvider>
 	);

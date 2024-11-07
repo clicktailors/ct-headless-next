@@ -1,10 +1,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import {
-	useParallaxEffect,
-	handleSmoothScroll,
-} from "../../../utils/hooks/effects";
+import { useParallaxEffect, handleSmoothScroll } from "../../../hooks/effects";
 import { styles } from "../../../lib/styles";
 
 import HeroImage from "../../../public/images/marketing-hero/hero.png";
