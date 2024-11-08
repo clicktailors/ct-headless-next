@@ -29,21 +29,6 @@ export const thirdPartyScripts: ThirdPartyScript[] = [
 			window.fbq('track', 'PageView');
 		`,
 	},
-	{
-		id: "google-analytics",
-		strategy: "afterInteractive",
-		innerHTML: `
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-				gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-			`,
-	},
-	{
-		id: "google-analytics-script",
-		strategy: "afterInteractive",
-		src: `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`,
-	},
 ];
 
 export const thirdPartyMetaTags: ThirdPartyMetaTag[] = [
