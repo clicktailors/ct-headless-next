@@ -11,6 +11,8 @@ const sharedClasses = `w-full p-2 mb-1 text-base placeholder:text-base-content/5
 const inputClasses = "input input-bordered p-4 py-6";
 const textareaClasses = "textarea textarea-bordered h-48";
 
+const LOGGING = process.env.LOGGING || false;
+
 export interface FieldType {
 	label: string;
 	type: string;
@@ -44,7 +46,7 @@ const Field: React.FC<FieldProps> = ({
 	};
 
 	const renderField = () => {
-		console.log(type);
+		LOGGING && console.log(type);
 		if (type === "textarea") {
 			return (
 				<textarea
