@@ -18,9 +18,12 @@ import Newsletter from "../../../components/sections/marketing/Newsletter";
 import { useBlogTracking } from "../../../components/integrations/google/useBlogTracking";
 
 export default function Post({ post, posts }: { post: any; posts: any }) {
-	useBlogTracking(post.title, post.slug);
 	const router = useRouter();
 	const morePosts = posts?.edges;
+
+	if (post?.title && post?.slug) {
+		useBlogTracking(post.title, post.slug);
+	}
 
 	if (!router.isFallback && !post?.slug) {
 		return <CustomErrorPage statusCode={404} />;
