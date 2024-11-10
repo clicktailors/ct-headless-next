@@ -11,7 +11,6 @@ export default function Document() {
 				<FacebookNoscript />
 			</Head>
 			<body>
-				<Integrations />
 				<Main />
 				<NextScript />
 			</body>

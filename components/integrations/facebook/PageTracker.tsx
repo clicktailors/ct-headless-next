@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function PageTracker() {
+export default function FacebookPageTracker() {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const isFirstRender = useRef(true);
@@ -15,7 +15,7 @@ export default function PageTracker() {
 			return;
 		}
 
-		console.log("PageTracker", pathname, searchParams);
+		console.log("FacebookPageTracker", pathname, searchParams);
 
 		if (typeof window !== "undefined" && window.fbq) {
 			window.fbq("track", "PageView");

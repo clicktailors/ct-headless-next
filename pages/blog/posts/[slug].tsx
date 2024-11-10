@@ -15,8 +15,10 @@ import Tags from "../../../components/blog/Tags";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../api/wp-api";
 import { SITE_NAME, SITE_URL } from "../../../lib/constants";
 import Newsletter from "../../../components/sections/marketing/Newsletter";
+import { useBlogTracking } from "../../../components/integrations/google/useBlogTracking";
 
 export default function Post({ post, posts }: { post: any; posts: any }) {
+	useBlogTracking(post.title, post.slug);
 	const router = useRouter();
 	const morePosts = posts?.edges;
 
