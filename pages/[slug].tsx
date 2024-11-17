@@ -34,27 +34,43 @@ export default function Page({ page }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const page = await getPageBySlug(params?.slug as string);
+	try {
+		const page = await getPageBySlug(params?.slug as string);
 
-	if (!page) {
+		if (!page) {
+			return {
+				notFound: true,
+			};
+		}
+
+		return {
+			props: {
+				page,
+			},
+			revalidate: 60,
+		};
+	} catch (error) {
+		console.error(`Error fetching page ${params?.slug}:`, error);
 		return {
 			notFound: true,
 		};
 	}
-
-	return {
-		props: {
-			page,
-		},
-		revalidate: 10,
-	};
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const allPages = await getAllPages();
+	const excludedSlugs = ["home"];
+
+	const paths =
+		allPages.edges
+			.map(({ node }: any) => node.slug)
+			.filter(
+				(slug: string) => !excludedSlugs.includes(slug.toLowerCase())
+			)
+			.map((slug: string) => `/${slug}`) || [];
 
 	return {
-		paths: allPages.edges.map(({ node }: any) => `/${node.slug}`) || [],
+		paths,
 		fallback: "blocking",
 	};
 };

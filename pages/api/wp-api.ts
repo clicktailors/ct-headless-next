@@ -17,7 +17,7 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
 		throw new Error('API_URL is not defined');
 	}
 
-	const maxRetries = 3;
+	const maxRetries = 5;
 	let lastError;
 
 	for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -27,7 +27,9 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
 				variables,
 			}, { 
 				headers,
-				timeout: 15000 // Increased timeout
+				timeout: 30000,
+				maxContentLength: Infinity,
+				maxBodyLength: Infinity
 			});
 
 			if (data.errors) {
@@ -45,16 +47,8 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
 				variables
 			});
 
-			if (error.response?.status === 403) {
-				console.warn('Authentication error - check WORDPRESS_AUTH_REFRESH_TOKEN');
-			}
-
-			// Only retry on network errors or 5xx errors
-			if (!error.response || error.response.status >= 500) {
-				await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
-				continue;
-			}
-			break;
+			await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
+			continue;
 		}
 	}
 
