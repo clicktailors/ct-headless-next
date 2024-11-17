@@ -2,6 +2,8 @@ import HeroImage from "../public/images/marketing-hero/hero.png";
 import { CalendarIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
 
 import Home from "./Home";
+import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
+import { MarketingSplitContent } from "../components/sections/marketing/MarketingSplit";
 
 const heroContent = {
 	header: "Your ideas. Our code.",
@@ -18,19 +20,20 @@ const heroContent = {
 	image: HeroImage,
 };
 
-const gridContent = {
+const gridContent: BlurbTwoByTwoGridContent = {
 	blurb: {
 		sectionTitle: "Our Expertise",
 		sectionHeading: "Crafting Digital Excellence",
 		sectionSummary:
 			"ClickTailors is a premier web design agency dedicated to creating stunning, functional websites that elevate your brand and drive business growth.",
+		// "Your vision, our expertise. We transform ideas into powerful digital solutions.",
 	},
 	features: [
 		{
-			name: "Custom Design",
+			name: "Discovery and Planning",
 			description:
-				"Our team of creative designers crafts unique, visually appealing websites tailored to your brand identity and target audience.",
-			icon: "PaintBrushIcon",
+				"We begin by understanding your goals, target audience, and requirements to create a comprehensive project roadmap.",
+			icon: "MapIcon" as const,
 		},
 		{
 			name: "Responsive Development",
@@ -53,7 +56,7 @@ const gridContent = {
 	],
 };
 
-const splitContent = {
+const splitContent: MarketingSplitContent = {
 	sectionTitle: "Our Design Process",
 	sectionHeading: "How We Create Your Perfect Website",
 	sectionSummary:
@@ -74,25 +77,25 @@ const splitContent = {
 			name: "Discovery and Planning",
 			description:
 				"We start by understanding your business goals, target audience, and design preferences to create a comprehensive project plan.",
-			icon: "MapIcon",
+			icon: "MapIcon" as const,
 		},
 		{
 			name: "Design Concept",
 			description:
 				"Our creative team develops unique design concepts that align with your brand identity and user experience requirements.",
-			icon: "PaintBrushIcon",
+			icon: "PaintBrushIcon" as const,
 		},
 		{
 			name: "Development and Integration",
 			description:
 				"We bring your design to life with clean, efficient code and seamlessly integrate necessary features and functionalities.",
-			icon: "CodeBracketIcon",
+			icon: "CodeBracketIcon" as const,
 		},
 		{
 			name: "Testing and Launch",
 			description:
 				"We rigorously test your website across devices and browsers before launching it to ensure a flawless user experience.",
-			icon: "RocketLaunchIcon",
+			icon: "RocketLaunchIcon" as const,
 		},
 	],
 	// button: "Start Your Project",

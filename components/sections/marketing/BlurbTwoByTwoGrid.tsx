@@ -4,26 +4,28 @@ import TwoByTwoGrid from "./TwoByTwoGrid";
 import { convertToId } from "../../../utils/formatters";
 import Section from "../../ui/Section";
 import Container from "../../ui/Container";
+import * as icons from "@heroicons/react/24/outline";
 
-interface BlurbTwoByTwoGridContent {
-	blurb?: {
-		sectionTitle?: string;
-		sectionHeading?: string;
-		sectionSummary?: string;
+export interface BlurbTwoByTwoGridContent {
+	blurb: {
+		sectionTitle: string;
+		sectionHeading: string;
+		sectionSummary: string;
 	};
-	features: Array<{ name: string; icon: string; description: string }>;
+	features: Array<{
+		name: string;
+		description: string;
+		icon: keyof typeof icons;
+	}>;
 }
 
 export default function BlurbTwoByTwoGrid({
-	content = {
-		blurb: {},
-		features: [],
-	},
+	content,
 }: {
 	content: BlurbTwoByTwoGridContent;
 }) {
-	const { blurb = {}, features = [] } = content;
-	const sectionTitle = blurb.sectionTitle || "Default Section Title";
+	const { blurb, features } = content;
+	const sectionTitle = blurb?.sectionTitle || "Default Section Title";
 
 	return (
 		<Section>

@@ -56,11 +56,11 @@ interface MarketingSplitContent {
 	sectionSummary: string;
 	imageURL?: string;
 	imagePosition?: "left" | "right";
-	features: {
+	features: Array<{
 		name: string;
 		description: string;
 		icon: keyof typeof icons;
-	}[];
+	}>;
 	lottie?: {
 		src: string;
 		loop: boolean;
@@ -71,6 +71,9 @@ interface MarketingSplitContent {
 		};
 	};
 }
+
+// Export the interface so it can be imported in other files
+export type { MarketingSplitContent };
 
 export default function MarketingSplit({
 	content = {

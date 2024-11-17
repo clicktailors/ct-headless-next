@@ -4,31 +4,37 @@ import Layout from "./layout";
 import { getAllPostsForHome } from "./api/wp-api";
 import { SITE_NAME } from "../lib/constants";
 import * as Marketing from "../components/sections/marketing/_module";
+import { MarketingSplitContent } from "../components/sections/marketing/MarketingSplit";
+import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
+
+interface HomeProps {
+	preview?: boolean;
+	allPosts?: any[];
+	heroContent?: Record<string, any>;
+	gridContent?: BlurbTwoByTwoGridContent;
+	splitContent?: MarketingSplitContent;
+}
 
 export default function Home({
-	heroContent = {},
-	gridContent = {},
-	splitContent = {},
 	preview = false,
 	allPosts = [],
-}: {
-	heroContent: any;
-	gridContent: any;
-	splitContent: any;
-	preview?: boolean;
-	allPosts?: any;
-}) {
+	heroContent,
+	gridContent,
+	splitContent,
+}: HomeProps) {
 	return (
 		<>
 			<Head>
 				<title>{`${SITE_NAME}`}</title>
 			</Head>
 			<main>
-				{heroContent && <Marketing.Hero content={heroContent} />}
-				{gridContent && (
+				{heroContent && Object.keys(heroContent).length > 0 && (
+					<Marketing.Hero content={heroContent} />
+				)}
+				{gridContent && Object.keys(gridContent).length > 0 && (
 					<Marketing.Splits.BlurbTwoByTwoGrid content={gridContent} />
 				)}
-				{splitContent && (
+				{splitContent && Object.keys(splitContent).length > 0 && (
 					<Marketing.Splits.MarketingSplit content={splitContent} />
 				)}
 				<Marketing.Newsletter />
@@ -43,9 +49,24 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 
 		return {
 			props: {
-				allPosts,
+				allPosts: allPosts || [],
 				preview,
-				// Add other props here
+				heroContent: {},
+				gridContent: {
+					blurb: {
+						sectionTitle: "",
+						sectionHeading: "",
+						sectionSummary: "",
+					},
+					features: [],
+				} as BlurbTwoByTwoGridContent,
+				splitContent: {
+					sectionTitle: "",
+					sectionHeading: "",
+					sectionSummary: "",
+					features: [],
+					imagePosition: "right",
+				},
 			},
 			revalidate: 10,
 		};
@@ -55,6 +76,22 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 			props: {
 				allPosts: [],
 				preview: false,
+				heroContent: {},
+				gridContent: {
+					blurb: {
+						sectionTitle: "",
+						sectionHeading: "",
+						sectionSummary: "",
+					},
+					features: [],
+				} as BlurbTwoByTwoGridContent,
+				splitContent: {
+					sectionTitle: "",
+					sectionHeading: "",
+					sectionSummary: "",
+					features: [],
+					imagePosition: "right",
+				},
 			},
 			revalidate: 10,
 		};

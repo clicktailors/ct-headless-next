@@ -3,7 +3,10 @@ import axios from 'axios';
 const API_URL = process.env.WORDPRESS_API_URL;
 
 async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
-	const headers: Record<string, string> = { "Content-Type": "application/json" };
+	const headers: Record<string, string> = { 
+		"Content-Type": "application/json",
+		"Accept": "application/json"
+	};
 
 	if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
 		headers["Authorization"] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
@@ -17,17 +20,24 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
 		const { data } = await axios.post(API_URL, {
 			query,
 			variables,
-		}, { headers });
+		}, { 
+			headers,
+			timeout: 10000 
+		});
 
 		if (data.errors) {
-			console.error(data.errors);
-			throw new Error("Failed to fetch API");
+			console.error('GraphQL Errors:', JSON.stringify(data.errors, null, 2));
+			throw new Error(data.errors[0]?.message || "Failed to fetch API");
 		}
 		
 		return data.data;
-	} catch (error) {
-		console.error('Error fetching from API:', error);
-		throw error;
+	} catch (error: any) {
+		console.error('API Error:', {
+			message: error.message,
+			query,
+			variables
+		});
+		throw new Error(`Failed to fetch API: ${error.message}`);
 	}
 }
 
@@ -83,6 +93,11 @@ export async function getAllPostsWithSlug() {
 }
 
 export async function getAllPostsForHome(preview: boolean, page = 1, perPage = 20) {
+	const variables = {
+		first: perPage,
+		after: page > 1 ? btoa(`arrayconnection:${(page - 1) * perPage - 1}`) : null,
+	};
+
 	const data = await fetchAPI(
 		`
 		query AllPosts($first: Int!, $after: String) {
@@ -119,16 +134,8 @@ export async function getAllPostsForHome(preview: boolean, page = 1, perPage = 2
 					}
 				}
 			}
-		}
-			`,
-		{
-			variables: {
-				first: perPage,
-				after: page > 1 ? btoa(`arrayconnection:${(page - 1) * perPage - 1}`) : null,
-				onlyEnabled: !preview,
-				preview,
-			},
-		}
+		}`,
+		{ variables }
 	);
 
 	return data?.posts;
