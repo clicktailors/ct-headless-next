@@ -19,26 +19,44 @@ export default function Home({
 	allPosts?: any;
 }) {
 	return (
-		<Layout>
+		<>
 			<Head>
 				<title>{`${SITE_NAME}`}</title>
 			</Head>
-			{heroContent && <Marketing.Hero content={heroContent} />}
-			{gridContent && (
-				<Marketing.Splits.BlurbTwoByTwoGrid content={gridContent} />
-			)}
-			{splitContent && (
-				<Marketing.Splits.MarketingSplit content={splitContent} />
-			)}
-			<Marketing.Newsletter />
-		</Layout>
+			<main>
+				{heroContent && <Marketing.Hero content={heroContent} />}
+				{gridContent && (
+					<Marketing.Splits.BlurbTwoByTwoGrid content={gridContent} />
+				)}
+				{splitContent && (
+					<Marketing.Splits.MarketingSplit content={splitContent} />
+				)}
+				<Marketing.Newsletter />
+			</main>
+		</>
 	);
 }
 
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-	const allPosts = await getAllPostsForHome(preview);
+	try {
+		const allPosts = await getAllPostsForHome(preview);
 
-	return {
-		props: { allPosts, preview },
-	};
+		return {
+			props: {
+				allPosts,
+				preview,
+				// Add other props here
+			},
+			revalidate: 10,
+		};
+	} catch (error) {
+		console.error("Error in getStaticProps:", error);
+		return {
+			props: {
+				allPosts: [],
+				preview: false,
+			},
+			revalidate: 10,
+		};
+	}
 };
