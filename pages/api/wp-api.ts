@@ -8,37 +8,57 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
 		"Accept": "application/json"
 	};
 
-	if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
-		headers["Authorization"] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
+	const token = process.env.WORDPRESS_AUTH_REFRESH_TOKEN;
+	if (token) {
+		headers["Authorization"] = `Bearer ${token}`;
 	}
 	
 	if (!API_URL) {
 		throw new Error('API_URL is not defined');
 	}
 
-	try {
-		const { data } = await axios.post(API_URL, {
-			query,
-			variables,
-		}, { 
-			headers,
-			timeout: 10000 
-		});
+	const maxRetries = 3;
+	let lastError;
 
-		if (data.errors) {
-			console.error('GraphQL Errors:', JSON.stringify(data.errors, null, 2));
-			throw new Error(data.errors[0]?.message || "Failed to fetch API");
+	for (let attempt = 0; attempt < maxRetries; attempt++) {
+		try {
+			const { data } = await axios.post(API_URL, {
+				query,
+				variables,
+			}, { 
+				headers,
+				timeout: 15000 // Increased timeout
+			});
+
+			if (data.errors) {
+				console.error('GraphQL Errors:', JSON.stringify(data.errors, null, 2));
+				throw new Error(data.errors[0]?.message || "Failed to fetch API");
+			}
+			
+			return data.data;
+		} catch (error: any) {
+			lastError = error;
+			console.error(`API Error (attempt ${attempt + 1}/${maxRetries}):`, {
+				message: error.message,
+				status: error.response?.status,
+				query: query.slice(0, 200) + '...',
+				variables
+			});
+
+			if (error.response?.status === 403) {
+				console.warn('Authentication error - check WORDPRESS_AUTH_REFRESH_TOKEN');
+			}
+
+			// Only retry on network errors or 5xx errors
+			if (!error.response || error.response.status >= 500) {
+				await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt)));
+				continue;
+			}
+			break;
 		}
-		
-		return data.data;
-	} catch (error: any) {
-		console.error('API Error:', {
-			message: error.message,
-			query,
-			variables
-		});
-		throw new Error(`Failed to fetch API: ${error.message}`);
 	}
+
+	throw new Error(`Failed to fetch API after ${maxRetries} attempts: ${lastError.message}`);
 }
 
 export async function getPreviewPost(id: number, idType = "DATABASE_ID") {
