@@ -23,7 +23,7 @@ export default function Home({
 	splitContent,
 }: HomeProps) {
 	return (
-		<>
+		<Layout>
 			<Head>
 				<title>{`${SITE_NAME}`}</title>
 			</Head>
@@ -39,7 +39,7 @@ export default function Home({
 				)}
 				<Marketing.Newsletter />
 			</main>
-		</>
+		</Layout>
 	);
 }
 
