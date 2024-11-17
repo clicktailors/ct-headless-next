@@ -269,3 +269,43 @@ export async function getPostAndMorePosts(slug: string, preview: boolean, previe
 
 	return data;
 }
+
+export async function getPageBySlug(slug: string) {
+	const data = await fetchAPI(
+		`
+		query PageBySlug($id: ID!) {
+			page(id: $id, idType: URI) {
+				title
+				content
+				slug
+				modified
+				featuredImage {
+					node {
+						sourceUrl
+					}
+				}
+			}
+		}`,
+		{
+			variables: { id: slug },
+		}
+	);
+	return data?.page;
+}
+
+export async function getAllPages() {
+	const data = await fetchAPI(`
+		{
+			pages(first: 100) {
+				edges {
+					node {
+						title
+						slug
+						content
+					}
+				}
+			}
+		}
+	`);
+	return data?.pages;
+}

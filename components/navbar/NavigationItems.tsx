@@ -9,6 +9,7 @@ interface NavItem {
 	route: {
 		name: string;
 		path: string;
+		footerOnly?: boolean;
 	};
 	drawer?: boolean;
 	currentPath: string;
@@ -62,9 +63,16 @@ const NavigationItems: React.FC<NavigationItemsProps> = ({
 		if (closeMenu) closeMenu();
 	}, [closeMenu]);
 
+	const filteredRoutes = routes.filter((route) => {
+		if (footer) {
+			return true; // Show all routes in footer
+		}
+		return !route.footerOnly; // Only show non-footer-only routes in navbar
+	});
+
 	return (
 		<>
-			{routes.map((route) => (
+			{filteredRoutes.map((route) => (
 				<NavItem
 					key={route.path}
 					drawer={drawer}
