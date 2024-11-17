@@ -1,4 +1,22 @@
+import HeroImage from "../public/images/marketing-hero/hero.png";
+import { CalendarIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
+
 import Home from "./Home";
+
+const heroContent = {
+	header: "Your ideas. Our code.",
+	// subheader:
+	// 	"At ClickTailors, we specialize in bringing your business to the next level in a world where being digital matters.",
+	subheader:
+		"At ClickTailors, we specialize in creating custom tailored websites and tools that bring your business to the next level in a world where being digital matters.",
+	button: "Free Consultation",
+	buttonLink: "/contact",
+	buttonIcon: <CalendarIcon className="size-4" />,
+	buttonSecondary: "Learn More",
+	buttonSecondaryLink: "/blog",
+	buttonSecondaryIcon: <InformationCircleIcon className="size-4" />,
+	image: HeroImage,
+};
 
 const gridContent = {
 	blurb: {
@@ -84,6 +102,7 @@ const splitContent = {
 export default function Index() {
 	return (
 		<Home
+			heroContent={heroContent || {}}
 			gridContent={gridContent || {}}
 			splitContent={splitContent || {}}
 		/>

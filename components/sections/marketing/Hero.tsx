@@ -4,26 +4,10 @@ import Image from "next/image";
 import { useParallaxEffect, handleSmoothScroll } from "../../../hooks/effects";
 import { styles } from "../../../lib/styles";
 
-import HeroImage from "../../../public/images/marketing-hero/hero.png";
-
-import { CalendarIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
 import Section from "../../ui/Section";
 import Container from "../../ui/Container";
 
-export default function Hero() {
-	const content = {
-		header: "A Website That Sets You Apart.",
-		subheader:
-			"At ClickTailors, we specialize in bringing your business to the next level in a world where being digital matters.",
-		button: "Free Consultation",
-		buttonLink: "/contact",
-		buttonIcon: <CalendarIcon className="size-4" />,
-		buttonSecondary: "Learn More",
-		buttonSecondaryLink: "/blog",
-		buttonSecondaryIcon: <InformationCircleIcon className="size-4" />,
-		image: HeroImage,
-	};
-
+export default function Hero({ content }: { content: any }) {
 	const { hero } = styles;
 
 	return (
