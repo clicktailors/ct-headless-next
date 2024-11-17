@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProvider as PrimerThemeProvider } from "@primer/react-brand";
 
 export default function ClientProviders({
@@ -12,16 +12,23 @@ export default function ClientProviders({
 		attribute: "data-theme",
 		defaultTheme: "system",
 		themes: ["light", "dark"],
-		colorMode: "dark",
+		enableSystem: true,
+		value: {
+			light: "light",
+			dark: "dark",
+			system: "system",
+		},
 	};
 
 	return (
-		<ThemeProvider {...providerProps}>
+		<NextThemesProvider {...providerProps}>
 			<PrimerThemeProvider
-				colorMode={providerProps.colorMode as "light" | "dark" | "auto"}
+				colorMode={
+					providerProps.defaultTheme as "light" | "dark" | "auto"
+				}
 			>
 				{children}
 			</PrimerThemeProvider>
-		</ThemeProvider>
+		</NextThemesProvider>
 	);
 }
