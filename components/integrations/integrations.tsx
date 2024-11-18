@@ -1,7 +1,7 @@
 "use client";
 
 import ThirdPartyScripts from "./ThirdPartyScripts";
-import FacebookPageTracker from "./facebook/PageTracker";
+import FacebookPixel from "./facebook/FacebookPixel";
 import GoogleAnalytics from "./google/GoogleAnalytics";
 
 export default function Integrations() {
@@ -9,7 +9,7 @@ export default function Integrations() {
 		<>
 			<GoogleAnalytics />
 			<ThirdPartyScripts />
-			<FacebookPageTracker />
+			<FacebookPixel />
 		</>
 	);
 }
