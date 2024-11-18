@@ -10,21 +10,35 @@ export default function FacebookPixel() {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const initialized = useRef(false);
+	const pageViewTimeout = useRef<NodeJS.Timeout>();
 
 	useEffect(() => {
 		if (!FB_PIXEL_ID) return;
 
 		try {
 			if (!initialized.current) {
-				// Initialize pixel only once
 				window.fbq("init", FB_PIXEL_ID);
 				initialized.current = true;
+				window.fbq("track", "PageView");
+			} else {
+				// Clear any pending pageview
+				if (pageViewTimeout.current) {
+					clearTimeout(pageViewTimeout.current);
+				}
+				// Debounce pageview tracking
+				pageViewTimeout.current = setTimeout(() => {
+					window.fbq("track", "PageView");
+				}, 100);
 			}
-			// Track pageview on every navigation
-			window.fbq("track", "PageView");
 		} catch (error) {
 			console.debug("Facebook Pixel tracking unavailable");
 		}
+
+		return () => {
+			if (pageViewTimeout.current) {
+				clearTimeout(pageViewTimeout.current);
+			}
+		};
 	}, [pathname, searchParams]);
 
 	if (!FB_PIXEL_ID) return null;
