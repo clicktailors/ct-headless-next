@@ -54,8 +54,8 @@ export default function Newsletter() {
 	return (
 		<Section>
 			<Container>
-				<div className="flex flex-col items-center justify-center gap-8 max-w-sm mx-auto">
-					<div className="w-full flex flex-col items-center justify-center gap-8 mb-12">
+				<div className="flex flex-col items-center justify-center gap-8 max-w-sm mx-auto py-16">
+					<div className="w-full flex flex-col items-center justify-center gap-8">
 						<Lottie
 							button={false}
 							src={newsletterAnimation}

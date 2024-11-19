@@ -1,9 +1,11 @@
 import HeroImage from "../public/images/marketing-hero/hero.png";
 import { CalendarIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
+import { GetStaticProps } from "next";
 
 import Home from "./Home";
 import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
 import { MarketingSplitContent } from "../components/sections/marketing/MarketingSplit";
+import { getAllPostsForHome } from "./api/wp-api";
 
 const heroContent = {
 	header: "Your ideas. Our code.",
@@ -102,12 +104,44 @@ const splitContent: MarketingSplitContent = {
 	// buttonLink: "/contact",
 };
 
-export default function Index() {
+export default function Index({
+	allPosts,
+	preview = false,
+}: {
+	allPosts: any;
+	preview: boolean;
+}) {
 	return (
 		<Home
 			heroContent={heroContent || {}}
 			gridContent={gridContent || {}}
 			splitContent={splitContent || {}}
+			allPosts={allPosts || { edges: [] }}
+			preview={preview || false}
 		/>
 	);
 }
+
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+	try {
+		const page = 1;
+		const allPosts = await getAllPostsForHome(preview, page);
+
+		return {
+			props: {
+				allPosts,
+				preview,
+			},
+			revalidate: 10,
+		};
+	} catch (error) {
+		console.error("Error in getStaticProps:", error);
+		return {
+			props: {
+				allPosts: { edges: [] },
+				preview: false,
+			},
+			revalidate: 10,
+		};
+	}
+};

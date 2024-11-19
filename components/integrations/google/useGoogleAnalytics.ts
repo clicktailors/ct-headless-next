@@ -3,6 +3,8 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
+const LOGGING = process.env.LOGGING || false;
+
 declare global {
 	interface Window {
 		gtag: (
@@ -18,7 +20,7 @@ export function useGoogleAnalytics() {
 
 	useEffect(() => {
 		if (isFirstRender.current) {
-			console.log("GA First Render", {
+			LOGGING && console.log("GA First Render", {
 				gaId: process.env.NEXT_PUBLIC_GA_ID,
 				hasGtag: typeof window.gtag !== "undefined",
 			});
