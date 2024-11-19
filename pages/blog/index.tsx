@@ -43,23 +43,33 @@ export default function Index({
 
 	const Pagination = () => {
 		return (
-			// <div className="flex justify-between max-w-2xl mx-auto my-8">
-			<div className="join">
-				<button
-					onClick={() => router.push(`/blog?page=${currentPage - 1}`)}
-					disabled={currentPage <= 1}
-					className="px-4 py-2 text-sm disabled:opacity-50"
-				>
-					Previous
-				</button>
-				<span>Page {currentPage}</span>
-				<button
-					onClick={() => router.push(`/blog?page=${currentPage + 1}`)}
-					disabled={!pageInfo.hasNextPage}
-					className="px-4 py-2 text-sm disabled:opacity-50"
-				>
-					Next
-				</button>
+			<div className="flex justify-center my-8">
+				<div className="join">
+					<button
+						onClick={() =>
+							router.push(`/blog?page=${currentPage - 1}`)
+						}
+						disabled={currentPage <= 1}
+						className="join-item btn btn-outline"
+					>
+						«
+					</button>
+					<button
+						className="join-item btn btn-outline no-animation"
+						disabled
+					>
+						Page {currentPage}
+					</button>
+					<button
+						onClick={() =>
+							router.push(`/blog?page=${currentPage + 1}`)
+						}
+						disabled={!pageInfo.hasNextPage}
+						className="join-item btn btn-outline"
+					>
+						»
+					</button>
+				</div>
 			</div>
 		);
 	};
