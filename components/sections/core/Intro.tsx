@@ -16,7 +16,7 @@ export default function Intro({
 		<Section id="intro">
 			<Container>
 				<h1
-					className={`tracking-tighter text-6xl md:text-7xl font-bold leading-tight my-12 ${
+					className={`tracking-tighter text-6xl md:text-7xl font-bold leading-tight ${
 						center && "text-center"
 					}`}
 				>

@@ -8,7 +8,8 @@ import { MarketingSplitContent } from "../components/sections/marketing/Marketin
 import { getAllPostsForHome } from "./api/wp-api";
 
 const heroContent = {
-	header: "Your ideas. Our code.",
+	header: "Your Ideas.",
+	header2: "< Our Code />",
 	// subheader:
 	// 	"At ClickTailors, we specialize in bringing your business to the next level in a world where being digital matters.",
 	subheader:

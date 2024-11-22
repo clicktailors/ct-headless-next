@@ -30,7 +30,7 @@ export default function BlurbTwoByTwoGrid({
 	return (
 		<Section>
 			<Container>
-				<div id={convertToId(sectionTitle)} className="py-12 sm:py-12">
+				<div id={convertToId(sectionTitle)}>
 					<Blurb blurb={blurb} />
 					<TwoByTwoGrid features={features} />
 				</div>

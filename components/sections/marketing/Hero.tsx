@@ -22,10 +22,26 @@ export default function Hero({ content }: { content: any }) {
 					<div className={hero.main}>
 						{/* Hero text */}
 						<div className={hero.textArea}>
-							<h1 className={hero.header}>{content.header}</h1>
+							<h1
+								className={`${hero.header} mb-8 ${
+									content.header2 ? "flex flex-col" : ""
+								}`}
+							>
+								{content.header}
+								{content.header2 && (
+									<>
+										<br />
+										<span className="text-primary font-mono text-4xl">
+											{content.header2}
+										</span>
+									</>
+								)}
+							</h1>
 							<p className={hero.subheader}>
 								{content.subheader}
 							</p>
+
+							{/* Buttons */}
 							<div className="flex flex-row gap-4 lg:flex-row">
 								<button className={hero.button}>
 									<Link

@@ -1,4 +1,5 @@
 export const styles = {
+	yMargin: "my-8 md:my-16",
 	icon: "hover:text-primary transition-colors duration-300 ease-in-out hover:scale-110",
 	link: "hover:text-primary transition-colors duration-300 ease-in-out hover:scale-110",
 	button: "bg-primary text-white hover:bg-primary/90 transition-colors duration-300 ease-in-out hover:scale-110",
@@ -32,7 +33,7 @@ export const styles = {
 	hero: {
 		main: "hero-content relative mx-auto pt-24 flex flex-col gap-4 lg:flex-row items-center justify-between",
 		textArea: "lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0",
-		header: "text-6xl md:text-7xl lg:text-7xl font-bold leading-tight flex items-start gap-4 text-left mb-4",
+		header: "text-6xl md:text-7xl lg:text-7xl font-bold leading-tight flex items-start gap-4 text-left",
 		subheader: "text-xl mb-8 text-left",
 		button: "btn btn-primary",
 		buttonOutline: "btn btn-outline btn-primary",

@@ -81,11 +81,9 @@ export default function HeroPost({
 	return (
 		<Section>
 			<Container>
-				<div className=" my-20 md:my-28">
-					<Image />
-					<Heading />
-					<TextArea />
-				</div>
+				<Image />
+				<Heading />
+				<TextArea />
 			</Container>
 		</Section>
 	);

@@ -7,16 +7,16 @@ export default function BlogCarousel({ posts }: { posts: any[] }) {
 	return (
 		<Section>
 			<Container>
-				<div className="relative my-16">
-					<h2 className="mb-8 text-6xl font-bold tracking-tighter leading-tight">
+				<div className="relative">
+					<h2 className="mb-8 text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
 						Latest Posts
 					</h2>
 
-					<div className="carousel carousel-center w-full gap-8 py-4">
+					<div className="carousel carousel-center w-full gap-4 md:gap-8 py-4 overflow-x-auto">
 						{posts.map(({ node }) => (
 							<div
 								key={node.slug}
-								className="carousel-item w-[350px]"
+								className="carousel-item w-[280px] md:w-[350px]"
 							>
 								<PostPreview
 									title={node.title}
@@ -30,14 +30,13 @@ export default function BlogCarousel({ posts }: { posts: any[] }) {
 						))}
 					</div>
 
-					{/* Navigation Buttons */}
-					<div className="absolute right-0 -top-16 space-x-2">
+					<div className="absolute right-0 top-0 space-x-1">
 						<button
 							onClick={() => {
 								const carousel =
 									document.querySelector(".carousel");
 								carousel?.scrollBy({
-									left: -400,
+									left: -300,
 									behavior: "smooth",
 								});
 							}}
@@ -51,7 +50,7 @@ export default function BlogCarousel({ posts }: { posts: any[] }) {
 								const carousel =
 									document.querySelector(".carousel");
 								carousel?.scrollBy({
-									left: 400,
+									left: 300,
 									behavior: "smooth",
 								});
 							}}

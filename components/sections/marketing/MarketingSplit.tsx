@@ -139,9 +139,9 @@ export default function MarketingSplit({
 
 	const TextSection = () => {
 		return (
-			<div className="lg:pr-8 lg:pt-4">
+			<div className="lg:pr-8">
 				{/* Features */}
-				<dl className="mt-10 max-w-xl space-y-8 leading-7 lg:max-w-none">
+				<dl className="max-w-xl space-y-8 leading-7 lg:max-w-none">
 					{features.map((feature) => (
 						<div key={feature.name} className="relative pl-9">
 							<dt className="inline font-semibold">
@@ -174,12 +174,9 @@ export default function MarketingSplit({
 	return (
 		<Section>
 			<Container>
-				<div
-					id={convertToId(sectionTitle)}
-					className="overflow-hidden py-24 sm:py-32"
-				>
+				<div id={convertToId(sectionTitle)} className="overflow-hidden">
 					{/* Centered heading and summary */}
-					<div className="text-center mb-16">
+					<div className="mx-auto max-w-2xl lg:text-center">
 						<h2
 							id={convertToId(sectionTitle)}
 							className="font-semibold leading-7 text-primary"
@@ -201,7 +198,7 @@ export default function MarketingSplit({
 					</div>
 
 					{/* Split layout */}
-					<div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+					<div className="my-16 mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
 						<ImageSection />
 						<TextSection />
 					</div>

@@ -54,7 +54,12 @@ export default function Newsletter() {
 	return (
 		<Section>
 			<Container>
-				<div className="flex flex-col items-center justify-center gap-8 max-w-sm mx-auto py-16">
+				<div className="flex flex-col items-center justify-center gap-8 max-w-sm mx-auto">
+					{/* Section title */}
+					<h2 className="mb-8 text-4xl md:text-6xl font-bold tracking-tighter leading-tight">
+						Newsletter
+					</h2>
+					{/* Animation */}
 					<div className="w-full flex flex-col items-center justify-center gap-8">
 						<Lottie
 							button={false}
@@ -63,6 +68,7 @@ export default function Newsletter() {
 							autoplay={true}
 						/>
 					</div>
+					{/* Message */}
 					<div
 						className={`w-full flex flex-col text-center justify-center ${
 							isFading ? "opacity-0" : "opacity-100"
@@ -75,6 +81,7 @@ export default function Newsletter() {
 							{titleMessage.body}
 						</p>
 					</div>
+					{/* Form */}
 					<div className="w-full flex items-center">
 						<Form
 							fields={fields}
