@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPreviewPost } from "../pages/api/wp-api";
+import { createCMSProvider } from "../lib/cms/cms-factory";
+import { cmsConfig } from "../lib/config";
 
 export default async function preview(
 	req: NextApiRequest,
@@ -17,7 +18,8 @@ export default async function preview(
 		return res.status(401).json({ message: "Invalid token" });
 	}
 	// Fetch WordPress to check if the provided `id` or `slug` exists
-	const post = await getPreviewPost(
+	const cms = createCMSProvider(cmsConfig.type);
+	const post = await cms.getPreviewPost(
 		id ? parseInt(id as string, 10) : (slug ? parseInt(slug as string, 10) : 0),
 		id ? "DATABASE_ID" : "SLUG"
 	);

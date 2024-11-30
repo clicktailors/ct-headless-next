@@ -1,11 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { SITE_URL } from "../../lib/constants";
-import { getAllPostsWithSlug } from "../api/wp-api";
+import { createCMSProvider } from "../../lib/cms/cms-factory";
+import { cmsConfig } from "../../lib/config";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		// Fetch all blog posts
-		const posts = await getAllPostsWithSlug();
+		// Fetch all blog posts using CMS factory
+		const cms = createCMSProvider(cmsConfig.type);
+		const posts = await cms.getAllPostsWithSlug();
 		
 		// Base routes
 		const routes = [
@@ -13,6 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				url: SITE_URL,
 				lastmod: new Date().toISOString(),
 				changefreq: "yearly",
+				
 				priority: 1,
 			},
 			{

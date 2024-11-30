@@ -1,10 +1,12 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "../lib/constants";
-import { getAllPostsWithSlug } from "../pages/api/wp-api";
+import { createCMSProvider } from "../lib/cms/cms-factory";
+import { cmsConfig } from "../lib/config";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	// Fetch all blog posts
-	const posts = await getAllPostsWithSlug();
+	// Fetch all blog posts using CMS factory
+	const cms = createCMSProvider(cmsConfig.type);
+	const posts = await cms.getAllPostsWithSlug();
 	const blogPosts = posts?.edges?.map(({ node }: { node: { slug: string; date: string } }) => ({
 		url: `${SITE_URL}/blog/posts/${node.slug}`,
 		lastModified: new Date(node.date),
