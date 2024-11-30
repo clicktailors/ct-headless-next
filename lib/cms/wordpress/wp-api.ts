@@ -51,4 +51,4 @@ export async function fetchAPI(
 	}
 
 	throw new Error(`Failed to fetch API after ${maxRetries} attempts: ${lastError.message}`);
-}
+} 

@@ -4,6 +4,7 @@ import { sendContactEmail } from "../../services/emailService";
 import { processPayment } from "../../services/paymentService";
 import { submitToTenantScreening } from "../../services/tenantScreeningService";
 import { sendApplicationNotification, sendNewsletterEmail } from "../../services/emailService";
+import { LOGGING } from "../../lib/logging";
 
 export default async function handler(
 	req: NextApiRequest,
@@ -12,15 +13,15 @@ export default async function handler(
 	if (req.method === "POST") {
 		try {
 			const { formType, ...formData } = req.body;
-			console.log("Received formType:", formType);
-			console.log("formData", formData);
+			LOGGING && console.log("Received formType:", formType);
+			LOGGING && console.log("formData", formData);
 			let response: any = {};
 
 			// Common operations for all form types
 			if (formData.email) {
 				const hubspotResponse = await createOrUpdateContact(formData);
 				response.hubspot = hubspotResponse;
-				console.log("hubspotResponse", hubspotResponse);
+				LOGGING && console.log("hubspotResponse", hubspotResponse);
 			}
 
 			// Specific operations based on form type
@@ -33,12 +34,12 @@ export default async function handler(
 					// const newsletterResponse = await sendNewsletterEmail(formData);
 					// response.newsletter = newsletterResponse;
 					// break;
-					console.log("newsletter subscribed")
+					LOGGING && console.log("newsletter subscribed");
 					break;
 				case "buyer":
-					console.log("Buyer form data:", formData);
+					LOGGING && console.log("Buyer form data:", formData);
 					if (formData.paymentIntentId) {
-						console.log("Processing payment with paymentIntentId:", formData.paymentIntentId);
+						LOGGING && console.log("Processing payment with paymentIntentId:", formData.paymentIntentId);
 						const paymentResponse = await processPayment(
 							formData.paymentIntentId,
 							formData.email
@@ -53,11 +54,11 @@ export default async function handler(
 							});
 						}
 						// If payment is successful, proceed with tenant screening
-						console.log("Payment successful, submitting to tenant screening");
+						LOGGING && console.log("Payment successful, submitting to tenant screening");
 						const screeningResponse = await submitToTenantScreening(formData);
 						response.screening = screeningResponse;
 					} else if (formData.paymentMethodId) {
-						console.log("Payment already processed with paymentMethodId:", formData.paymentMethodId);
+						LOGGING && console.log("Payment already processed with paymentMethodId:", formData.paymentMethodId);
 						// Proceed with tenant screening
 						const screeningResponse = await submitToTenantScreening(formData);
 						response.screening = screeningResponse;
@@ -71,7 +72,7 @@ export default async function handler(
 				case "seller":
 					// Send notification email for seller application
 					await sendApplicationNotification("seller", formData);
-					// console.log("Sending seller notification email");
+					// LOGGING && console.log("Sending seller notification email");
 					break;
 				default:
 					throw new Error("Invalid form type");

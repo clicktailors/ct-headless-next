@@ -2,8 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
-
-const LOGGING = process.env.LOGGING || false;
+import { LOGGING } from "../../../lib/logging";
 
 declare global {
 	interface Window {

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-
+import { LOGGING } from "../../lib/logging";
 const PaymentSuccess = () => {
 	const router = useRouter();
 	const { payment_intent, payment_intent_client_secret, redirect_status } =
@@ -9,10 +9,10 @@ const PaymentSuccess = () => {
 	useEffect(() => {
 		if (redirect_status === "succeeded") {
 			// Handle successful payment here
-			console.log("Payment succeeded:", payment_intent);
+			LOGGING && console.log("Payment succeeded:", payment_intent);
 		} else {
 			// Handle other statuses or errors
-			console.log("Payment status:", redirect_status);
+			LOGGING && console.log("Payment status:", redirect_status);
 		}
 	}, [redirect_status, payment_intent]);
 

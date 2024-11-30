@@ -4,32 +4,54 @@ import MoreStories from "../../components/blog/MoreStories";
 import HeroPost from "../../components/blog/HeroPost";
 import Intro from "../../components/sections/core/Intro";
 import Layout from "../layout";
-import { getAllPostsForHome } from "../api/wp-api";
 import { SITE_NAME } from "../../lib/constants";
 import Newsletter from "../../components/sections/marketing/Newsletter";
 import { useRouter } from "next/router";
+import { createCMSProvider } from "../../lib/cms/cms-factory";
+import { cmsConfig } from "../../lib/config";
 
-export default function Index({
-	allPosts: { edges, pageInfo },
-	currentPage,
-}: {
+interface Props {
 	allPosts: {
-		edges: any[];
+		edges: Array<{
+			node: {
+				title: string;
+				excerpt: string;
+				slug: string;
+				date: string;
+				featuredImage?: {
+					node: {
+						sourceUrl: string;
+					};
+				};
+				author?: {
+					node: {
+						name: string;
+						firstName?: string;
+						lastName?: string;
+						avatar?: {
+							url: string;
+						};
+					};
+				};
+			};
+		}>;
 		pageInfo: {
 			hasNextPage: boolean;
 			endCursor: string;
 		};
 	};
 	currentPage: number;
-}) {
+}
+
+export default function Index({ allPosts, currentPage }: Props) {
 	const router = useRouter();
-	const heroPost = edges[0]?.node;
-	const morePosts = edges.slice(1);
+	const heroPost = allPosts.edges[0]?.node;
+	const morePosts = allPosts.edges.slice(1);
 	const pageTitle = "Featured Posts";
 
 	const heroPostProps = {
 		title: heroPost.title,
-		coverImage: heroPost.featuredImage,
+		coverImage: heroPost.featuredImage || { node: { sourceUrl: "" } },
 		date: heroPost.date,
 		author: heroPost.author,
 		slug: heroPost.slug,
@@ -37,7 +59,7 @@ export default function Index({
 	};
 
 	const paginationProps = {
-		hasNextPage: pageInfo.hasNextPage,
+		hasNextPage: allPosts.pageInfo.hasNextPage,
 		currentPage: currentPage,
 	};
 
@@ -64,7 +86,7 @@ export default function Index({
 						onClick={() =>
 							router.push(`/blog?page=${currentPage + 1}`)
 						}
-						disabled={!pageInfo.hasNextPage}
+						disabled={!allPosts.pageInfo.hasNextPage}
 						className="join-item btn btn-outline"
 					>
 						»
@@ -93,16 +115,16 @@ export default function Index({
 	);
 }
 
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-	const page = 1; // For static generation, we'll always show first page
-	const allPosts = await getAllPostsForHome(preview, page);
+export const getStaticProps: GetStaticProps = async ({
+	preview = false,
+	params,
+}) => {
+	const cms = createCMSProvider(cmsConfig.type);
+	const currentPage = params?.page ? parseInt(params.page as string) : 1;
+	const allPosts = await cms.getAllPostsForHome(false, currentPage);
 
 	return {
-		props: {
-			allPosts,
-			currentPage: page,
-			preview,
-		},
+		props: { allPosts, currentPage },
 		revalidate: 10,
 	};
 };

@@ -1,6 +1,8 @@
+import { LOGGING } from "../lib/logging";
+
 export async function submitToTenantScreening(formData: any) {
   // Placeholder function for tenant screening
-  console.log('Submitting to tenant screening:', formData);
+  LOGGING && console.log('Submitting to tenant screening:', formData);
   
   // Simulate an API call
   await new Promise(resolve => setTimeout(resolve, 1000));

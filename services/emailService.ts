@@ -1,8 +1,8 @@
 import sgMail from "@sendgrid/mail";
 import { FROM_EMAIL } from "../lib/constants";
-
+import { LOGGING } from "../lib/logging";
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
-console.log("SENDGRID_API_KEY", process.env.SENDGRID_API_KEY);
+LOGGING && console.log("SENDGRID_API_KEY", process.env.SENDGRID_API_KEY);
 
 export async function sendContactEmail(formData: {
   firstName: string;
@@ -29,7 +29,7 @@ export async function sendContactEmail(formData: {
 	};
 
 	try {
-		console.log("Sending email:", msg);
+		LOGGING && console.log("Sending email:", msg);
 		await sgMail.send(msg);
 		return { success: true, message: "Email sent successfully!" };
 	} catch (error) {

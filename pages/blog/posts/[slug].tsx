@@ -1,7 +1,7 @@
+import { GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
-import CustomErrorPage from "../../../components/ui/CustomErrorPage";
+import ErrorPage from "next/error";
 import Head from "next/head";
-import { GetStaticPaths, GetStaticProps } from "next";
 import Container from "../../../components/ui/Container";
 import Section from "../../../components/ui/Section";
 import PostBody from "../../../components/blog/PostBody";
@@ -12,96 +12,117 @@ import SectionSeparator from "../../../components/ui/SectionSeparator";
 import Layout from "../../layout";
 import PostTitle from "../../../components/blog/PostTitle";
 import Tags from "../../../components/blog/Tags";
-import { getAllPostsWithSlug, getPostAndMorePosts } from "../../api/wp-api";
-import { SITE_NAME, SITE_URL } from "../../../lib/constants";
-import Newsletter from "../../../components/sections/marketing/Newsletter";
-import { useBlogTracking } from "../../../components/integrations/google/useBlogTracking";
+import { SITE_NAME } from "../../../lib/constants";
+import { createCMSProvider } from "../../../lib/cms/cms-factory";
+import { cmsConfig } from "../../../lib/config";
 
-export default function Post({ post, posts }: { post: any; posts: any }) {
+interface PostType {
+	slug: string;
+	title: string;
+	featuredImage?: {
+		node: {
+			sourceUrl: string;
+		};
+	};
+	date: string;
+	author: {
+		node: {
+			name: string;
+			firstName?: string;
+			lastName?: string;
+			avatar?: {
+				url: string;
+			};
+		};
+	};
+	categories: {
+		edges: Array<{
+			node: {
+				name: string;
+			};
+		}>;
+	};
+	content: string;
+	tags: {
+		edges: Array<{
+			node: {
+				name: string;
+			};
+		}>;
+	};
+}
+
+interface PostsType {
+	edges: Array<{
+		node: PostType;
+	}>;
+}
+
+interface Props {
+	post: PostType;
+	posts: PostsType;
+	preview?: boolean;
+}
+
+export default function Post({ post, posts, preview = false }: Props) {
 	const router = useRouter();
-	const morePosts = posts?.edges;
-
-	if (post?.title && post?.slug) {
-		useBlogTracking(post.title, post.slug);
-	}
 
 	if (!router.isFallback && !post?.slug) {
-		return <CustomErrorPage statusCode={404} />;
+		return <ErrorPage statusCode={404} />;
 	}
 
 	return (
 		<Layout>
-			{/* <Header /> */}
-			{router.isFallback ? (
-				<PostTitle>Loading…</PostTitle>
-			) : (
-				<>
-					<article>
-						<Head>
-							<title>{`${post.title} | ${SITE_NAME}`}</title>
-							<meta
-								name="description"
-								content={post.excerpt
-									.replace(/<[^>]*>/g, "")
-									.substring(0, 160)}
+			<Container>
+				{router.isFallback ? (
+					<PostTitle>Loading…</PostTitle>
+				) : (
+					<>
+						<article>
+							<Head>
+								<title>{`${post.title} | ${SITE_NAME}`}</title>
+								<meta
+									property="og:image"
+									content={post.featuredImage?.node.sourceUrl}
+								/>
+							</Head>
+							<PostHeader
+								title={post.title}
+								coverImage={
+									post.featuredImage || {
+										node: { sourceUrl: "" },
+									}
+								}
+								date={post.date}
+								author={post.author}
+								categories={post.categories}
 							/>
-							<meta
-								property="og:title"
-								content={`${post.title} | ${SITE_NAME}`}
-							/>
-							<meta
-								property="og:description"
-								content={post.excerpt
-									.replace(/<[^>]*>/g, "")
-									.substring(0, 160)}
-							/>
-							<meta
-								property="og:url"
-								content={`${SITE_URL}/blog/posts/${post.slug}`}
-							/>
-							<meta property="og:type" content="article" />
-							<meta
-								property="article:published_time"
-								content={post.date}
-							/>
-							<meta
-								property="og:image"
-								content={post.featuredImage?.node.sourceUrl}
-							/>
-							<link
-								rel="canonical"
-								href={`${SITE_URL}/blog/posts/${post.slug}`}
-							/>
-						</Head>
-						<PostHeader
-							title={post.title}
-							coverImage={post.featuredImage}
-							date={post.date}
-							author={post.author}
-							categories={post.categories}
-						/>
-						<PostBody content={post.content} />
-						<footer>
-							{post.tags.edges.length > 0 && (
-								<Tags tags={post.tags} />
-							)}
-						</footer>
-					</article>
-					{morePosts.length > 0 && <SectionSeparator />}
-					{morePosts.length > 0 && <MoreStories posts={morePosts} />}
-				</>
-			)}
-			<Newsletter />
+							<PostBody content={post.content} />
+							<footer>
+								{post.tags.edges.length > 0 && (
+									<Tags tags={post.tags} />
+								)}
+							</footer>
+						</article>
+
+						<SectionSeparator />
+						{posts?.edges?.length > 0 && (
+							<MoreStories posts={posts.edges} />
+						)}
+					</>
+				)}
+			</Container>
 		</Layout>
 	);
 }
 
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps: GetStaticProps<Props> = async ({
 	params,
 	preview = false,
 	previewData,
 }) => {
-	const data = await getPostAndMorePosts(
+	const cms = createCMSProvider(cmsConfig.type);
+	const data = await cms.getPostAndMorePosts(
 		params?.slug as string,
 		preview,
 		previewData
@@ -118,12 +139,14 @@ export const getStaticProps: GetStaticProps = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const allPosts = await getAllPostsWithSlug();
+	const cms = createCMSProvider(cmsConfig.type);
+	const allPosts = await cms.getAllPostsWithSlug();
 
 	return {
 		paths:
 			allPosts.edges.map(
-				({ node }: { node: any }) => `/blog/posts/${node.slug}`
+				({ node }: { node: { slug: string } }) =>
+					`/blog/posts/${node.slug}`
 			) || [],
 		fallback: true,
 	};

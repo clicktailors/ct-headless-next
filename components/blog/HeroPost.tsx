@@ -14,12 +14,12 @@ interface HeroPostProps {
 	};
 	date: string;
 	excerpt: string;
-	author: {
+	author?: {
 		node: {
 			name: string;
-			firstName: string;
-			lastName: string;
-			avatar: {
+			firstName?: string;
+			lastName?: string;
+			avatar?: {
 				url: string;
 			};
 		};

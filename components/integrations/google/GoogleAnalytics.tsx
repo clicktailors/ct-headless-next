@@ -2,8 +2,7 @@
 
 import { GoogleAnalytics as NextGoogleAnalytics } from "@next/third-parties/google";
 import { useGoogleAnalytics } from "./useGoogleAnalytics";
-
-const LOGGING = process.env.LOGGING || false;
+import { LOGGING } from "../../../lib/logging";
 
 export default function GoogleAnalytics() {
 	const gaId = process.env.NEXT_PUBLIC_GA_ID;

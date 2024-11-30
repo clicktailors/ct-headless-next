@@ -1,10 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Layout from "./layout";
-import { getAllPages, getPageBySlug } from "./api/wp-api";
 import { SITE_NAME } from "../lib/constants";
 import Container from "../components/ui/Container";
 import Section from "../components/ui/Section";
+import { createCMSProvider } from "../lib/cms/cms-factory";
+import { cmsConfig } from "../lib/config";
 
 interface PageProps {
 	page: {
@@ -35,7 +36,8 @@ export default function Page({ page }: PageProps) {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	try {
-		const page = await getPageBySlug(params?.slug as string);
+		const cms = createCMSProvider(cmsConfig.type);
+		const page = await cms.getPageBySlug(params?.slug as string);
 
 		if (!page) {
 			return {
@@ -58,7 +60,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const allPages = await getAllPages();
+	const cms = createCMSProvider(cmsConfig.type);
+	const allPages = await cms.getAllPages();
 	const excludedSlugs = ["home"];
 
 	const paths =

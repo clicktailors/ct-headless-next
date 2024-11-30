@@ -5,6 +5,7 @@ import { validateForm } from "../../utils/formValidation";
 import ErrorMessage from "../../components/ui/ErrorMessage";
 import FormStep from "../../components/ui/Form/components/FormStep";
 import axios from "axios";
+import { LOGGING } from "../../lib/logging";
 
 const ApplicationForm = ({
 	steps,
@@ -82,7 +83,7 @@ const ApplicationForm = ({
 				setHighestStepReached(Math.max(highestStepReached, nextStep));
 			}
 		} else {
-			console.log("Validation errors:", filteredErrors);
+			LOGGING && console.log("Validation errors:", filteredErrors);
 			setSubmitError("Please fill in all required fields correctly.");
 		}
 	};

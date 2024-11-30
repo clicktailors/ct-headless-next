@@ -1,12 +1,14 @@
 import Head from "next/head";
 import { GetStaticProps } from "next";
 import Layout from "./layout";
-import { getAllPostsForHome } from "./api/wp-api";
 import { SITE_NAME } from "../lib/constants";
 import * as Marketing from "../components/sections/marketing/_module";
 import { MarketingSplitContent } from "../components/sections/marketing/MarketingSplit";
 import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
 import BlogCarousel from "../components/blog/BlogCarousel";
+import { createCMSProvider } from "../lib/cms/cms-factory";
+import { cmsConfig } from "../lib/config";
+import { LOGGING } from "../lib/logging";
 
 interface HomeProps {
 	preview?: boolean;
@@ -30,7 +32,7 @@ export default function Home({
 	splitContent,
 }: HomeProps) {
 	const recentPosts = allPosts?.edges?.slice(0, 6) || [];
-	console.log(recentPosts, allPosts);
+	LOGGING && console.log(recentPosts, allPosts);
 
 	return (
 		<Layout>
@@ -57,8 +59,9 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 	try {
 		const page = 1;
-		const allPosts = await getAllPostsForHome(preview, page);
-		console.log("getAllPostsForHome response:", allPosts);
+		const cms = createCMSProvider(cmsConfig.type);
+		const allPosts = await cms.getAllPostsForHome(preview, page);
+		LOGGING && console.log("getAllPostsForHome response:", allPosts);
 
 		return {
 			props: {

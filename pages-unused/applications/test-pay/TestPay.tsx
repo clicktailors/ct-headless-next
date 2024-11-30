@@ -6,7 +6,7 @@ import Container from "../../../components/ui/Container";
 import { SITE_NAME } from "../../../lib/constants";
 import StripeForm from "../../../components/ui/Form/StripeForm";
 import Timeline from "../../../components/ui/Form/components/Timeline";
-
+import { LOGGING } from "../../../lib/logging";
 const TestPay: React.FC = () => {
 	const pageTitle = "Test Pay";
 	const pageDescription = "This is a test payment page.";
@@ -18,7 +18,7 @@ const TestPay: React.FC = () => {
 		try {
 			setCompletedSteps([...completedSteps, 1]);
 			setCurrentStep(2);
-			console.log("Payment result:", paymentResult);
+			LOGGING && console.log("Payment result:", paymentResult);
 			// Simulate form submission
 			await new Promise((resolve) => setTimeout(resolve, 1000));
 			setCompletedSteps([...completedSteps, 1, 2]);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "./components/Form";
 import Error from "../Error";
 import { useFormSubmit } from "../../../hooks/useFormSubmit";
+import { LOGGING } from "../../../lib/logging";
 
 const PaymentForm = ({
 	onPaymentSuccess,
@@ -46,7 +47,7 @@ const PaymentForm = ({
 		setIsSubmitting(true);
 		try {
 			const result = await handleSubmit(formData);
-			console.log("Payment submission result:", result);
+			LOGGING && console.log("Payment submission result:", result);
 			if (result.success) {
 				onPaymentSuccess(result);
 			}

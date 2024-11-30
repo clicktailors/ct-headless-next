@@ -5,7 +5,8 @@ import { GetStaticProps } from "next";
 import Home from "./Home";
 import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
 import { MarketingSplitContent } from "../components/sections/marketing/MarketingSplit";
-import { getAllPostsForHome } from "./api/wp-api";
+import { createCMSProvider } from "../lib/cms/cms-factory";
+import { cmsConfig } from "../lib/config";
 
 const heroContent = {
 	header: "Your Ideas.",
@@ -126,7 +127,8 @@ export default function Index({
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 	try {
 		const page = 1;
-		const allPosts = await getAllPostsForHome(preview, page);
+		const cms = createCMSProvider(cmsConfig.type);
+		const allPosts = await cms.getAllPostsForHome(preview, page);
 
 		return {
 			props: {

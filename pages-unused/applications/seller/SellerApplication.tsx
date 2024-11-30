@@ -6,6 +6,7 @@ import Container from "../../../components/ui/Container";
 import { SITE_NAME } from "../../../lib/constants";
 import Form from "../../../components/ui/Form/components/Form";
 import { useFormSubmit } from "../../../hooks/useFormSubmit";
+import { LOGGING } from "../../../lib/logging";
 
 const SellerApplication = () => {
 	const pageTitle = "Seller Application";
@@ -113,7 +114,7 @@ const SellerApplication = () => {
 		setIsSubmitting(true);
 		try {
 			const result = await handleSubmit(formData);
-			console.log("Form submission result:", result);
+			LOGGING && console.log("Form submission result:", result);
 			// Handle success (e.g., show success message, redirect)
 		} catch (error) {
 			// Error is already logged and set in the hook

@@ -2,6 +2,7 @@ export const colors = {
 	light: {
 		primary: "#37818D",
 		secondary: "#3CC0B4",
+		accent: "#FF729F",
 		background: "#F6F4F5",
 		text: "#30313d",
 		borderColor: "#e5e7eb",
@@ -16,7 +17,7 @@ export const colors = {
 	dark: {
 		primary: "#0096c7",
 		secondary: "#4ce0cd",
-		tertiary: "#FFAE03",
+		accent: "#FF729F",
 		background: "#23272b",
 		text: "#ffffff80",
 		borderColor: "#ffffff20",

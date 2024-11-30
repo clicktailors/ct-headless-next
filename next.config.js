@@ -1,73 +1,52 @@
-if (!URL.canParse(process.env.WORDPRESS_API_URL)) {
-	throw new Error(`
-    Please provide a valid WordPress instance URL.
-    Add to your environment variables WORDPRESS_API_URL.
-  `);
-}
-
-const { protocol, hostname, port, pathname } = new URL(
-	process.env.WORDPRESS_API_URL
-);
-
 /** @type {import('next').NextConfig} */
+
+// Extract domain from WordPress API URL
+const getWordPressDomain = () => {
+	try {
+		if (process.env.WORDPRESS_API_URL) {
+			const url = new URL(process.env.WORDPRESS_API_URL);
+			return url.hostname;
+		}
+		return null;
+	} catch (error) {
+		console.warn("Invalid WORDPRESS_API_URL format");
+		return null;
+	}
+};
+
+const wpDomain = getWordPressDomain();
+
 module.exports = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: protocol.slice(0, -1),
-				hostname,
-				port,
-				pathname: `${pathname}/**`,
+				protocol: "https",
+				hostname: "*.gravatar.com",
 			},
-			// {
-			// 	protocol: "https",
-			// 	hostname: "clicktailors.com",
-			// 	port: "",
-			// 	pathname: "/wp-content/uploads/**",
-			// },
+			...(wpDomain
+				? [
+						{
+							protocol: "https",
+							hostname: wpDomain,
+						},
+					]
+				: []),
 			{
 				protocol: "https",
-				hostname: "wp.clicktailors.com",
-				port: "",
-				pathname: "/wp-content/uploads/**",
+				hostname: "*.wp.com",
 			},
 			{
 				protocol: "https",
-				hostname: "secure.gravatar.com",
-				port: "",
-				pathname: "/avatar/**",
+				hostname: "cdn.sanity.io",
 			},
 			{
 				protocol: "https",
 				hostname: "images.unsplash.com",
-				port: "",
-				pathname: "/**",
 			},
 			{
-				protocol: "https",
-				hostname: "www.freepik.com",
-				port: "",
-				pathname: "/**",
-			},
-			{
-				protocol: "https",
-				hostname: "i0.wp.com",
-				port: "",
-				pathname: "/**",
+				protocol: "http",
+				hostname: "localhost",
 			},
 		],
-	},
-	async rewrites() {
-		return [
-			{
-				source: "/.well-known/apple-developer-merchantid-domain-association",
-				destination:
-					"/api/apple-developer-merchantid-domain-association",
-			},
-			{
-				source: "/sitemap.xml",
-				destination: "/api/sitemap",
-			},
-		];
 	},
 };

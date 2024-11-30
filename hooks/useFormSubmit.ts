@@ -1,7 +1,6 @@
 import { useState } from "react";
 import submitForm from "../services/submitForm";
-
-const LOGGING = process.env.LOGGING || false;
+import { LOGGING } from "../lib/logging";
 
 export const useFormSubmit = (formType: string) => {
 	const [submitError, setSubmitError] = useState<string | null>(null);

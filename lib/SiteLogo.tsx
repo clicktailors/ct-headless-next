@@ -1,4 +1,4 @@
-import { CursorArrowRaysIcon } from "@heroicons/react/24/solid";
+import Logo from "../components/ui/Icons/Logo";
 
 interface SiteLogoProps {
 	className?: string;
@@ -13,11 +13,7 @@ export const SiteLogo = ({
 }: SiteLogoProps) => {
 	return (
 		<div className={`flex items-center ${className}`}>
-			<CursorArrowRaysIcon
-				className={`${size} ${
-					inverted ? "text-lightText" : "text-gradient-start"
-				}`}
-			/>
+			<Logo size={size} />
 		</div>
 	);
 };

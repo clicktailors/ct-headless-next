@@ -1,11 +1,11 @@
 import axios, { AxiosError } from "axios";
-
+import { LOGGING } from "../lib/logging";
 interface FormData {
 	[key: string]: string | number | boolean;
 }
 
 export default async function submitForm(formType: string, formData: FormData) {
-  console.log("formData", formData);
+	LOGGING && console.log("formData", formData);
 	try {
 		const response = await axios.post("/api/submit-form", {
 			formType,

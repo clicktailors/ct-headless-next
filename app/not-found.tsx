@@ -1,5 +1,5 @@
-import { getAllPostsForHome } from "../pages/api/wp-api";
-import { SITE_NAME } from "../lib/constants";
+import { createCMSProvider } from "../lib/cms/cms-factory";
+import { cmsConfig } from "../lib/config";
 import { Metadata } from "next";
 import Link from "next/link";
 import MoreStories from "../components/blog/MoreStories";
@@ -7,11 +7,12 @@ import Container from "../components/ui/Container";
 import Section from "../components/ui/Section";
 
 export const metadata: Metadata = {
-	title: `Page Not Found | ${SITE_NAME}`,
+	title: `Page Not Found | ${cmsConfig.siteName}`,
 };
 
 export default async function NotFound() {
-	const posts = await getAllPostsForHome(false, 1, 4);
+	const cms = createCMSProvider(cmsConfig.type);
+	const posts = await cms.getAllPostsForHome(false, 1, 4);
 	const morePosts = posts?.edges?.slice(0, 4) || [];
 
 	return (
