@@ -1,8 +1,8 @@
 import { CMSProvider } from '../types';
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
+import type { Document, WithId } from 'mongodb';
 
-interface MongoPost {
-	_id: ObjectId;
+interface MongoPost extends Document {
 	title: string;
 	slug: string;
 	date: Date;
@@ -22,8 +22,7 @@ interface MongoPost {
 	};
 }
 
-interface MongoPage {
-	_id: ObjectId;
+interface MongoPage extends Document {
 	title: string;
 	slug: string;
 	content: string;
@@ -32,7 +31,7 @@ interface MongoPage {
 }
 
 export class MongoDBProvider implements CMSProvider {
-	private client: MongoClient;
+	private client: InstanceType<typeof MongoClient>;
 	private dbName: string;
 
 	constructor(private uri: string, dbName: string) {
@@ -44,26 +43,30 @@ export class MongoDBProvider implements CMSProvider {
 		if (!this.client.connect) {
 			await this.client.connect();
 		}
-		return this.client.db(this.dbName);
+		const db = this.client.db(this.dbName);
+		return {
+			posts: db.collection('posts'),
+			pages: db.collection('pages')
+		};
 	}
 
 	async getPreviewPost(id: number, idType = "DATABASE_ID") {
-		const db = await this.connect();
-		const post = await db.collection<MongoPost>('posts').findOne({ 
+		const { posts } = await this.connect();
+		const post = await posts.findOne({ 
 			[idType === "DATABASE_ID" ? "_id" : "slug"]: id 
 		});
 		return post;
 	}
 
 	async getAllPostsWithSlug() {
-		const db = await this.connect();
-		const posts = await db.collection<MongoPost>('posts')
+		const { posts } = await this.connect();
+		const allPosts = await posts
 			.find({})
 			.sort({ date: -1 })
-			.toArray();
+			.toArray() as WithId<MongoPost>[];
 
 		return {
-			edges: posts.map((post: MongoPost) => ({
+			edges: allPosts.map(post => ({
 				node: {
 					...post,
 					featuredImage: post.featuredImage ? {
@@ -75,21 +78,21 @@ export class MongoDBProvider implements CMSProvider {
 	}
 
 	async getAllPostsForHome(preview: boolean, page = 1, perPage = 20) {
-		const db = await this.connect();
+		const { posts: postsCollection } = await this.connect();
 		const skip = (page - 1) * perPage;
 
-		const [posts, totalCount] = await Promise.all([
-			db.collection<MongoPost>('posts')
+		const [postsData, totalCount] = await Promise.all([
+			postsCollection
 				.find({})
 				.sort({ date: -1 })
 				.skip(skip)
 				.limit(perPage)
-				.toArray(),
-			db.collection('posts').countDocuments()
-			]);
+				.toArray() as Promise<WithId<MongoPost>[]>,
+			postsCollection.countDocuments()
+		]);
 
 		return {
-			edges: posts.map((post: MongoPost) => ({
+			edges: postsData.map(post => ({
 				node: {
 					...post,
 					featuredImage: post.featuredImage ? {
@@ -99,20 +102,20 @@ export class MongoDBProvider implements CMSProvider {
 			})),
 			pageInfo: {
 				hasNextPage: skip + perPage < totalCount,
-				endCursor: posts.length > 0 ? posts[posts.length - 1]._id.toString() : null
+				endCursor: postsData.length > 0 ? postsData[postsData.length - 1]._id.toString() : null
 			}
 		};
 	}
 
 	async getPostAndMorePosts(slug: string, preview: boolean, previewData: any) {
-		const db = await this.connect();
-		const post = await db.collection<MongoPost>('posts').findOne({ slug });
+		const { posts } = await this.connect();
+		const post = await posts.findOne({ slug }) as WithId<MongoPost>;
 
-		const morePosts = await db.collection<MongoPost>('posts')
+		const morePosts = await posts
 			.find({ slug: { $ne: slug } })
 			.sort({ date: -1 })
 			.limit(3)
-			.toArray();
+			.toArray() as WithId<MongoPost>[];
 
 		return {
 			post: {
@@ -122,7 +125,7 @@ export class MongoDBProvider implements CMSProvider {
 				} : null
 			},
 			posts: {
-				edges: morePosts.map((post: MongoPost) => ({
+				edges: morePosts.map(post => ({
 					node: {
 						...post,
 						featuredImage: post.featuredImage ? {
@@ -135,21 +138,21 @@ export class MongoDBProvider implements CMSProvider {
 	}
 
 	async getAllPages() {
-		const db = await this.connect();
-		const pages = await db.collection<MongoPage>('pages')
+		const { pages } = await this.connect();
+		const allPages = await pages
 			.find({})
-			.toArray();
+			.toArray() as WithId<MongoPage>[];
 
 		return {
-			edges: pages.map((page: MongoPage) => ({
+			edges: allPages.map(page => ({
 				node: page
 			}))
 		};
 	}
 
 	async getPageBySlug(slug: string): Promise<any> {
-		const db = await this.connect();
-		const page = await db.collection<MongoPage>('pages').findOne({ slug });
+		const { pages } = await this.connect();
+		const page = await pages.findOne({ slug });
 		
 		if (!page) {
 			return null;
