@@ -1,11 +1,13 @@
 {
 	"private": true,
+	"packageManager": "pnpm@9.10.0",
 	"scripts": {
 		"dev": "next",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"migrate": "ts-node scripts/migrate-wp-to-mongo.ts"
+		"migrate": "ts-node scripts/migrate-wp-to-mongo.ts",
+		"init-sites": "ts-node scripts/init-site-config.ts"
 	},
 	"dependencies": {
 		"@hubspot/api-client": "^11.1.0",
