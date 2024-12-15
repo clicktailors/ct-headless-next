@@ -1,87 +1,71 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { MongoClient } from 'mongodb';
+import { neon, neonConfig } from '@neondatabase/serverless';
+
+// Configure Neon to work in Edge runtime
+neonConfig.fetchConnectionCache = true;
 
 interface SiteConfig {
-    siteId: string;
-    domain: string;
-    siteName: string;
-    siteDescription: string;
-    cmsType: 'wordpress' | 'mongodb';
-    wordpress?: {
-        apiUrl: string;
-    };
-    mongodb?: {
-        uri: string;
-        dbName: string;
-    };
+	site_id: string;
+	site_name: string;
+	cms_type: string;
+	wordpress_api_url?: string;
+	mongodb_uri?: string;
+	mongodb_db_name?: string;
 }
 
+const sql = neon(process.env.NEON_DATABASE_URL || '');
+
 export async function middleware(request: NextRequest) {
-    try {
-        const hostname = request.headers.get('host') || '';
-        const domain = hostname.replace(/^www\./, '');
+	try {
+		const hostname = request.headers.get('host') || '';
+		const domain = hostname.replace(/^www\./, '');
 
-        // Connect to MongoDB and get site configuration
-        const mongoUri = process.env.MONGODB_CONFIG_URI;
-        if (!mongoUri) {
-            throw new Error('MONGODB_CONFIG_URI environment variable is required');
-        }
+		// Query site config from Neon
+		const siteConfigs = await sql`
+			SELECT 
+				site_id,
+				site_name,
+				cms_type,
+				wordpress_api_url,
+				mongodb_uri,
+				mongodb_db_name
+			FROM site_configs 
+			WHERE domain = ${domain}
+			LIMIT 1
+		` as SiteConfig[];
 
-        const client = new MongoClient(mongoUri);
+		const requestHeaders = new Headers(request.headers);
+		
+		if (siteConfigs?.[0]) {
+			const config = siteConfigs[0];
+			requestHeaders.set('x-site-id', config.site_id);
+			requestHeaders.set('x-site-name', config.site_name);
+			requestHeaders.set('x-site-cms-type', config.cms_type);
+			
+			if (config.wordpress_api_url) {
+				requestHeaders.set('x-wordpress-api-url', config.wordpress_api_url);
+			}
+		} else {
+			// Fallback to environment variables
+			requestHeaders.set('x-site-id', process.env.SITE_ID || 'clicktailors');
+			requestHeaders.set('x-site-name', process.env.SITE_NAME || 'ClickTailors');
+			requestHeaders.set('x-site-cms-type', process.env.CMS_TYPE || 'wordpress');
+		}
 
-        try {
-            await client.connect();
-            const db = client.db('site-configs');
-            const sitesCollection = db.collection<SiteConfig>('sites');
-
-            const siteConfig = await sitesCollection.findOne({ domain });
-            
-            if (!siteConfig) {
-                console.error(`No configuration found for domain: ${domain}`);
-                return NextResponse.next();
-            }
-
-            // Clone the request headers
-            const requestHeaders = new Headers(request.headers);
-            
-            // Add site configuration to request headers
-            requestHeaders.set('x-site-id', siteConfig.siteId);
-            requestHeaders.set('x-site-name', siteConfig.siteName);
-            requestHeaders.set('x-site-cms-type', siteConfig.cmsType);
-            
-            // Add CMS-specific configuration
-            if (siteConfig.cmsType === 'wordpress' && siteConfig.wordpress?.apiUrl) {
-                requestHeaders.set('x-wordpress-api-url', siteConfig.wordpress.apiUrl);
-            } else if (siteConfig.cmsType === 'mongodb' && siteConfig.mongodb) {
-                requestHeaders.set('x-mongodb-uri', siteConfig.mongodb.uri);
-                requestHeaders.set('x-mongodb-db-name', siteConfig.mongodb.dbName);
-            }
-
-            // Return response with modified headers
-            return NextResponse.next({
-                request: {
-                    headers: requestHeaders,
-                },
-            });
-        } finally {
-            await client.close();
-        }
-    } catch (error) {
-        console.error('Middleware error:', error);
-        return NextResponse.next();
-    }
+		return NextResponse.next({
+			request: {
+				headers: requestHeaders,
+			},
+		});
+	} catch (error) {
+		console.error('Middleware error:', error);
+		return NextResponse.next();
+	}
 }
 
 export const config = {
-    matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - api (API routes)
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         */
-        '/((?!api|_next/static|_next/image|favicon.ico).*)',
-    ],
+	matcher: [
+		'/((?!api|_next/static|_next/image|favicon.ico).*)',
+	],
 }; 
