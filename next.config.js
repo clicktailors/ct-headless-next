@@ -29,11 +29,15 @@ module.exports = {
 							protocol: "https",
 							hostname: wpDomain,
 						},
-					]
+				  ]
 				: []),
 			{
 				protocol: "https",
 				hostname: "*.wp.com",
+			},
+			{
+				protocol: "https",
+				hostname: "i0.wp.com",
 			},
 			{
 				protocol: "https",
