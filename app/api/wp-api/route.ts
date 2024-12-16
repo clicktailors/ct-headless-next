@@ -1,10 +1,10 @@
 import { headers } from 'next/headers';
 import { createCMSProvider } from '../../../lib/cms/cms-factory';
+import { getDynamicSiteConfig } from '../../../lib/config';
 
 export async function GET(request: Request) {
-	const headersList = headers();
-	const type = headersList.get('x-wp-api') || 'wordpress';
-	const provider = createCMSProvider(type as 'wordpress' | 'neon');
+	const config = await getDynamicSiteConfig();
+	const provider = createCMSProvider(config.cmsType);
 
 	const { searchParams } = new URL(request.url);
 	const path = searchParams.get('path');

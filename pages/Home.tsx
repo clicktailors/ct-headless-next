@@ -7,7 +7,7 @@ import { MarketingSplitContent } from "../components/sections/marketing/Marketin
 import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
 import BlogCarousel from "../components/blog/BlogCarousel";
 import { createCMSProvider } from "../lib/cms/cms-factory";
-import { cmsConfig } from "../lib/config";
+import { getStaticSiteConfig } from "../lib/config";
 import { LOGGING } from "../lib/logging";
 
 interface HomeProps {
@@ -59,7 +59,8 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 	try {
 		const page = 1;
-		const cms = createCMSProvider(cmsConfig.type);
+		const config = getStaticSiteConfig();
+		const cms = createCMSProvider(config.cmsType);
 		const allPosts = await cms.getAllPostsForHome(preview, page);
 		LOGGING && console.log("getAllPostsForHome response:", allPosts);
 
