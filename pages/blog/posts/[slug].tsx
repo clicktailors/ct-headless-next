@@ -14,7 +14,7 @@ import PostTitle from "../../../components/blog/PostTitle";
 import Tags from "../../../components/blog/Tags";
 import { SITE_NAME } from "../../../lib/constants";
 import { createCMSProvider } from "../../../lib/cms/cms-factory";
-import { cmsConfig } from "../../../lib/config";
+import { getStaticSiteConfig } from "../../../lib/config";
 
 interface PostType {
 	slug: string;
@@ -121,7 +121,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({
 	preview = false,
 	previewData,
 }) => {
-	const cms = createCMSProvider(cmsConfig.type);
+	const config = getStaticSiteConfig();
+	const cms = createCMSProvider(config.cmsType);
 	const data = await cms.getPostAndMorePosts(
 		params?.slug as string,
 		preview,
@@ -139,7 +140,8 @@ export const getStaticProps: GetStaticProps<Props> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const cms = createCMSProvider(cmsConfig.type);
+	const config = getStaticSiteConfig();
+	const cms = createCMSProvider(config.cmsType);
 	const allPosts = await cms.getAllPostsWithSlug();
 
 	return {

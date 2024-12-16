@@ -8,7 +8,7 @@ import { SITE_NAME } from "../../lib/constants";
 import Newsletter from "../../components/sections/marketing/Newsletter";
 import { useRouter } from "next/router";
 import { createCMSProvider } from "../../lib/cms/cms-factory";
-import { cmsConfig } from "../../lib/config";
+import { getStaticSiteConfig } from "../../lib/config";
 
 interface Props {
 	allPosts: {
@@ -119,7 +119,8 @@ export const getStaticProps: GetStaticProps = async ({
 	preview = false,
 	params,
 }) => {
-	const cms = createCMSProvider(cmsConfig.type);
+	const config = getStaticSiteConfig();
+	const cms = createCMSProvider(config.cmsType);
 	const currentPage = params?.page ? parseInt(params.page as string) : 1;
 	const allPosts = await cms.getAllPostsForHome(false, currentPage);
 

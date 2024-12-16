@@ -5,7 +5,7 @@ import { SITE_NAME } from "../lib/constants";
 import Container from "../components/ui/Container";
 import Section from "../components/ui/Section";
 import { createCMSProvider } from "../lib/cms/cms-factory";
-import { cmsConfig } from "../lib/config";
+import { getStaticSiteConfig } from "../lib/config";
 
 interface PageProps {
 	page: {
@@ -34,9 +34,13 @@ export default function Page({ page }: PageProps) {
 	);
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({
+	params,
+	preview = false,
+}) => {
+	const config = getStaticSiteConfig();
+	const cms = createCMSProvider(config.cmsType);
 	try {
-		const cms = createCMSProvider(cmsConfig.type);
 		const page = await cms.getPageBySlug(params?.slug as string);
 
 		if (!page) {
@@ -60,7 +64,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const cms = createCMSProvider(cmsConfig.type);
+	const config = getStaticSiteConfig();
+	const cms = createCMSProvider(config.cmsType);
 	const allPages = await cms.getAllPages();
 	const excludedSlugs = ["home"];
 

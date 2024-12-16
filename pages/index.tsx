@@ -6,7 +6,7 @@ import Home from "./Home";
 import { BlurbTwoByTwoGridContent } from "../components/sections/marketing/BlurbTwoByTwoGrid";
 import { MarketingSplitContent } from "../components/sections/marketing/MarketingSplit";
 import { createCMSProvider } from "../lib/cms/cms-factory";
-import { cmsConfig } from "../lib/config";
+import { getStaticSiteConfig } from "../lib/config";
 
 const heroContent = {
 	header: "Your Ideas.",
@@ -125,9 +125,10 @@ export default function Index({
 }
 
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+	const config = getStaticSiteConfig();
+	const cms = createCMSProvider(config.cmsType);
 	try {
 		const page = 1;
-		const cms = createCMSProvider(cmsConfig.type);
 		const allPosts = await cms.getAllPostsForHome(preview, page);
 
 		return {
