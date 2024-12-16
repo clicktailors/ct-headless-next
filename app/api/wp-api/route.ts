@@ -3,6 +3,8 @@ import { createCMSProvider } from '../../../lib/cms/cms-factory';
 import { getDynamicSiteConfig } from '../../../lib/config';
 
 export async function GET(request: Request) {
+	const headersList = headers();
+	const type = headersList.get('x-wp-api') || 'wordpress';
 	const config = await getDynamicSiteConfig();
 	const provider = createCMSProvider(config.cmsType);
 

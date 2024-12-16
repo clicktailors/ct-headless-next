@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { neon, neonConfig } from '@neondatabase/serverless';
+import { getDynamicSiteConfig } from './lib/config';
 
 // Configure Neon to work in Edge runtime
 neonConfig.fetchConnectionCache = true;
@@ -20,6 +21,7 @@ export async function middleware(request: NextRequest) {
 	try {
 		const hostname = request.headers.get('host') || '';
 		const domain = hostname.replace(/^www\./, '');
+		const config = await getDynamicSiteConfig();
 
 		// Query site config from Neon
 		const siteConfigs = await sql`
@@ -38,19 +40,19 @@ export async function middleware(request: NextRequest) {
 		const requestHeaders = new Headers(request.headers);
 		
 		if (siteConfigs?.[0]) {
-			const config = siteConfigs[0];
-			requestHeaders.set('x-site-id', config.site_id);
-			requestHeaders.set('x-site-name', config.site_name);
-			requestHeaders.set('x-site-cms-type', config.cms_type);
+			const siteConfig = siteConfigs[0];
+			requestHeaders.set('x-site-id', siteConfig.site_id);
+			requestHeaders.set('x-site-name', siteConfig.site_name);
+			requestHeaders.set('x-cms-type', siteConfig.cms_type);
 			
-			if (config.wordpress_api_url) {
-				requestHeaders.set('x-wordpress-api-url', config.wordpress_api_url);
+			if (siteConfig.wordpress_api_url) {
+				requestHeaders.set('x-wordpress-api-url', siteConfig.wordpress_api_url);
 			}
 		} else {
-			// Fallback to environment variables
+			// Fallback to environment variables and config
 			requestHeaders.set('x-site-id', process.env.SITE_ID || 'clicktailors');
 			requestHeaders.set('x-site-name', process.env.SITE_NAME || 'ClickTailors');
-			requestHeaders.set('x-site-cms-type', process.env.CMS_TYPE || 'wordpress');
+			requestHeaders.set('x-cms-type', config.cmsType);
 		}
 
 		return NextResponse.next({
@@ -60,7 +62,16 @@ export async function middleware(request: NextRequest) {
 		});
 	} catch (error) {
 		console.error('Middleware error:', error);
-		return NextResponse.next();
+		// Fallback to config system if database query fails
+		const config = await getDynamicSiteConfig();
+		const requestHeaders = new Headers(request.headers);
+		requestHeaders.set('x-cms-type', config.cmsType);
+		
+		return NextResponse.next({
+			request: {
+				headers: requestHeaders,
+			},
+		});
 	}
 }
 

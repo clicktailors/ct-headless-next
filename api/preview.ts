@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { createCMSProvider } from "../lib/cms/cms-factory";
-import { getStaticSiteConfig } from "../lib/config";
+import { getDynamicSiteConfig } from "../lib/config";
 
 export default async function preview(
 	req: NextApiRequest,
@@ -18,11 +18,11 @@ export default async function preview(
 		return res.status(401).json({ message: "Invalid token" });
 	}
 
-	// Fetch WordPress data
-	const config = getStaticSiteConfig();
-	const cms = createCMSProvider(config.cmsType);
-	
 	try {
+		// Fetch WordPress data
+		const config = await getDynamicSiteConfig();
+		const cms = createCMSProvider(config.cmsType);
+		
 		// @ts-ignore
 		const post = await cms.getPreviewPost(id || slug, id ? "DATABASE_ID" : "SLUG");
 

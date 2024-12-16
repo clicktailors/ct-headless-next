@@ -1,10 +1,10 @@
 import { createCMSProvider } from '../../lib/cms/cms-factory';
-import { getStaticSiteConfig } from '../../lib/config';
+import { getDynamicSiteConfig } from '../../lib/config';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const config = getStaticSiteConfig();
+		const config = await getDynamicSiteConfig();
 		const cms = createCMSProvider(config.cmsType);
 		const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
