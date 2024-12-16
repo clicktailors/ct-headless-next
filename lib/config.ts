@@ -1,16 +1,18 @@
 import { CMSType } from './cms/cms-factory';
+import { headers } from 'next/headers';
 
 export function getSiteConfig() {
+	const headersList = headers();
+	
 	return {
-		type: (process.env.CMS_TYPE || 'wordpress') as CMSType,
-		siteName: process.env.SITE_NAME || 'My Site',
+		type: (headersList.get('x-site-cms-type') || process.env.CMS_TYPE || 'wordpress') as CMSType,
+		siteName: headersList.get('x-site-name') || process.env.SITE_NAME || 'My Site',
 		siteDescription: process.env.SITE_DESCRIPTION || 'Welcome to my site',
 		wordpress: {
-			apiUrl: process.env.WORDPRESS_API_URL,
+			apiUrl: headersList.get('x-wordpress-api-url') || process.env.WORDPRESS_API_URL,
 		},
-		mongodb: {
-			uri: process.env.MONGODB_URI,
-			dbName: process.env.MONGODB_DB_NAME,
+		neon: {
+			url: process.env.NEON_DATABASE_URL
 		}
 	};
 }

@@ -1,8 +1,8 @@
 import { CMSProvider } from './types';
-import { WordPressProvider } from './wordpress/wp-provider';
-import { MongoDBProvider } from './mongodb/mongo-provider';
+import { WordPressProvider } from './wordpress';
+import { NeonProvider } from './neon';
 
-export type CMSType = 'wordpress' | 'mongodb';
+export type CMSType = 'wordpress' | 'neon';
 
 export function createCMSProvider(type: CMSType): CMSProvider {
 	switch (type) {
@@ -15,15 +15,14 @@ export function createCMSProvider(type: CMSType): CMSProvider {
 			
 			return new WordPressProvider(wpApiUrl);
 			
-		case 'mongodb':
-			const mongoUri = process.env.MONGODB_URI;
-			const dbName = process.env.MONGODB_DB_NAME;
+		case 'neon':
+			const neonUrl = process.env.NEON_DATABASE_URL;
 			
-			if (!mongoUri || !dbName) {
-				throw new Error('MongoDB configuration is not complete');
+			if (!neonUrl) {
+				throw new Error('NEON_DATABASE_URL is not defined');
 			}
 			
-			return new MongoDBProvider(mongoUri, dbName);
+			return new NeonProvider(neonUrl);
 			
 		default:
 			throw new Error(`Unsupported CMS type: ${type}`);
